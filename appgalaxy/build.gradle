@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
@@ -7,7 +7,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.avengers.appgalaxy"
+        //applicationId "com.avengers.appgalaxy"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1

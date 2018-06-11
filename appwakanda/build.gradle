@@ -1,16 +1,18 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdkVersion 27
 
+
+
     defaultConfig {
+     //   applicationId "com.avengers.appwakanda"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        vectorDrawables.useSupportLibrary = true
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -26,15 +28,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api deps.kotlin.stdlib
-    api deps.support.app_compat
-    api deps.support.design
-    api deps.support.v4
-    api deps.support.multidex
-    api deps.constraint_layout
-    api 'com.spinytech.ma:macore:0.2.1'
-    testImplementation deps.junit
-    androidTestImplementation deps.atsl.runner
-    androidTestImplementation deps.espresso.core
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation project(':baselibrary')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

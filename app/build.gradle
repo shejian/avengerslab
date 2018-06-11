@@ -26,6 +26,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':appgalaxy')
+    implementation project(':appwakanda')
     implementation project(':baselibrary')
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner

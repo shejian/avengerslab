@@ -1,41 +1,16 @@
-package com.avengers.power;
+package com.avengers.baselibrary;
 
-import android.content.Context;
 import android.content.res.Configuration;
-import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.util.Log;
 
-import com.spinytech.macore.MaApplication;
-
-public class MyApplication extends MaApplication {
+public class MyApplication extends MultiDexApplication {
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-        //注册全局的activity生命周期监听
-        registerActivityLifecycleCallbacks(new MyAppActivityLifecycleCallbacks());
-    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
-    }
-
-    @Override
-    public void initializeAllProcessRouter() {
-
-    }
-
-    @Override
-    protected void initializeLogic() {
-
-    }
-
-    @Override
-    public boolean needMultipleProcess() {
-        return false;
+        Log.d("Base","Base MyApplication");
     }
 
     /**
