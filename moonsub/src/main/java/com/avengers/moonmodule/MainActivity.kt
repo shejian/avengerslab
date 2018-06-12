@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
         Toast.makeText(this, "123", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "123", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "123", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "123", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
