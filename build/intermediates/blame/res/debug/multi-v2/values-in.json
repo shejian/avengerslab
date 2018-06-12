@@ -1,10 +1,20 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/jvis/workspace/MoonModule/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-in/values-in.xml",
+            "outputFile": "/Users/jvis/workspace/avengerslab/moonsub/build/intermediates/incremental/mergeDebugResources/merged.dir/values-in/values-in.xml",
             "map": [
                 {
-                    "source": "/Users/jvis/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/6a8ae0972798ac1a4a0f29223f268054/res/values-in/values-in.xml",
+                    "source": "/Users/jvis/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9d15eda2269e63131d9934d674528c43/res/values-in/values-in.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,215,317,422,509,613,729,811,890,976,1079,1188,1289,1393,1501,1609,1765,1864",
+                        "endColumns": "109,101,104,86,103,115,81,78,85,102,108,100,103,107,107,155,98,83",
+                        "endOffsets": "210,312,417,504,608,724,806,885,971,1074,1183,1284,1388,1496,1604,1760,1859,1943"
+                    }
+                },
+                {
+                    "source": "/Users/jvis/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/24c26da148a7fb44cb2496ab67d542c9/res/values-in/values-in.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -18,16 +28,6 @@
                         "startOffsets": "1948",
                         "endColumns": "100",
                         "endOffsets": "2044"
-                    }
-                },
-                {
-                    "source": "/Users/jvis/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/d2de91c2fb41755cd3a92d1c9e5b33ae/res/values-in/values-in.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,215,317,422,509,613,729,811,890,976,1079,1188,1289,1393,1501,1609,1765,1864",
-                        "endColumns": "109,101,104,86,103,115,81,78,85,102,108,100,103,107,107,155,98,83",
-                        "endOffsets": "210,312,417,504,608,724,806,885,971,1074,1183,1284,1388,1496,1604,1760,1859,1943"
                     }
                 }
             ]
