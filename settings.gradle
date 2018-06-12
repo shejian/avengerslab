@@ -1,1 +1,1 @@
-include ':app', ':baselibrary', ':appgalaxy', ':appwakanda'
+include ':app', ':baselibrary', ':appgalaxy', ':appwakanda', ':moonsubmodule'
