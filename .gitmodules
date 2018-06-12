@@ -1,0 +1,3 @@
+[submodule "EathModule"]
+	path = EathModule
+	url = https://github.com/shejian/EathModule.git

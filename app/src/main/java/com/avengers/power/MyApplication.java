@@ -3,7 +3,6 @@ package com.avengers.power;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
 
 import com.spinytech.macore.MaApplication;
 
