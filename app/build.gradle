@@ -29,11 +29,11 @@ dependencies {
     implementation project(':appgalaxy')
     implementation project(':appwakanda')
     implementation project(':baselibrary')
+    implementation project(':eathsub')
+    implementation project(':zombiebase')
     testImplementation deps.junit
     androidTestImplementation deps.atsl.runner
     androidTestImplementation deps.espresso.core
-    implementation project(':eathsub')
-
 }
 repositories {
     mavenCentral()

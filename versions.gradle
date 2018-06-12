@@ -171,25 +171,5 @@ def addRepos(RepositoryHandler handler) {
 ext.addRepos = this.&addRepos
 
 
-def setDefaultConfig = { android ->
-
-    android.compileSdkVersion build_versions.target_sdk
-
-    android.defaultConfig {
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
-        vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-}
-
-ext.defaultConfig = setDefaultConfig
-
-
-
-
-
-
-
 
 

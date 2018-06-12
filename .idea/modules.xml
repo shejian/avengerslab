@@ -5,10 +5,14 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/appgalaxy/appgalaxy.iml" filepath="$PROJECT_DIR$/appgalaxy/appgalaxy.iml" />
       <module fileurl="file://$PROJECT_DIR$/appwakanda/appwakanda.iml" filepath="$PROJECT_DIR$/appwakanda/appwakanda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appwakanda/appwakanda.iml" filepath="$PROJECT_DIR$/appwakanda/appwakanda.iml" />
       <module fileurl="file://$PROJECT_DIR$/avengerslab.iml" filepath="$PROJECT_DIR$/avengerslab.iml" />
       <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/eathsub/eathsub.iml" filepath="$PROJECT_DIR$/eathsub/eathsub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eathsub/eathsub.iml" filepath="$PROJECT_DIR$/eathsub/eathsub.iml" />
       <module fileurl="file://$PROJECT_DIR$/moonsub/moonsub.iml" filepath="$PROJECT_DIR$/moonsub/moonsub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moonsub/moonsub.iml" filepath="$PROJECT_DIR$/moonsub/moonsub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zombiebase/zombiebase.iml" filepath="$PROJECT_DIR$/zombiebase/zombiebase.iml" />
       <module fileurl="file://$PROJECT_DIR$/zombiebase/zombiebase.iml" filepath="$PROJECT_DIR$/zombiebase/zombiebase.iml" />
     </modules>
   </component>
