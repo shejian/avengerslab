@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "123", Toast.LENGTH_SHORT).show()
         Toast.makeText(this, "123", Toast.LENGTH_SHORT).show()
         Toast.makeText(this, "123", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "我是module的独立项目", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
