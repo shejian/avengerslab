@@ -1,0 +1,4 @@
+[submodule "eathsub"]
+	path = eathsub
+	url = https://github.com/shejian/eathmodule.git
+	branch = develop
