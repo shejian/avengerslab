@@ -1,1 +1,1 @@
-include ':app', ':baselibrary', ':appgalaxy', ':appwakanda',':EathModule'
+include ':app', ':baselibrary', ':appgalaxy', ':appwakanda'
