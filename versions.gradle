@@ -1,3 +1,5 @@
+import java.security.cert.Extension
+
 /*
  * Copyright (C) 2018 The Android Open Source Project
  *
@@ -14,12 +16,10 @@
  * limitations under the License.
  */
 
-
-
 /**
-* Shared file between builds so that they can all use the same dependencies and
-* maven repositories.
-**/
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
 ext.deps = [:]
 def versions = [:]
 versions.arch_core = "1.1.1"
@@ -139,9 +139,11 @@ ext.deps = deps
 
 def build_versions = [:]
 build_versions.min_sdk = 14
-build_versions.target_sdk = 26
+build_versions.target_sdk = 27
 build_versions.build_tools = "27.0.3"
 ext.build_versions = build_versions
+
+
 
 def work = [:]
 work.runtime = "android.arch.work:work-runtime:$versions.work"
@@ -165,4 +167,29 @@ def addRepos(RepositoryHandler handler) {
     handler.jcenter()
     handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
+
 ext.addRepos = this.&addRepos
+
+
+def setDefaultConfig = { android ->
+
+    android.compileSdkVersion build_versions.target_sdk
+
+    android.defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+}
+
+ext.defaultConfig = setDefaultConfig
+
+
+
+
+
+
+
+
+

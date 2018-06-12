@@ -1,1 +1,1 @@
-include ':app', ':baselibrary', ':appgalaxy', ':appwakanda', ':moonsub', ':eathsub'
+include ':app', ':baselibrary', ':appgalaxy', ':appwakanda', ':moonsub', ':eathsub', ':zombiebase'

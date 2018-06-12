@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/eathsub/eathsub.iml" filepath="$PROJECT_DIR$/eathsub/eathsub.iml" />
       <module fileurl="file://$PROJECT_DIR$/moonsub/moonsub.iml" filepath="$PROJECT_DIR$/moonsub/moonsub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zombiebase/zombiebase.iml" filepath="$PROJECT_DIR$/zombiebase/zombiebase.iml" />
     </modules>
   </component>
 </project>
