@@ -1,122 +1,122 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:2:1-24:12
-INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:2:1-24:12
-INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:2:1-24:12
-INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:2:1-24:12
-MERGED from [com.android.support:design:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/6bffa085ecd9b41c9e718baa9d47910e/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/d2de91c2fb41755cd3a92d1c9e5b33ae/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support.constraint:constraint-layout:1.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.1.aar/d1aec30b309642d9ac75a643156da7e1/AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:support-v4:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/412bf0cdfbd5fa6cb930f93d9121c5d9/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/8918f34bf424756016f12ccdc5a162c7/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/07edf3202d6c9338def1c2fdae8dd765/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/27fe2f21c89b45c150199cc61234df39/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/7cfc01e7ac2fb93fd0ba8b9fcf0ee6bb/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/1a82742b5cbd7315643590eecdcb35df/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/47c7189132a2c08b30e50f2229a3c479/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:transition:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/c190d708f6307176e021cec327e096ee/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/0502317d36676848f9e3943bde81a620/AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/6a8ae0972798ac1a4a0f29223f268054/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/9d7826bb288f35ab73a552060ec58756/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/124c59e924223bb58df40d3ea91505d6/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/b3deae2f900295bd7bf12f5fb79072e7/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/d6fd86af8f0029d82aed9fe4a4a088eb/AndroidManifest.xml:17:1-22:12
-INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:2:1-24:12
-INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:2:1-24:12
-INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:2:1-24:12
+ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:2:1-24:12
+MERGED from [com.android.support:design:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/79557aecef315c4999dbd2a697bc35d2/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9d15eda2269e63131d9934d674528c43/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.1.aar/cbe39ec0a4c318cd5dbb5100344af413/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-v4:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/7ba0530c76a4a13d91632406f053350d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/8224f909e05c744df0b59aeca736e8c3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/ab57ea8a111ca6a906268fc5b2decb6a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/3e0a5d896b3d9937fa29c49f6aa52a6f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/032fdf97c29d70a7863020b4f77af4b2/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/79bcd9f211f10541f253bd1991bbd2a4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/734c7a48196f3b2745e1b07c3a543cf9/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/c8b96116b2289ccf476b62aea8073852/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/e07a14872fed64758b45860fa7b7d8d6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/24c26da148a7fb44cb2496ab67d542c9/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/6d09c95af4daf2920807cd38fa60a827/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/bcac3276032aa8f8e3b1b1f129c2c700/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/4751fc21dc5ad6cdb628f12f907f0bbd/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/0dc005ca7a6d5d35054379108a4cefe1/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:2:1-24:12
 	package
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:3:5-38
-		INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:3:5-38
+		INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
+		INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:2:1-24:12
-		INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:2:1-24:12
+		INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:2:1-24:12
-		INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:2:1-24:12
+		INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:2:11-69
 application
-ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:5:5-22:19
-MERGED from [com.android.support.constraint:constraint-layout:1.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.1.aar/d1aec30b309642d9ac75a643156da7e1/AndroidManifest.xml:9:5-20
-MERGED from [com.android.support.constraint:constraint-layout:1.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.1.aar/d1aec30b309642d9ac75a643156da7e1/AndroidManifest.xml:9:5-20
+ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:5:5-22:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.1.aar/cbe39ec0a4c318cd5dbb5100344af413/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.1.aar/cbe39ec0a4c318cd5dbb5100344af413/AndroidManifest.xml:9:5-20
 	android:supportsRtl
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:10:9-35
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:10:9-35
 	android:label
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:8:9-41
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:8:9-41
 	android:roundIcon
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:9:9-54
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:9:9-54
 	android:icon
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:7:9-43
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:7:9-43
 	android:allowBackup
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:6:9-35
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:6:9-35
 	android:theme
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:11:9-40
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:11:9-40
 activity#com.avengers.moonmodule.MainActivity
-ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:12:9-21:20
+ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:12:9-21:20
 	android:label
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:14:13-45
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:14:13-45
 	android:theme
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:15:13-56
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:15:13-56
 	android:name
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:13:13-41
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:13:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:16:13-20:29
+ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:16:13-20:29
 action#android.intent.action.MAIN
-ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:17:17-69
+ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:17:17-69
 	android:name
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:17:25-66
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:17:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:19:17-77
+ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:19:17-77
 	android:name
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml:19:27-74
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml:19:27-74
 uses-sdk
-INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
-INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
-MERGED from [com.android.support:design:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/6bffa085ecd9b41c9e718baa9d47910e/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:design:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/6bffa085ecd9b41c9e718baa9d47910e/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/d2de91c2fb41755cd3a92d1c9e5b33ae/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/d2de91c2fb41755cd3a92d1c9e5b33ae/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support.constraint:constraint-layout:1.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.1.aar/d1aec30b309642d9ac75a643156da7e1/AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support.constraint:constraint-layout:1.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.1.aar/d1aec30b309642d9ac75a643156da7e1/AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:support-v4:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/412bf0cdfbd5fa6cb930f93d9121c5d9/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/412bf0cdfbd5fa6cb930f93d9121c5d9/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/8918f34bf424756016f12ccdc5a162c7/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/8918f34bf424756016f12ccdc5a162c7/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/07edf3202d6c9338def1c2fdae8dd765/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/07edf3202d6c9338def1c2fdae8dd765/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/27fe2f21c89b45c150199cc61234df39/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/27fe2f21c89b45c150199cc61234df39/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/7cfc01e7ac2fb93fd0ba8b9fcf0ee6bb/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/7cfc01e7ac2fb93fd0ba8b9fcf0ee6bb/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/1a82742b5cbd7315643590eecdcb35df/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/1a82742b5cbd7315643590eecdcb35df/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/47c7189132a2c08b30e50f2229a3c479/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/47c7189132a2c08b30e50f2229a3c479/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/c190d708f6307176e021cec327e096ee/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/c190d708f6307176e021cec327e096ee/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/0502317d36676848f9e3943bde81a620/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/0502317d36676848f9e3943bde81a620/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/6a8ae0972798ac1a4a0f29223f268054/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/6a8ae0972798ac1a4a0f29223f268054/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/9d7826bb288f35ab73a552060ec58756/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/9d7826bb288f35ab73a552060ec58756/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/124c59e924223bb58df40d3ea91505d6/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/124c59e924223bb58df40d3ea91505d6/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/b3deae2f900295bd7bf12f5fb79072e7/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/b3deae2f900295bd7bf12f5fb79072e7/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/d6fd86af8f0029d82aed9fe4a4a088eb/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/d6fd86af8f0029d82aed9fe4a4a088eb/AndroidManifest.xml:20:5-44
-INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
-INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
+INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
+INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
+MERGED from [com.android.support:design:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/79557aecef315c4999dbd2a697bc35d2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/79557aecef315c4999dbd2a697bc35d2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9d15eda2269e63131d9934d674528c43/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9d15eda2269e63131d9934d674528c43/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.1.aar/cbe39ec0a4c318cd5dbb5100344af413/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.1.aar/cbe39ec0a4c318cd5dbb5100344af413/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/7ba0530c76a4a13d91632406f053350d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/7ba0530c76a4a13d91632406f053350d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/8224f909e05c744df0b59aeca736e8c3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/8224f909e05c744df0b59aeca736e8c3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/ab57ea8a111ca6a906268fc5b2decb6a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/ab57ea8a111ca6a906268fc5b2decb6a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/3e0a5d896b3d9937fa29c49f6aa52a6f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/3e0a5d896b3d9937fa29c49f6aa52a6f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/032fdf97c29d70a7863020b4f77af4b2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/032fdf97c29d70a7863020b4f77af4b2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/79bcd9f211f10541f253bd1991bbd2a4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/79bcd9f211f10541f253bd1991bbd2a4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/734c7a48196f3b2745e1b07c3a543cf9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/734c7a48196f3b2745e1b07c3a543cf9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/c8b96116b2289ccf476b62aea8073852/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/c8b96116b2289ccf476b62aea8073852/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/e07a14872fed64758b45860fa7b7d8d6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/e07a14872fed64758b45860fa7b7d8d6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/24c26da148a7fb44cb2496ab67d542c9/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /Users/jvis/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/24c26da148a7fb44cb2496ab67d542c9/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/6d09c95af4daf2920807cd38fa60a827/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/6d09c95af4daf2920807cd38fa60a827/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/bcac3276032aa8f8e3b1b1f129c2c700/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/bcac3276032aa8f8e3b1b1f129c2c700/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/4751fc21dc5ad6cdb628f12f907f0bbd/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/4751fc21dc5ad6cdb628f12f907f0bbd/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/0dc005ca7a6d5d35054379108a4cefe1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/jvis/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/0dc005ca7a6d5d35054379108a4cefe1/AndroidManifest.xml:20:5-44
+INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
+INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
+		INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
-		ADDED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/jvis/workspace/MoonModule/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
+		ADDED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml
+		INJECTED from /Users/jvis/workspace/avengerslab/moonsub/src/main/AndroidManifest.xml

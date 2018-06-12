@@ -29,3 +29,5 @@ gen/
 /local.properties
 publiclibrary/libs/
 /moonsub/build/
+/moonsub/build/intermediates/
+/moonsub/build/outputs/
