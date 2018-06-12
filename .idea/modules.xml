@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/appwakanda/appwakanda.iml" filepath="$PROJECT_DIR$/appwakanda/appwakanda.iml" />
       <module fileurl="file://$PROJECT_DIR$/avengerslab.iml" filepath="$PROJECT_DIR$/avengerslab.iml" />
       <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/moonsubmodule/moonsubmodule.iml" filepath="$PROJECT_DIR$/moonsubmodule/moonsubmodule.iml" />
     </modules>
   </component>
 </project>

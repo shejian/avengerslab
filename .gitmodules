@@ -1,4 +1,0 @@
-[submodule "moonsubmodule"]
-	path = moonsubmodule
-	url = https://github.com/shejian/moonmodule.git
-	branch = develop
