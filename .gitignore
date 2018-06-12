@@ -1,5 +1,33 @@
-/build
-!/build/intermediates/
-!/build/
-/build/intermediates/
-/build/
+# Gradle files
+build/
+.gradle/
+/captures/
+*.DS_Store
+
+# IDEA
+*.iml
+.idea/
+
+# Built application files
+*.apk
+
+# Files for the Dalvik VM
+*.dex
+
+# Generated files
+bin/
+gen/
+
+!/app/src/main/java/com/taiwu/dao/*
+
+# Java class files
+*.class
+
+# Log Files
+*.log
+
+/local.properties
+publiclibrary/libs/
+/moonsub/build/
+/moonsub/build/intermediates/
+/moonsub/build/outputs/
