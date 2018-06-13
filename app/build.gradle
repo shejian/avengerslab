@@ -1,40 +1,17 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
+apply from: '../zombiebase/common_config.gradle'
+appDefaultConfig project
 
 android {
-    compileSdkVersion 27
     defaultConfig {
         applicationId "com.avengers.power"
-        minSdkVersion 19
-        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
-        multiDexEnabled true
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 }
 
+/**
+ * 关联到相关的业务模块的项目
+ */
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':appgalaxy')
-    implementation project(':appwakanda')
-    implementation project(':baselibrary')
-    implementation project(':eathsub')
-    implementation project(':zombiebase')
-    testImplementation deps.junit
-    androidTestImplementation deps.atsl.runner
-    androidTestImplementation deps.espresso.core
-}
-repositories {
-    mavenCentral()
+
 }

@@ -1,12 +1,13 @@
 package com.avengers.power;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
 
 import com.spinytech.macore.MaApplication;
 
-public class MyApplication extends MaApplication {
+public class MyApplication extends Application {
 
 
     @Override
@@ -20,21 +21,6 @@ public class MyApplication extends MaApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
-    }
-
-    @Override
-    public void initializeAllProcessRouter() {
-
-    }
-
-    @Override
-    protected void initializeLogic() {
-
-    }
-
-    @Override
-    public boolean needMultipleProcess() {
-        return false;
     }
 
     /**
