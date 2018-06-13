@@ -4,3 +4,5 @@
 /build/intermediates/
 /build/
 /build/outputs/
+
+*.iml
