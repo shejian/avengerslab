@@ -1,13 +1,12 @@
 package com.avengers.power;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
 
 import com.spinytech.macore.MaApplication;
 
-public class MyApplication extends Application {
+public class MyApplication extends MaApplication {
 
 
     @Override
@@ -15,6 +14,21 @@ public class MyApplication extends Application {
         super.onCreate();
         //注册全局的activity生命周期监听
         registerActivityLifecycleCallbacks(new MyAppActivityLifecycleCallbacks());
+    }
+
+    @Override
+    public void initializeAllProcessRouter() {
+
+    }
+
+    @Override
+    protected void initializeLogic() {
+
+    }
+
+    @Override
+    public boolean needMultipleProcess() {
+        return false;
     }
 
     @Override
