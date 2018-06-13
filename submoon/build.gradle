@@ -1,11 +1,13 @@
 apply from: '../zombiebase/common_config.gradle'
-libDefaultConfig project
+componentsDefaultConfig project
 
 android {
-
     defaultConfig {
         versionCode 1
         versionName "1.0"
     }
 
+}
+
+dependencies {
 }
