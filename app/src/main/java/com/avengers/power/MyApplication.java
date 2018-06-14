@@ -18,16 +18,20 @@ public class MyApplication extends MaApplication {
 
     @Override
     public void initializeAllProcessRouter() {
-
+        //注册多个进程的本地路由
     }
 
     @Override
     protected void initializeLogic() {
+        //注册Application逻辑
+        //进程名称，初始化的优先级，application逻辑类，在需要的会反射初始化
+        registerApplicationLogic("com.avengers.power", 999, MyApplicationLogic.class);
 
     }
 
     @Override
     public boolean needMultipleProcess() {
+        //标记是否是是多进程的，是，返回true，否，返回false
         return false;
     }
 
