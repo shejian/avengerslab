@@ -19,7 +19,7 @@ public class MyApplicationLogic extends BaseApplicationLogic {
     }
 
     private void initSubRegisterProvider(LocalRouter localRouter) {
-        localRouter.registerProvider("GalaxyProvider", new GalaxyProvider());
+        localRouter.registerProvider("WakandaProvider", new GalaxyProvider());
     }
 
 

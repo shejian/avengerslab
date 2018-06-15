@@ -6,12 +6,12 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.zombiebase.ZombieBaseUtils
-import com.spinytech.macore.MaApplication
-import com.spinytech.macore.router.LocalRouter
 import com.spinytech.macore.router.RouterRequest
 import kotlinx.android.synthetic.main.activity_scrolling.*
 
+@Route(path = "/galaxy/scrollactivity")
 class ScrollingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,14 +20,11 @@ class ScrollingActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         fab.setOnClickListener { view ->
 
-
-
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
-          //  var  m =Intent(this,MainActivity::class.java)
-
-
-
+            //  ZombieBaseUtils.startNavigation("/wakanda/mainactivity")
+            ZombieBaseUtils.startNavigationBuild("/wakanda/mainactivity")
+                    .withString("frompath", "/galaxy/scrollactivity").navigation()
         }
 
         var request234 = RouterRequest.obtain(this)
@@ -38,7 +35,7 @@ class ScrollingActivity : AppCompatActivity() {
                 .`object`(String())
 
         var res = ZombieBaseUtils.onLocalRoute(this, request234)
-        var jg = res.get()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

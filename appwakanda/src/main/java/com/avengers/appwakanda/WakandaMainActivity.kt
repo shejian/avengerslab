@@ -5,18 +5,22 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.alibaba.android.arouter.facade.annotation.Route
 
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_wakanda_main.fab
+import kotlinx.android.synthetic.main.activity_wakanda_main.toolbar
 
-class MainActivity : AppCompatActivity() {
+@Route(path = "/wakanda/mainactivity")
+class WakandaMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_wakanda_main)
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            var fromPath = intent.getStringExtra("frompath")
+            Snackbar.make(view, fromPath, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
     }

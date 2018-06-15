@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.avengers.appgalaxy.ScrollingActivity
+import com.avengers.appwakanda.WakandaMainActivity
 import com.avengers.power.databinding.ActivityMainBinding
 import com.avengers.zombiebase.ZombieBaseUtils
 import com.spinytech.macore.router.RouterRequest
@@ -17,8 +18,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         var activityMainBinding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         var routerRequest = RouterRequest.obtain(this)
-                .provider("GalaxyProvider")
-                .action("GalaxyAction")
+                .provider("WakandaProvider")
+                .action("WakandaAction")
                 .data("params1", "参数A")
                 .data("params2", "参数B")
         var readsa = ZombieBaseUtils.onLocalRoute(this, routerRequest)
