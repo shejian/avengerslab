@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Power</string>
+    <string name="failure">失败</string>
+    <string name="successfully">成功</string>
 </resources>
