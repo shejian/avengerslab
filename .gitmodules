@@ -6,3 +6,7 @@
 	path = zombiebase
 	url = https://github.com/shejian/ZombieBase.git
 	branch = develop
+[submodule "rfwebserver"]
+	path = rfwebserver
+	url = https://github.com/cd-butterfly/retrofit.git
+	branch = master
