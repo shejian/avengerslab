@@ -9,8 +9,10 @@ import android.view.View
 import com.avengers.appgalaxy.ScrollingActivity
 import com.avengers.appwakanda.WakandaMainActivity
 import com.avengers.power.databinding.ActivityMainBinding
+import com.avengers.zombiebase.RunTimePermission
 import com.avengers.zombiebase.ZombieBaseUtils
 import com.spinytech.macore.router.RouterRequest
+import com.yanzhenjie.permission.Permission
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,8 +38,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun buttonClick(view: View) {
-        var s = Intent(this, ScrollingActivity::class.java)
-        startActivity(s)
+        RunTimePermission.requestPermission(this, { startActivity(Intent(this, ScrollingActivity::class.java)) }, Permission.CALL_PHONE, Permission.CAMERA)
     }
 
 
