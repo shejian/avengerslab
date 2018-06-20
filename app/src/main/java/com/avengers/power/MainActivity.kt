@@ -2,12 +2,11 @@ package com.avengers.power
 
 import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import com.avengers.appgalaxy.ScrollingActivity
-import com.avengers.appwakanda.WakandaMainActivity
 import com.avengers.power.databinding.ActivityMainBinding
 import com.avengers.zombiebase.RunTimePermission
 import com.avengers.zombiebase.ZombieBaseUtils
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         var readsa = ZombieBaseUtils.onLocalRoute(this, routerRequest)
 
 
-        Log.d("shejian", "路由调用成功" + readsa.data)
+        Log.d("shejian", "路由调用成功， 小程序重新出现现" )
     }
 
 
@@ -38,7 +37,12 @@ class MainActivity : AppCompatActivity() {
 
 
     fun buttonClick(view: View) {
-        RunTimePermission.requestPermission(this, { startActivity(Intent(this, ScrollingActivity::class.java)) }, Permission.CALL_PHONE, Permission.CAMERA)
+/*        RunTimePermission.requestPermission(this, {
+            startActivity(Intent(this, ScrollingActivity::class.java))
+        }, Permission.CALL_PHONE, Permission.CAMERA)*/
+        ZombieBaseUtils.startNavigationBuild("/galaxy/scrollactivity")
+                .withString("frompath", "power MainActivity").navigation()
+
     }
 
 
