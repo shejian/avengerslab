@@ -7,5 +7,17 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", "\"http://reader.smartisan.com/\""
+        }
+        beta {
+            buildConfigField "String", "BASE_URL", "\"http://reader.smartisan.com/\""
+        }
+        release {
+            buildConfigField "String", "BASE_URL", "\"http://reader.smartisan.com/\""
+        }
+
+    }
 
 }

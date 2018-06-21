@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
 
+import com.avengers.appwakanda.BuildConfig;
 import com.avengers.zombiebase.ApplicationInitBase;
 import com.spinytech.macore.MaApplication;
 
@@ -20,6 +21,7 @@ public class MyApplication extends MaApplication {
         //注册全局的activity生命周期监听
         registerActivityLifecycleCallbacks(new MyAppActivityLifecycleCallbacks());
         ApplicationInitBase.initARouter(this);
+        ApplicationInitBase.initWebServer(BuildConfig.BASE_URL);
     }
 
     @Override

@@ -7,6 +7,10 @@ import com.spinytech.macore.MaActionResult;
 
 import java.util.HashMap;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class WakandaAction extends MaAction {
     @Override
     public boolean isAsync(Context context, HashMap<String, String> requestData) {
