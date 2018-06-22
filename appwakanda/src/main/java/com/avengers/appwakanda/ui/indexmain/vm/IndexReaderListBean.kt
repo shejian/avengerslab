@@ -13,7 +13,7 @@ class IndexReaderListBean : JsonBeanResponse() {
 
 
     class ContextData {
-        var list: Array<ContextItemBean>? = null
+        var list: List<ContextItemBean>? = null
         var count = 0
         var page_count = 0
     }

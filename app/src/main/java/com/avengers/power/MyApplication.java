@@ -1,27 +1,40 @@
 package com.avengers.power;
 
+import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
 
 import com.avengers.appwakanda.BuildConfig;
+import com.avengers.zombiebase.AppExecutors;
 import com.avengers.zombiebase.ApplicationInitBase;
+import com.avengers.zombiebase.BaseApplication;
 import com.spinytech.macore.MaApplication;
 
 /**
  * @author jvis
  * @date
  */
-public class MyApplication extends MaApplication {
+public class MyApplication extends BaseApplication {
 
+    public static AppExecutors appExecutors;
 
     @Override
     public void onCreate() {
         super.onCreate();
         //注册全局的activity生命周期监听
         registerActivityLifecycleCallbacks(new MyAppActivityLifecycleCallbacks());
+        appExecutors = ApplicationInitBase.getInstanceExecutors();
         ApplicationInitBase.initARouter(this);
         ApplicationInitBase.initWebServer(BuildConfig.BASE_URL);
+    }
+
+
+
+
+
+    public AppExecutors getAppExecutors() {
+        return appExecutors;
     }
 
     @Override

@@ -1,35 +1,78 @@
 package com.avengers.appwakanda.ui.indexmain.vm
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import android.databinding.BaseObservable
 import android.databinding.Bindable
+import android.support.annotation.NonNull
 import com.avengers.appwakanda.BR
 import java.util.*
 
+@Entity
 class ContextItemBean : BaseObservable() {
 
-    private var id: String? = null
-    private var site_id: String? = null
+    @PrimaryKey
+    @NonNull
+    lateinit var id: String
+    @ColumnInfo
+    var site_id: String? = null
+    @ColumnInfo
     private var title: String? = null
-    private var headpic: String? = null
-    private var author_id: String? = null
-    private var author_name: String? = null
-    private var brief: String? = null
-    private var read_num: String? = null
-    private var collect_num: String? = null
-    private var origin_url: String? = null
-    private var url: String? = null
-    private var status: String? = null
-    private var create_time: String? = null
-    private var update_time: String? = null
-    private var pub_date: String? = null
-    private var md5: String? = null
-    private var is_recommend: String? = null
-    private var prepic1: String? = null
-    private var prepic2: String? = null
-    private var prepic3: String? = null
-    private var recommend_time: String? = null
-    private var sort_score: String? = null
-    private var site_info: SiteInfo? = null
+    @ColumnInfo
+    var headpic: String? = null
+    @ColumnInfo
+    var author_id: String? = null
+    @ColumnInfo
+    var author_name: String? = null
+    @ColumnInfo
+    var brief: String? = null
+    @ColumnInfo
+    var read_num: String? = null
+
+    @ColumnInfo
+    var collect_num: String? = null
+
+    @ColumnInfo
+    var origin_url: String? = null
+
+    @ColumnInfo
+    var url: String? = null
+
+    @ColumnInfo
+    var status: String? = null
+
+    @ColumnInfo
+    var create_time: String? = null
+
+    @ColumnInfo
+    var update_time: String? = null
+
+    @ColumnInfo
+    var pub_date: String? = null
+
+    @ColumnInfo
+    var md5: String? = null
+
+    @ColumnInfo
+    var _is_recommend: String? = null
+
+    @ColumnInfo
+    var prepic1: String? = null
+
+    @ColumnInfo
+    var prepic2: String? = null
+
+    @ColumnInfo
+    var prepic3: String? = null
+
+    @ColumnInfo
+    var recommend_time: String? = null
+
+    @ColumnInfo
+    var sort_score: String? = null
+
+    //private var site_info: SiteInfo? = null
 
 
     @Bindable
@@ -41,6 +84,7 @@ class ContextItemBean : BaseObservable() {
         this.title = mtitle
         notifyPropertyChanged(BR.title)
     }
+
 
 
     class SiteInfo : BaseObservable() {
