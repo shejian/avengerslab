@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -13,7 +12,7 @@ import com.avengers.appwakanda.BR
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.databinding.ActivityWakandaMainBinding
 import com.avengers.appwakanda.databinding.IndexlistDbdItemBinding
-import com.avengers.appwakanda.ui.indexmain.vm.ContextItemBean
+import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
 import com.avengers.zombiebase.DataBindingLiteAdapter
 import com.avengers.zombiebase.RcycyleHelper
@@ -30,8 +29,8 @@ class WakandaMainActivity : AppCompatActivity() {
         indexListViewModel.init()
 
         RcycyleHelper.initBaseRcycyleView(this, activityDataBinding.recyclerView)
-        var dataBindingLiteAdapter = DataBindingLiteAdapter<ContextItemBean, IndexlistDbdItemBinding>(
-                ArrayList<ContextItemBean>(),
+        var dataBindingLiteAdapter = DataBindingLiteAdapter<ContextItemEntity, IndexlistDbdItemBinding>(
+                ArrayList<ContextItemEntity>(),
                 R.layout.indexlist_dbd_item,
                 BR.contextItem,
                 DataBindingLiteAdapter.DbdAdapterEvent
@@ -45,7 +44,6 @@ class WakandaMainActivity : AppCompatActivity() {
         indexListViewModel.getIndexListLiveData().observe(this, Observer { list ->
             dataBindingLiteAdapter.setNewList(list)
         })
-
 
     }
 

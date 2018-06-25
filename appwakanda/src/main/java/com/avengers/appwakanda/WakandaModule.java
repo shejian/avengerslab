@@ -1,24 +1,23 @@
 package com.avengers.appwakanda;
 
-import android.app.Application;
-import android.content.Context;
 
-import com.avengers.appwakanda.db.room.MyDataBase;
+import com.avengers.appwakanda.db.room.RoomHelper;
+import com.avengers.zombiebase.AppExecutors;
 import com.avengers.zombiebase.ApplicationInitBase;
+import com.avengers.zombiebase.BaseAppLogic;
 
-public class WakandaModule {
+/**
+ * @author jvis
+ * 相关全局组件需要初始化的位置
+ */
+public class WakandaModule extends BaseAppLogic {
+    public static AppExecutors appExecutors = null;
 
-
-
-    Application mApp;
-
-
-    public void setmApp(Application mApp) {
-        this.mApp = mApp;
-    }
-
-    public MyDataBase getDataBase(Context context) {
-        return MyDataBase.getInstance(context, ApplicationInitBase.getInstanceExecutors());
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        appExecutors = ApplicationInitBase.getInstanceExecutors();
+        RoomHelper.getInstance(mApplication, ApplicationInitBase.getInstanceExecutors());
     }
 
 

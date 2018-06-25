@@ -7,6 +7,7 @@ import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
 import com.alibaba.android.arouter.facade.template.IInterceptor
+import com.avengers.zombiebase.BaseApplication
 
 @Interceptor(priority = 80, name = "test interceptor")
 class GalaxyActivityInterceptor : IInterceptor {

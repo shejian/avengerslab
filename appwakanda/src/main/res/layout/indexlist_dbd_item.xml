@@ -7,7 +7,7 @@
 
         <variable
             name="contextItem"
-            type="com.avengers.appwakanda.ui.indexmain.vm.ContextItemBean" />
+            type="com.avengers.appwakanda.db.room.entity.ContextItemEntity" />
 
     </data>
 

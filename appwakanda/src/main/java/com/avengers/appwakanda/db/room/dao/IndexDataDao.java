@@ -1,14 +1,13 @@
-package com.avengers.appwakanda.db.dao;
+package com.avengers.appwakanda.db.room.dao;
 
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.avengers.appwakanda.ui.indexmain.vm.ContextItemBean;
+import com.avengers.appwakanda.db.room.entity.ContextItemEntity;
 
 import java.util.List;
 
@@ -16,12 +15,12 @@ import java.util.List;
 public interface IndexDataDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertInfo(ContextItemBean contextItemBean);
+    void insertInfo(ContextItemEntity contextItemBean);
 
-    @Query("SELECT * FROM ContextItemBean")
-    LiveData<List<ContextItemBean>> quryInfos();
+    @Query("SELECT * FROM ContextItemEntity")
+    LiveData<List<ContextItemEntity>> quryInfos();
 
-    @Query("SELECT COUNT(*) FROM ContextItemBean ")
+    @Query("SELECT COUNT(*) FROM ContextItemEntity ")
     int hasData();
 
 }

@@ -1,5 +1,6 @@
-package com.avengers.appwakanda.ui.indexmain.vm
+package com.avengers.appwakanda.bean
 
+import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.bty.retrofit.net.bean.JsonBeanResponse
 
 class IndexReaderListBean : JsonBeanResponse() {
@@ -13,7 +14,7 @@ class IndexReaderListBean : JsonBeanResponse() {
 
 
     class ContextData {
-        var list: List<ContextItemBean>? = null
+        var list: List<ContextItemEntity>? = null
         var count = 0
         var page_count = 0
     }

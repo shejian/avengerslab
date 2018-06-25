@@ -1,6 +1,6 @@
 package com.avengers.appwakanda.webapi
 
-import com.avengers.appwakanda.ui.indexmain.vm.IndexReaderListBean
+import com.avengers.appwakanda.bean.IndexReaderListBean
 import com.bty.annotation.Service
 import retrofit2.Call
 import retrofit2.http.*
