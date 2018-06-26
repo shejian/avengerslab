@@ -1,6 +1,8 @@
 package com.avengers.appwakanda;
 
 
+import android.util.Log;
+
 import com.avengers.appwakanda.db.room.RoomHelper;
 import com.avengers.zombiebase.AppExecutors;
 import com.avengers.zombiebase.ApplicationInitBase;
@@ -16,8 +18,9 @@ public class WakandaModule extends BaseAppLogic {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.d("shejian","WakandaModule onCreate");
         appExecutors = ApplicationInitBase.getInstanceExecutors();
-        RoomHelper.getInstance(mApplication, ApplicationInitBase.getInstanceExecutors());
+        RoomHelper.getInstance(mApplication, appExecutors);
     }
 
 

@@ -42,6 +42,9 @@ class WakandaMainActivity : AppCompatActivity() {
         activityDataBinding.recyclerView.adapter = dataBindingLiteAdapter
 
         indexListViewModel.getIndexListLiveData().observe(this, Observer { list ->
+            if (list == null) {
+                return@Observer
+            }
             dataBindingLiteAdapter.setNewList(list)
         })
 

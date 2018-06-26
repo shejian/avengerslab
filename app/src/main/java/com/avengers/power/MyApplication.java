@@ -49,7 +49,7 @@ public class MyApplication extends BaseApplication  {
         //注册Application逻辑
         //进程名称，初始化的优先级，application逻辑类，在需要的会反射初始化
         registerApplicationLogic("com.avengers.power", 999, MyApplicationLogic.class);
-        registerApplicationLogic("com.avengers.appwakanda", 998,WakandaModule.class);
+        registerApplicationLogic("com.avengers.power", 998,WakandaModule.class);
     }
 
     @Override
