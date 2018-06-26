@@ -1,21 +1,17 @@
 package com.avengers.appgalaxy
 
-import android.app.Application
 import com.avengers.appgalaxy.db.room.RoomHelper
 import com.avengers.zombiebase.AppExecutors
 import com.avengers.zombiebase.ApplicationInitBase
+import com.avengers.zombiebase.BaseAppLogic
 
-class GalaxyModule {
-    companion object {
-        var appExecutors: AppExecutors? = null
-        var app: Application? = null
+class GalaxyModule : BaseAppLogic() {
 
-        fun init(application: Application) {
-            app = application
-            appExecutors = ApplicationInitBase.getInstanceExecutors()
-            RoomHelper.getInstance(application, ApplicationInitBase.getInstanceExecutors())
-        }
-
+    var appExecutors: AppExecutors? = null
+    override fun onCreate() {
+        super.onCreate()
+        appExecutors = ApplicationInitBase.getInstanceExecutors()
+        RoomHelper.getInstance(mApplication, ApplicationInitBase.getInstanceExecutors())
     }
 
 

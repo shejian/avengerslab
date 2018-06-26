@@ -15,7 +15,7 @@ import com.avengers.zombiebase.BaseApplication;
  * @author jvis
  * @date
  */
-public class MyApplication extends BaseApplication  {
+public class MyApplication extends BaseApplication {
 
     public static AppExecutors appExecutors;
 
@@ -27,11 +27,7 @@ public class MyApplication extends BaseApplication  {
         appExecutors = ApplicationInitBase.getInstanceExecutors();
         ApplicationInitBase.initARouter(this);
         ApplicationInitBase.initWebServer(BuildConfig.BASE_URL);
-        initModule();
-    }
 
-    private void initModule() {
-        GalaxyModule.Companion.init(this);
     }
 
 
@@ -49,7 +45,8 @@ public class MyApplication extends BaseApplication  {
         //注册Application逻辑
         //进程名称，初始化的优先级，application逻辑类，在需要的会反射初始化
         registerApplicationLogic("com.avengers.power", 999, MyApplicationLogic.class);
-        registerApplicationLogic("com.avengers.power", 998,WakandaModule.class);
+        registerApplicationLogic("com.avengers.power", 998, WakandaModule.class);
+        registerApplicationLogic("com.avengers.power", 997, GalaxyModule.class);
     }
 
     @Override
