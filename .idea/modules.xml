@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/appwakanda/appwakanda.iml" filepath="$PROJECT_DIR$/appwakanda/appwakanda.iml" />
       <module fileurl="file://$PROJECT_DIR$/avengerslab.iml" filepath="$PROJECT_DIR$/avengerslab.iml" />
       <module fileurl="file://$PROJECT_DIR$/eathsub/eathsub.iml" filepath="$PROJECT_DIR$/eathsub/eathsub.iml" />
-      <module fileurl="file://$PROJECT_DIR$/interfacebase/interfacebase.iml" filepath="$PROJECT_DIR$/interfacebase/interfacebase.iml" />
       <module fileurl="file://$PROJECT_DIR$/submoon/submoon.iml" filepath="$PROJECT_DIR$/submoon/submoon.iml" />
       <module fileurl="file://$PROJECT_DIR$/zombiebase/zombiebase.iml" filepath="$PROJECT_DIR$/zombiebase/zombiebase.iml" />
     </modules>

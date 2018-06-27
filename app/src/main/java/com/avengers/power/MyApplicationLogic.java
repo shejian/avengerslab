@@ -3,7 +3,7 @@ package com.avengers.power;
 import android.content.res.Configuration;
 
 import com.avengers.appgalaxy.GalaxyProvider;
-import com.avengers.intfacebase.RoaterBaseProviderManager;
+import com.avengers.zombiebase.ZombieBaseUtils;
 import com.spinytech.macore.multiprocess.BaseApplicationLogic;
 import com.spinytech.macore.router.LocalRouter;
 
@@ -14,7 +14,7 @@ public class MyApplicationLogic extends BaseApplicationLogic {
         super.onCreate();
         //注册Provider
         LocalRouter localRouter = LocalRouter.getInstance(mApplication);
-        RoaterBaseProviderManager.initRegProvider(localRouter);
+        ZombieBaseUtils.initRegProvider(localRouter);
         initSubRegisterProvider(localRouter);
     }
 

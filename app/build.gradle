@@ -16,7 +16,6 @@ android {
 dependencies {
 
     implementation project(path: ':zombiebase')
-    implementation project(path: ':interfacebase')
     implementation project(path: ':appgalaxy')
     implementation project(path: ':appwakanda')
 }
