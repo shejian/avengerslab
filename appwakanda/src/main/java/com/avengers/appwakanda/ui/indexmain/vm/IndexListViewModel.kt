@@ -14,33 +14,36 @@ import com.avengers.zombiebase.ApplicationInitBase
 
 class IndexListViewModel(private val repository: IndexRepository) : ViewModel() {
 
-    var indexListLiveData: LiveData<PagedList<ContextItemEntity>>? = null
+ //   var indexListLiveData: LiveData<PagedList<ContextItemEntity>>? = null
 
 
-    var indexpeository: IndexRepository? = null
-
+   // var indexpeository: IndexRepository? = null
+/*
     fun init() {
         val cache = IndexDataCache(RoomHelper.indexDataDao(), ApplicationInitBase.getInstanceExecutors().diskIO())
         indexpeository = IndexRepository(SmartisanService(), cache)
-    }
+    }*/
 
     /**
-     * Search a repository based on a query string.
+     * 设置请求参数，
      */
     fun getIndexData(queryString: String) {
         queryLiveData.postValue(queryString)
     }
 
+    //获取参数值
     fun lastQueryValue(): String? = queryLiveData.value
 
     private val queryLiveData = MutableLiveData<String>()//"line/show"
 
 
+    //queryLiveData 为参数 通过函数 转化为结果
     var result: LiveData<ItemResult> = Transformations.map(queryLiveData) {
         repository.getIndexListData(it)
     }
 
 
+    //列表数据
     var items: LiveData<PagedList<ContextItemEntity>> = Transformations.switchMap(result) {
         it.data
     }
