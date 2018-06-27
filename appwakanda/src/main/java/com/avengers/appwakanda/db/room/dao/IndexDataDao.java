@@ -18,6 +18,9 @@ public interface IndexDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertInfo(ContextItemEntity contextItemBean);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertList(List<ContextItemEntity> contextItemBean);
+
     @Query("SELECT * FROM ContextItemEntity")
     LiveData<List<ContextItemEntity>> quryInfos();
 
