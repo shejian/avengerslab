@@ -15,8 +15,6 @@ import java.util.List;
 @Dao
 public interface IndexDataDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertInfo(ContextItemEntity contextItemBean);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertList(List<ContextItemEntity> contextItemBean);

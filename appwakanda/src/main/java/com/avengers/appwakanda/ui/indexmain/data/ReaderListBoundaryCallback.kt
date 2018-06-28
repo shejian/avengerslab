@@ -9,6 +9,7 @@ import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.avengers.appwakanda.webapi.SmartisanService
 import com.bty.retrofit.Api
 
+//分页的边界回调类
 class ReaderListBoundaryCallback(
         private val query: String,
         private val service: SmartisanService,
@@ -33,7 +34,7 @@ class ReaderListBoundaryCallback(
 
 
     fun reqAndSaveData() {
-        service.indexMainData(Api.getSmartApi(), "line/show", NETWORK_PAGE_SIZE, lastRequestedPage, {
+        service.indexMainData(Api.getSmartApi(), query, NETWORK_PAGE_SIZE, lastRequestedPage, {
             cache.insert(it) {
                 lastRequestedPage++
                 isRequestInProgress = false

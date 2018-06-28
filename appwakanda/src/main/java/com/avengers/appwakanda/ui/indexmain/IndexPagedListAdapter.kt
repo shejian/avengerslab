@@ -4,6 +4,7 @@ import android.arch.paging.PagedListAdapter
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.v7.util.DiffUtil
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.avengers.appwakanda.BR
@@ -35,29 +36,20 @@ class IndexPagedListAdapter<E : ViewDataBinding> :
 
 
     companion object {
-        private val PAYLOAD_SCORE = Any()
         val POST_COMPARATOR = object : DiffUtil.ItemCallback<ContextItemEntity>() {
             override fun areContentsTheSame(oldItem: ContextItemEntity, newItem: ContextItemEntity): Boolean =
                     oldItem == newItem
 
-            override fun areItemsTheSame(oldItem: ContextItemEntity, newItem: ContextItemEntity): Boolean =
-                    oldItem.getTitle() == newItem.getTitle()
+            override fun areItemsTheSame(oldItem: ContextItemEntity, newItem: ContextItemEntity): Boolean  {
 
-            /*          override fun getChangePayload(oldItem: ContextItemEntity, newItem: ContextItemEntity): Any? {
-                          return if (sameExceptScore(oldItem, newItem)) {
-                              PAYLOAD_SCORE
-                          } else {
-                              null
-                          }
-                      }*/
+                Log.d("shejian",oldItem.getTitle()+"/"+newItem.getTitle())
+                  return   oldItem.getTitle() == newItem.getTitle()
+            }
+
+
         }
 
-        /*       private fun sameExceptScore(oldItem: ContextItemEntity, newItem: ContextItemEntity): Boolean {
-                   // DON'T do this copy in a real app, it is just convenient here for the demo :)
-                   // because reddit randomizes scores, we want to pass it as a payload to minimize
-                   // UI updates between refreshes
-                   return oldItem.copy(score = newItem.score) == newItem
-               }*/
+
     }
 }
 

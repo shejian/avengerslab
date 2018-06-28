@@ -14,10 +14,15 @@ import com.avengers.zombiebase.ApplicationInitBase
 
 class IndexListViewModel(private val repository: IndexRepository) : ViewModel() {
 
- //   var indexListLiveData: LiveData<PagedList<ContextItemEntity>>? = null
+
+    companion object {
+        private const val VISIBLE_THRESHOLD = 5
+    }
+
+    //   var indexListLiveData: LiveData<PagedList<ContextItemEntity>>? = null
 
 
-   // var indexpeository: IndexRepository? = null
+    // var indexpeository: IndexRepository? = null
 /*
     fun init() {
         val cache = IndexDataCache(RoomHelper.indexDataDao(), ApplicationInitBase.getInstanceExecutors().diskIO())
@@ -37,7 +42,7 @@ class IndexListViewModel(private val repository: IndexRepository) : ViewModel() 
     private val queryLiveData = MutableLiveData<String>()//"line/show"
 
 
-    //queryLiveData 为参数 通过函数 转化为结果
+    //queryLiveData 为参数 通过函数 转化为结果，Transformations将绑定queryLiveData与匿名函数的触发
     var result: LiveData<ItemResult> = Transformations.map(queryLiveData) {
         repository.getIndexListData(it)
     }
@@ -53,5 +58,14 @@ class IndexListViewModel(private val repository: IndexRepository) : ViewModel() 
         it.newworkError
     }
 
+
+    fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
+        if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
+            val immutableQuery = lastQueryValue()
+            if (immutableQuery != null) {
+                repository.getIndexListData(immutableQuery)
+            }
+        }
+    }
 
 }

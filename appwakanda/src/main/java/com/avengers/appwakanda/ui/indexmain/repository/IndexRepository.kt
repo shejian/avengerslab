@@ -6,6 +6,9 @@ import com.avengers.appwakanda.ui.indexmain.data.ReaderListBoundaryCallback
 import com.avengers.appwakanda.ui.indexmain.vm.ItemResult
 import com.avengers.appwakanda.webapi.SmartisanService
 
+/**
+ * 处理数据逻辑
+ */
 class IndexRepository(
         private val service: SmartisanService,
         private val cache: IndexDataCache
@@ -15,10 +18,12 @@ class IndexRepository(
     }
 
 
-    fun getIndexListData(query:String): ItemResult {
+    fun  getIndexListData(query: String): ItemResult {
 
+        //设置边界回调
         val callback = ReaderListBoundaryCallback(query, service, cache)
 
+        //缓存数据工厂类
         val dataSourceFactory = cache.queryIndexList()
 
         val networkErrors = callback.networkErrors
@@ -27,6 +32,7 @@ class IndexRepository(
                 .setBoundaryCallback(callback)
                 .build()
 
+        //数据封装
         return ItemResult(mLiveData, networkErrors)
     }
 
