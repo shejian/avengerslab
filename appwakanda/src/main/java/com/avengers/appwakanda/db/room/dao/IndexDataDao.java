@@ -1,7 +1,6 @@
 package com.avengers.appwakanda.db.room.dao;
 
 
-import android.arch.lifecycle.LiveData;
 import android.arch.paging.DataSource;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
@@ -15,17 +14,14 @@ import java.util.List;
 @Dao
 public interface IndexDataDao {
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertList(List<ContextItemEntity> contextItemBean);
 
-    @Query("SELECT * FROM ContextItemEntity")
-    LiveData<List<ContextItemEntity>> quryInfos();
-
-    @Query("SELECT COUNT(*) FROM ContextItemEntity ")
-    int hasData();
-
-    @Query("SELECT * FROM ContextItemEntity ")
+    @Query("SELECT * FROM ContextItemEntity  ORDER BY _mid ASC")
     DataSource.Factory<Integer, ContextItemEntity> quryAllItem();
+
+
+    @Query("SELECT MAX(_mid)+ 1 FROM ContextItemEntity")
+    Integer quryMaxMId();
 
 }

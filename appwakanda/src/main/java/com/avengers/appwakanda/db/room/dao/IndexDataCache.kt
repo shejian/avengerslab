@@ -25,4 +25,13 @@ class IndexDataCache(
     }
 
 
+    fun queryMaxIndex(): Int {
+        var dds = indexDao.quryMaxMId()
+        if (dds == null) {
+            dds = 0
+        }
+        return dds
+    }
+
+
 }

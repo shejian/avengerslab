@@ -12,8 +12,11 @@ import java.util.*
 @Entity
 class ContextItemEntity : BaseObservable() {
 
+
+    @ColumnInfo
+    private var _mid: Long? = null
     @PrimaryKey
-    @NonNull
+    @ColumnInfo
     lateinit var id: String
     @ColumnInfo
     var site_id: String? = null
@@ -73,7 +76,17 @@ class ContextItemEntity : BaseObservable() {
     var sort_score: String? = null
 
     //private var site_info: SiteInfo? = null
+    // to be consistent w/ changing backend order, we need to keep a data like this
 
+    @Bindable
+    fun getMid(): Long? {
+        return _mid
+    }
+
+    fun setMid(mid: Long) {
+        this._mid = mid
+        notifyPropertyChanged(BR.mid)
+    }
 
     @Bindable
     fun getTitle(): String? {
@@ -84,7 +97,6 @@ class ContextItemEntity : BaseObservable() {
         this.title = mtitle
         notifyPropertyChanged(BR.title)
     }
-
 
 
     class SiteInfo : BaseObservable() {

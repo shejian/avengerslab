@@ -23,6 +23,10 @@ public class RoomHelper {
 
     private static WakandaDb wakandaDb;
 
+    public static WakandaDb getWakandaDb() {
+        return wakandaDb;
+    }
+
     public static WakandaDb getInstance(final Context context, final AppExecutors executors) {
         if (wakandaDb == null) {
             synchronized (WakandaDb.class) {

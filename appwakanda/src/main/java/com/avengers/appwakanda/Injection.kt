@@ -11,8 +11,8 @@ object Injection {
 
     //3
     fun provideCache(): IndexDataCache {
-        var dao = RoomHelper.indexDataDao()
-        var ex = WakandaModule.appExecutors
+        val dao = RoomHelper.indexDataDao()
+        val ex = WakandaModule.appExecutors
         return IndexDataCache(dao, ex.diskIO())
     }
 

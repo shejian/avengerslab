@@ -4,6 +4,8 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PagedList
 import android.util.Log
+import com.avengers.appwakanda.WakandaModule
+import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.avengers.appwakanda.webapi.SmartisanService
@@ -22,7 +24,7 @@ class ReaderListBoundaryCallback(
 
     // keep the last requested page.
 // When the request is successful, increment the page number.
-    private var lastRequestedPage = 1
+    private var lastRequestedPage = 0
 
     private val _networkErrors = MutableLiveData<String>()
     // LiveData of network errors.
@@ -34,12 +36,29 @@ class ReaderListBoundaryCallback(
 
 
     fun reqAndSaveData() {
+        if (isRequestInProgress) {
+            return
+        }
+        isRequestInProgress = true
         service.indexMainData(Api.getSmartApi(), query, NETWORK_PAGE_SIZE, lastRequestedPage, {
-            cache.insert(it) {
-                lastRequestedPage++
-                isRequestInProgress = false
-                Log.d("shejian", "插入数据库完成" + lastRequestedPage)
+            WakandaModule.appExecutors!!.diskIO()?.execute{
+                it.let {
+                    RoomHelper.getWakandaDb().runInTransaction {
+                        val lastIndex = cache.queryMaxIndex().toLong()
+                        var newlist = it.mapIndexed { index, contextItemEntity ->
+                            contextItemEntity.setMid(lastIndex + index)
+                            contextItemEntity
+                        }
+                        Log.d("shejian", "插入数据库完成" + lastRequestedPage)
+                        cache.insert(newlist) {
+                            lastRequestedPage++
+                            isRequestInProgress = false
+                        }
+                    }
+                }
             }
+
+
         }, {
             Log.d("shejian", "失败" + it)
             _networkErrors.postValue(it)
