@@ -1,7 +1,3 @@
-[submodule "eathsub"]
-	path = eathsub
-	url = https://github.com/shejian/eathmodule.git
-	branch = develop
 [submodule "zombiebase"]
 	path = zombiebase
 	url = https://github.com/shejian/ZombieBase.git
