@@ -10,21 +10,21 @@ import android.view.ViewGroup
 import com.avengers.appwakanda.BR
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
-import com.avengers.zombiebase.DataBindingLiteAdapter
+import com.avengers.zombiebase.adapter.DataBindingLiteHolder
 
 class IndexPagedListAdapter<E : ViewDataBinding> :
-        PagedListAdapter<ContextItemEntity, DataBindingLiteAdapter.DbdLiteHolder<E>>(POST_COMPARATOR) {
+        PagedListAdapter<ContextItemEntity, DataBindingLiteHolder<E>>(POST_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int)
-            : DataBindingLiteAdapter.DbdLiteHolder<E> {
+            : DataBindingLiteHolder<E> {
         //1.拿到itemView的viewDataBinding对象
         val viewDataBinding = DataBindingUtil.inflate<E>(LayoutInflater.from(parent.context), R.layout.indexlist_dbd_item, parent, false)
-        return DataBindingLiteAdapter.DbdLiteHolder(viewDataBinding)
+        return DataBindingLiteHolder(viewDataBinding)
     }
 
     override fun onBindViewHolder(
-            holder: DataBindingLiteAdapter.DbdLiteHolder<E>,
+            holder: DataBindingLiteHolder<E>,
             position: Int
     ) {
         val binding = holder.binding

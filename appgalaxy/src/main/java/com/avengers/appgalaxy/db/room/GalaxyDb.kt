@@ -11,9 +11,6 @@ abstract class GalaxyDb : RoomDatabase() {
 
     abstract fun indexDataDao(): IndexDataDao
 
-
-
-
     companion object {
         fun installAllDefData() {
             val itemObjects = ITEM_DEFAULT_DATA.map { ContextItemEntity(0, it) }

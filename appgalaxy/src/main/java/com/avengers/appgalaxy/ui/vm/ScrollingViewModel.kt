@@ -20,7 +20,6 @@ class ScrollingViewModel : ViewModel() {
                 .setPrefetchDistance(2)
                 .build()
         liveDataModel = LivePagedListBuilder(dataSource, config).build()
-
     }
 
     fun getLiveData(): LiveData<PagedList<ContextItemEntity>>? {
