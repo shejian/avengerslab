@@ -6,3 +6,7 @@
 	path = rfwebserver
 	url = https://github.com/cd-butterfly/retrofit.git
 	branch = master
+[submodule "subearth"]
+	path = subearth
+	url = https://github.com/shejian/earthmodule.git
+	branch = develop
