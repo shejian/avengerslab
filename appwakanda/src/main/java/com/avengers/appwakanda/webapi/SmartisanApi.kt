@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 
-@Service("SmartApi")
+@Service(alias = "SmartApi")
 interface SmartisanApi {
 
     @GET("/index.php")

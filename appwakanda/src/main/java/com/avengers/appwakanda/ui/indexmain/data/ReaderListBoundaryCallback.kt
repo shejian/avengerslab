@@ -8,8 +8,8 @@ import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
+import com.avengers.appwakanda.webapi.Api
 import com.avengers.appwakanda.webapi.SmartisanService
-import com.bty.retrofit.Api
 
 //分页的边界回调类
 class ReaderListBoundaryCallback(
