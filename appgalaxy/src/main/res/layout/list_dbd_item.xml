@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="itemobj"
+            type="com.avengers.appgalaxy.db.room.entity.ContextItemEntity"/>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingRight="@dimen/_24"
+            android:paddingLeft="@dimen/_24"
+            android:text="@{itemobj.title}"
+            android:gravity="center_vertical"
+            tools:text="走上人生巅峰，赢取白富美"
+            tools:layout_editor_absoluteX="43dp"
+            tools:layout_editor_absoluteY="0dp"
+            tools:ignore="MissingConstraints" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

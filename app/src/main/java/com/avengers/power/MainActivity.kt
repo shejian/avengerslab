@@ -1,17 +1,13 @@
 package com.avengers.power
 
-import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import com.avengers.appgalaxy.ScrollingActivity
 import com.avengers.power.databinding.ActivityMainBinding
-import com.avengers.zombiebase.RunTimePermission
 import com.avengers.zombiebase.ZombieBaseUtils
 import com.spinytech.macore.router.RouterRequest
-import com.yanzhenjie.permission.Permission
 
 class MainActivity : AppCompatActivity() {
 

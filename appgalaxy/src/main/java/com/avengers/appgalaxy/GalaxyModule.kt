@@ -7,12 +7,17 @@ import com.avengers.zombiebase.BaseAppLogic
 
 class GalaxyModule : BaseAppLogic() {
 
-    var appExecutors: AppExecutors? = null
+    private var appExecutors: AppExecutors? = null
     override fun onCreate() {
         super.onCreate()
         appExecutors = ApplicationInitBase.getInstanceExecutors()
         RoomHelper.getInstance(mApplication, ApplicationInitBase.getInstanceExecutors())
     }
+
+    fun getAppExe():AppExecutors?{
+        return appExecutors
+    }
+
 
 
 }
