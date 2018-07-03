@@ -31,3 +31,6 @@ publiclibrary/libs/
 /moonsub/build/
 /moonsub/build/intermediates/
 /moonsub/build/outputs/
+
+#react native
+node_modules

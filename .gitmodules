@@ -6,3 +6,6 @@
 	path = subearth
 	url = https://github.com/shejian/earthmodule.git
 	branch = develop
+[submodule "subrn"]
+	path = subrn
+	url = https://github.com/li95/subrn.git

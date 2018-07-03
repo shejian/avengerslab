@@ -8,6 +8,15 @@ android {
         versionName "1.0"
     }
 
+    splits {
+        abi {
+            reset()
+            enable true
+            universalApk false  // If true, also generate a universal APK
+            include "armeabi-v7a"
+        }
+    }
+
 }
 
 /**
@@ -19,3 +28,15 @@ dependencies {
     implementation project(path: ':appgalaxy')
     implementation project(path: ':appwakanda')
 }
+
+//react
+def jsRoot = "$rootDir/appjs"
+project.ext.react = [root: jsRoot,
+                     bundleAssetName: 'app.android.bundle',
+                     entryFile: 'index.js',
+                     bundleInRelease: true,
+                     resourcesDirRelease: 'src/main/res',
+//                     bundleCommand: 'unbundle',
+//                     extraPackagerArgs: ['--indexed-unbundle']
+]
+apply from: "$jsRoot/node_modules/react-native/react.gradle"

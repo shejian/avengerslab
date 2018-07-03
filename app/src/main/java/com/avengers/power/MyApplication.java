@@ -10,6 +10,7 @@ import com.avengers.appwakanda.WakandaModule;
 import com.avengers.zombiebase.AppExecutors;
 import com.avengers.zombiebase.ApplicationInitBase;
 import com.avengers.zombiebase.BaseApplication;
+import com.taiwu.rn.RNApplicationLogic;
 
 /**
  * @author jvis
@@ -45,8 +46,9 @@ public class MyApplication extends BaseApplication {
         //注册Application逻辑
         //进程名称，初始化的优先级，application逻辑类，在需要的会反射初始化
         registerApplicationLogic("com.avengers.power", 999, MyApplicationLogic.class);
-        registerApplicationLogic("com.avengers.power", 998, WakandaModule.class);
-        registerApplicationLogic("com.avengers.power", 997, GalaxyModule.class);
+        registerApplicationLogic("com.avengers.power", 998, RNApplicationLogic.class);
+        registerApplicationLogic("com.avengers.power", 997, WakandaModule.class);
+        registerApplicationLogic("com.avengers.power", 996, GalaxyModule.class);
     }
 
     @Override
