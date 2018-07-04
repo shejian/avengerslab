@@ -1,6 +1,7 @@
 package com.avengers.appwakanda.ui.indexmain.repository
 
 import android.arch.paging.LivePagedListBuilder
+import android.arch.paging.PagedList
 import android.util.Log
 import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.db.room.RoomHelper
@@ -18,36 +19,32 @@ class IndexRepository(
         private val cache: IndexDataCache
 ) {
     companion object {
-        private const val DB_PAGE_SIZE = 10
+        private const val DB_PAGE_SIZE = 20
     }
 
-    var lastRequestedPage = -1
 
     fun getIndexListData(query: String): ItemResult {
-
         //设置边界回调
-        val callback = ReaderListBoundaryCallback(query, lastRequestedPage, service, cache)
-
+        val callback = ReaderListBoundaryCallback(query, service, cache)
         //缓存数据工厂类
         val dataSourceFactory = cache.queryIndexList()
 
         val networkErrors = callback.networkErrors
 
-        val mLiveData = LivePagedListBuilder(dataSourceFactory, DB_PAGE_SIZE)
+        val mLiveData = LivePagedListBuilder(dataSourceFactory,
+                PagedList.Config.Builder()
+                        .setPageSize(DB_PAGE_SIZE)
+                        .setEnablePlaceholders(false)
+                        .setPrefetchDistance(2)
+                        .build())
                 .setBoundaryCallback(callback)
                 .build()
-
-        if (lastRequestedPage == -1) {
-            cache.cleanData {
-                lastRequestedPage = 0
-            }
-        }
-
 
         //数据封装
         return ItemResult(mLiveData, networkErrors)
     }
 
+    private var lastRequestedPage = 0
     private var isRequestInProgress = false
     fun refresh(query: String) {
         if (isRequestInProgress) {

@@ -42,5 +42,9 @@ class IndexDataCache(
         return dds
     }
 
+    fun queryTotal(): Int {
+        return indexDao.quryAllCount()
+    }
+
 
 }

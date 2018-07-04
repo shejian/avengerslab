@@ -14,15 +14,15 @@ import com.avengers.appwakanda.webapi.SmartisanService
 //分页的边界回调类
 class ReaderListBoundaryCallback(
         private val query: String,
-        private var lastRequestedPage: Int,
         private val service: SmartisanService,
         private val cache: IndexDataCache
 ) : PagedList.BoundaryCallback<ContextItemEntity>() {
 
-    companion object {
+    public companion object {
         const val NETWORK_PAGE_SIZE = 20
     }
 
+    private var lastRequestedPage = 0
     // keep the last requested page.
 // When the request is successful, increment the page number.
 
@@ -35,11 +35,12 @@ class ReaderListBoundaryCallback(
     private var isRequestInProgress = false
 
 
-    fun reqAndSaveData() {
+    private fun reqAndSaveData() {
         if (isRequestInProgress) {
             return
         }
         isRequestInProgress = true
+
         service.indexMainData(Api.getSmartApi(), query, NETWORK_PAGE_SIZE, lastRequestedPage, {
             WakandaModule.appExecutors!!.diskIO()?.execute {
                 it.let {
@@ -49,9 +50,8 @@ class ReaderListBoundaryCallback(
                             contextItemEntity.setMid(lastIndex + index)
                             contextItemEntity
                         }
-                        Log.d("shejian", "插入数据库完成" + lastRequestedPage)
+                        Log.d("shejian", "插入数据库完成$lastRequestedPage")
                         cache.insert(newlist) {
-                            lastRequestedPage++
                             isRequestInProgress = false
                         }
                     }
@@ -69,11 +69,16 @@ class ReaderListBoundaryCallback(
 
     override fun onZeroItemsLoaded() {
         super.onZeroItemsLoaded()
+        Log.d("shejian", "onZeroItemsLoaded")
         reqAndSaveData()
     }
 
     override fun onItemAtEndLoaded(itemAtEnd: ContextItemEntity) {
         super.onItemAtEndLoaded(itemAtEnd)
+        //取出数据库中最后一个时计算页码
+        val pageNum = (itemAtEnd.getMid()?.plus(1))?.div(NETWORK_PAGE_SIZE)
+        lastRequestedPage = pageNum?.toInt()!!
+        Log.d("shejian", "onItemAtEndLoaded")
         reqAndSaveData()
     }
 }

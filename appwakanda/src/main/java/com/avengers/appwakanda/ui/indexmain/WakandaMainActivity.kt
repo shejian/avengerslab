@@ -35,7 +35,7 @@ class WakandaMainActivity : AppCompatActivity() {
 
         RcycyleHelper.initBaseRcycyleView(this, activityDataBinding.recyclerView)
         //    RcycyleHelper.initSwipeRefresh(activityDataBinding.swipeRefreshView)
-        setupScrollListener()
+     //   setupScrollListener()
 
         //初始化刷新控件的监听
         /*       activityDataBinding.swipeRefreshView.setOnRefreshListener {

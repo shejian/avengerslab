@@ -42,10 +42,12 @@ class IndexListViewModel(private val repository: IndexRepository) : ViewModel() 
     private val queryLiveData = MutableLiveData<String>()//"line/show"
 
 
+
     //queryLiveData 为参数 通过函数 转化为结果，Transformations将绑定queryLiveData与匿名函数的触发
     var result: LiveData<ItemResult> = Transformations.map(queryLiveData) {
         repository.getIndexListData(it)
     }
+
 
 
     //列表数据
