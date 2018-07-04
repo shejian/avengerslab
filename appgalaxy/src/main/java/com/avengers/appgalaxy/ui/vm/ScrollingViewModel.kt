@@ -1,9 +1,10 @@
 package com.avengers.appgalaxy.ui.vm
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.arch.paging.LivePagedListBuilder
-import android.arch.paging.PagedList
+import android.arch.paging.*
+import android.util.Log
 import com.avengers.appgalaxy.db.room.RoomHelper
 import com.avengers.appgalaxy.db.room.entity.ContextItemEntity
 
@@ -13,6 +14,10 @@ class ScrollingViewModel : ViewModel() {
 
     fun initModel() {
         val dataSource = RoomHelper.indexDataDao().quryInfos()
+
+
+       // var mySource= ItemKeyedDataSource<Int,PagedList<ContextItemEntity>>
+
         val config = PagedList.Config.Builder()
                 .setInitialLoadSizeHint(20)
                 .setPageSize(10)
@@ -25,6 +30,10 @@ class ScrollingViewModel : ViewModel() {
     fun getLiveData(): LiveData<PagedList<ContextItemEntity>>? {
         return this.liveDataModel
     }
+
+
+
+
 
 
 }

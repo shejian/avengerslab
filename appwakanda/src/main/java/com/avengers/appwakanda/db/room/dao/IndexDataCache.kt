@@ -20,6 +20,15 @@ class IndexDataCache(
     }
 
 
+    fun cleanData(delFinished: () -> Unit) {
+        ioExecutor.execute {
+            indexDao.deleteByItem()
+            delFinished()
+        }
+
+    }
+
+
     fun queryIndexList(): DataSource.Factory<Int, ContextItemEntity> {
         return indexDao.quryAllItem()
     }

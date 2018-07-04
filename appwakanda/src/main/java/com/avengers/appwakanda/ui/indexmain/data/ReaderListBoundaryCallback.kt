@@ -14,17 +14,17 @@ import com.avengers.appwakanda.webapi.SmartisanService
 //分页的边界回调类
 class ReaderListBoundaryCallback(
         private val query: String,
+        private var lastRequestedPage: Int,
         private val service: SmartisanService,
         private val cache: IndexDataCache
 ) : PagedList.BoundaryCallback<ContextItemEntity>() {
 
     companion object {
-        private const val NETWORK_PAGE_SIZE = 20
+        const val NETWORK_PAGE_SIZE = 20
     }
 
     // keep the last requested page.
 // When the request is successful, increment the page number.
-    private var lastRequestedPage = 0
 
     private val _networkErrors = MutableLiveData<String>()
     // LiveData of network errors.
@@ -41,7 +41,7 @@ class ReaderListBoundaryCallback(
         }
         isRequestInProgress = true
         service.indexMainData(Api.getSmartApi(), query, NETWORK_PAGE_SIZE, lastRequestedPage, {
-            WakandaModule.appExecutors!!.diskIO()?.execute{
+            WakandaModule.appExecutors!!.diskIO()?.execute {
                 it.let {
                     RoomHelper.getWakandaDb().runInTransaction {
                         val lastIndex = cache.queryMaxIndex().toLong()

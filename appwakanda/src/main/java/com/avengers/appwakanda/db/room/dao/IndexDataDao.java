@@ -17,6 +17,9 @@ public interface IndexDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertList(List<ContextItemEntity> contextItemBean);
 
+    @Query("DELETE FROM ContextItemEntity ")
+    void deleteByItem();
+
     @Query("SELECT * FROM ContextItemEntity  ORDER BY _mid ASC")
     DataSource.Factory<Integer, ContextItemEntity> quryAllItem();
 
