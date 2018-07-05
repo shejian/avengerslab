@@ -22,7 +22,6 @@ class IndexRepository(
         private const val DB_PAGE_SIZE = 20
     }
 
-
     fun getIndexListData(query: String): ItemResult {
         //设置边界回调
         val callback = ReaderListBoundaryCallback(query, service, cache)
@@ -34,19 +33,22 @@ class IndexRepository(
         val mLiveData = LivePagedListBuilder(dataSourceFactory,
                 PagedList.Config.Builder()
                         .setPageSize(DB_PAGE_SIZE)
-                        .setEnablePlaceholders(false)
+                        .setEnablePlaceholders(true)
                         .setPrefetchDistance(2)
                         .build())
                 .setBoundaryCallback(callback)
                 .build()
 
+        val result = ItemResult(mLiveData, networkErrors)
+
+        refresh(query, result)
         //数据封装
-        return ItemResult(mLiveData, networkErrors)
+        return result
     }
 
     private var lastRequestedPage = 0
     private var isRequestInProgress = false
-    fun refresh(query: String) {
+    fun refresh(query: String, itemResult: ItemResult) {
         if (isRequestInProgress) {
             return
         }
@@ -55,25 +57,25 @@ class IndexRepository(
             WakandaModule.appExecutors!!.diskIO()?.execute {
                 it.let {
                     RoomHelper.getWakandaDb().runInTransaction {
-                        val lastIndex = cache.queryMaxIndex().toLong()
-                        var newlist = it.mapIndexed { index, contextItemEntity ->
-                            contextItemEntity.setMid(lastIndex + index)
-                            contextItemEntity
-                        }
-                        cache.cleanData {
-                            lastRequestedPage = 0
-                            cache.insert(newlist) {
-                                lastRequestedPage++
-                                isRequestInProgress = false
+                        if (it.isNotEmpty()) {
+                            cache.cleanData {
+                                val lastIndex = cache.queryMaxIndex().toLong()
+                                val newlist = it.mapIndexed { index, contextItemEntity ->
+                                    contextItemEntity.setMid(lastIndex + index)
+                                    contextItemEntity
+                                }
+                                cache.insert(newlist) {
+                                    isRequestInProgress = false
+                                }
+                                itemResult.newworkError.postValue("ok" + System.currentTimeMillis())
                             }
                         }
                     }
                 }
             }
-
-
         }, {
             Log.d("shejian", "失败" + it)
+            itemResult.newworkError.postValue(it)
             isRequestInProgress = false
         })
     }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.appwakanda.Injection
 import com.avengers.appwakanda.R
@@ -34,27 +35,28 @@ class WakandaMainActivity : AppCompatActivity() {
         initAdapter()
 
         RcycyleHelper.initBaseRcycyleView(this, activityDataBinding.recyclerView)
-        //    RcycyleHelper.initSwipeRefresh(activityDataBinding.swipeRefreshView)
-     //   setupScrollListener()
+        //   RcycyleHelper.initSwipeRefresh(activityDataBinding)
+        //   setupScrollListener()
 
         //初始化刷新控件的监听
-        /*       activityDataBinding.swipeRefreshView.setOnRefreshListener {
-                   // indexListViewModel.refreshData()
-                   activityDataBinding.swipeRefreshView.isRefreshing = false
-               }*/
+        activityDataBinding.swipeRefreshView.setOnRefreshListener {
+            indexListViewModel.refresh()
+        }
         //指定请求参数，作为livedata 数据，将自动触发请求
         indexListViewModel.getIndexData("line/show")
-
+        activityDataBinding.swipeRefreshView.isRefreshing = true
     }
 
 
     fun initAdapter() {
-
-        var adapter = IndexPagedListAdapter<IndexlistDbdItemBinding>()
+        val adapter = IndexPagedListAdapter<IndexlistDbdItemBinding>()
         activityDataBinding.recyclerView.adapter = adapter
         indexListViewModel.items.observe(this, Observer {
             adapter.submitList(it)
-            //activityDataBinding.swipeRefreshView.isRefreshing = false
+        })
+        indexListViewModel.errorInfo?.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            activityDataBinding.swipeRefreshView.isRefreshing = false
         })
     }
 
@@ -70,7 +72,6 @@ class WakandaMainActivity : AppCompatActivity() {
                 val totalItemCount = layoutManager.itemCount
                 val visibleItemCount = layoutManager.childCount
                 val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-
                 indexListViewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
             }
         })

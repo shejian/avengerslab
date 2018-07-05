@@ -23,7 +23,7 @@ public interface IndexDataDao {
     @Query("SELECT * FROM ContextItemEntity  ORDER BY _mid ASC")
     DataSource.Factory<Integer, ContextItemEntity> quryAllItem();
 
-    @Query("SELECT  COUNT(*) FROM ContextItemEntity")
+    @Query("SELECT  COUNT(_mid) FROM ContextItemEntity")
     Integer quryAllCount();
 
     @Query("SELECT MAX(_mid)+ 1 FROM ContextItemEntity")

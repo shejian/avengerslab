@@ -29,6 +29,14 @@ class IndexDataCache(
     }
 
 
+    fun refresh(repos: List<ContextItemEntity>,finished: () -> Unit) {
+        ioExecutor.execute {
+            indexDao.deleteByItem()
+            indexDao.insertList(repos)
+            finished()
+        }
+    }
+
     fun queryIndexList(): DataSource.Factory<Int, ContextItemEntity> {
         return indexDao.quryAllItem()
     }

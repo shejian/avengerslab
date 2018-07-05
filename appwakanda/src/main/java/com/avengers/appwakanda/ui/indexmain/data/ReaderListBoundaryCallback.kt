@@ -28,7 +28,7 @@ class ReaderListBoundaryCallback(
 
     private val _networkErrors = MutableLiveData<String>()
     // LiveData of network errors.
-    val networkErrors: LiveData<String>
+    val networkErrors: MutableLiveData<String>
         get() = _networkErrors
 
     // avoid triggering multiple requests in the same time
@@ -56,11 +56,13 @@ class ReaderListBoundaryCallback(
                         }
                     }
                 }
+                _networkErrors.postValue("ok" + System.currentTimeMillis())
             }
 
 
         }, {
             Log.d("shejian", "失败" + it)
+         //   _networkErrors.postValue("fail" + System.currentTimeMillis())
             _networkErrors.postValue(it)
             isRequestInProgress = false
         })
@@ -70,7 +72,7 @@ class ReaderListBoundaryCallback(
     override fun onZeroItemsLoaded() {
         super.onZeroItemsLoaded()
         Log.d("shejian", "onZeroItemsLoaded")
-        reqAndSaveData()
+        //reqAndSaveData()
     }
 
     override fun onItemAtEndLoaded(itemAtEnd: ContextItemEntity) {
