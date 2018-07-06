@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.appwakanda.Injection
 import com.avengers.appwakanda.R
@@ -35,8 +34,8 @@ class WakandaMainActivity : AppCompatActivity() {
         initAdapter()
 
         RcycyleHelper.initBaseRcycyleView(this, activityDataBinding.recyclerView)
-        //   RcycyleHelper.initSwipeRefresh(activityDataBinding)
-        //   setupScrollListener()
+        RcycyleHelper.initSwipeRefresh(activityDataBinding.swipeRefreshView)
+        setupScrollListener()
 
         //初始化刷新控件的监听
         activityDataBinding.swipeRefreshView.setOnRefreshListener {
@@ -44,7 +43,7 @@ class WakandaMainActivity : AppCompatActivity() {
             indexListViewModel.runRefresh.postValue(true)
         }
         //指定请求参数，作为livedata 数据，将自动触发请求，是否需要首次触发下拉刷新onRefresh
-        indexListViewModel.getIndexData("line/show",true)
+        indexListViewModel.getIndexData("line/show", true)
 
     }
 
@@ -60,7 +59,7 @@ class WakandaMainActivity : AppCompatActivity() {
             activityDataBinding.swipeRefreshView.isRefreshing = true
         })
         //完成刷新请求，停止刷新UI
-        indexListViewModel.errorInfo.observe(this, Observer {
+        indexListViewModel.refreshState.observe(this, Observer {
             activityDataBinding.swipeRefreshView.isRefreshing = false
         })
     }

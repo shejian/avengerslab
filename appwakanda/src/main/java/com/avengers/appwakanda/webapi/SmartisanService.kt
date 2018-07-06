@@ -21,7 +21,7 @@ open class SmartisanService {
 
             override fun onResponse(call: Call<IndexReaderListBean>?, response: Response<IndexReaderListBean>) {
                 if (response.isSuccessful) {
-                    val indexReaderListBean = response!!.body()!!.data!!.list
+                    val indexReaderListBean = response.body()!!.data!!.list
                     onSuccess(indexReaderListBean!!)
                 } else {
                     onError(response.errorBody()?.string() ?: "Unknown error")

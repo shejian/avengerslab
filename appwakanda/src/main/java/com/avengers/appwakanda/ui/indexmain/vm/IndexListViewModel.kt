@@ -8,6 +8,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.paging.PagedList
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository
+import com.avengers.appwakanda.ui.indexmain.repository.NetworkState
 
 class IndexListViewModel(private val repository: IndexRepository) : ViewModel() {
 
@@ -39,23 +40,22 @@ class IndexListViewModel(private val repository: IndexRepository) : ViewModel() 
 
     private val queryLiveData = MutableLiveData<String>()//"line/show"
 
-
     //queryLiveData 为参数 通过函数 转化为结果，Transformations将绑定queryLiveData与匿名函数的触发
     private var result: LiveData<ItemResult> = map(queryLiveData) {
         repository.getIndexListData(it)
     }
 
-
     //列表数据
     var items: LiveData<PagedList<ContextItemEntity>> = switchMap(result) {
         it.data
     }
-
-
-    var errorInfo: LiveData<String> = switchMap(result) {
-        it.newworkState
+    var netWorkState: LiveData<NetworkState> = switchMap(result) {
+        it.netWorkState
     }
 
+    var refreshState: LiveData<NetworkState> = switchMap(result) {
+        it.refreshState
+    }
 
     fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
         if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {

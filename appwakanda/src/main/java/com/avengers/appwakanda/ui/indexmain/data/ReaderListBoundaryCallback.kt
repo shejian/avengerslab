@@ -8,6 +8,7 @@ import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
+import com.avengers.appwakanda.ui.indexmain.repository.NetworkState
 import com.avengers.appwakanda.webapi.Api
 import com.avengers.appwakanda.webapi.SmartisanService
 
@@ -26,10 +27,10 @@ class ReaderListBoundaryCallback(
     // keep the last requested page.
 // When the request is successful, increment the page number.
 
-    private val _networkErrors = MutableLiveData<String>()
+    private val _netWorkState = MutableLiveData<NetworkState>()
     // LiveData of network errors.
-    val networkErrors: MutableLiveData<String>
-        get() = _networkErrors
+    val netWorkState: MutableLiveData<NetworkState>
+        get() = _netWorkState
 
     // avoid triggering multiple requests in the same time
     private var isRequestInProgress = false
@@ -40,7 +41,7 @@ class ReaderListBoundaryCallback(
             return
         }
         isRequestInProgress = true
-
+        _netWorkState.postValue(NetworkState.LOADING)
         service.indexMainData(Api.getSmartApi(), query, NETWORK_PAGE_SIZE, lastRequestedPage, {
             WakandaModule.appExecutors!!.diskIO()?.execute {
                 it.let {
@@ -56,14 +57,14 @@ class ReaderListBoundaryCallback(
                         }
                     }
                 }
-                _networkErrors.postValue("ok" + System.currentTimeMillis())
+                _netWorkState.postValue(NetworkState.LOADED)
             }
 
 
         }, {
             Log.d("shejian", "失败" + it)
-         //   _networkErrors.postValue("fail" + System.currentTimeMillis())
-            _networkErrors.postValue(it)
+            //   _networkErrors.postValue("fail" + System.currentTimeMillis())
+            _netWorkState.postValue(NetworkState.error(it))
             isRequestInProgress = false
         })
     }

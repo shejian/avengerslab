@@ -32,7 +32,7 @@ class IndexRepository(
         //缓存数据工厂类
         val dataSourceFactory = cache.queryIndexList()
 
-        val networkErrors = callback.networkErrors
+        val netWorkState = callback.netWorkState
 
         val mLiveData = LivePagedListBuilder(dataSourceFactory,
                 PagedList.Config.Builder()
@@ -45,23 +45,24 @@ class IndexRepository(
 
         var netWorkFun = MutableLiveData<Unit>()
 
-        var newworkState = Transformations.switchMap(netWorkFun) {
+        var refreshState = Transformations.switchMap(netWorkFun) {
             refresh(query)
         }
 
         //数据封装
-        return ItemResult(mLiveData, networkErrors, newworkState) {
+        return ItemResult(mLiveData, netWorkState, refreshState) {
             netWorkFun.value = null
         }
     }
 
     private var lastRequestedPage = 0
     private var isRequestInProgress = false
-    private fun refresh(query: String): LiveData<String> {
-        val networkState = MutableLiveData<String>()
+    private fun refresh(query: String): LiveData<NetworkState> {
+        val refreshState = MutableLiveData<NetworkState>()
         if (isRequestInProgress) {
-            return networkState
+            return refreshState
         }
+        refreshState.postValue(NetworkState.LOADING)
         isRequestInProgress = true
         service.indexMainData(Api.getSmartApi(), query, ReaderListBoundaryCallback.NETWORK_PAGE_SIZE, lastRequestedPage, {
             WakandaModule.appExecutors!!.diskIO()?.execute {
@@ -77,7 +78,7 @@ class IndexRepository(
                                 cache.insert(newlist) {
                                     isRequestInProgress = false
                                 }
-                                networkState.postValue("ok" + System.currentTimeMillis())
+                                refreshState.postValue(NetworkState.LOADED)
                             }
                         }
                     }
@@ -85,10 +86,10 @@ class IndexRepository(
             }
         }, {
             Log.d("shejian", "失败" + it)
-            networkState.postValue(it)
+            refreshState.postValue(NetworkState.error(it))
             isRequestInProgress = false
         })
-        return networkState
+        return refreshState
     }
 
 
