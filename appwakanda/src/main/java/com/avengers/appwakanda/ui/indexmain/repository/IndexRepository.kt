@@ -1,5 +1,8 @@
 package com.avengers.appwakanda.ui.indexmain.repository
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
 import android.util.Log
@@ -25,6 +28,7 @@ class IndexRepository(
     fun getIndexListData(query: String): ItemResult {
         //设置边界回调
         val callback = ReaderListBoundaryCallback(query, service, cache)
+
         //缓存数据工厂类
         val dataSourceFactory = cache.queryIndexList()
 
@@ -39,18 +43,24 @@ class IndexRepository(
                 .setBoundaryCallback(callback)
                 .build()
 
-        val result = ItemResult(mLiveData, networkErrors)
+        var netWorkFun = MutableLiveData<Unit>()
 
-        refresh(query, result)
+        var newworkState = Transformations.switchMap(netWorkFun) {
+            refresh(query)
+        }
+
         //数据封装
-        return result
+        return ItemResult(mLiveData, networkErrors, newworkState) {
+            netWorkFun.value = null
+        }
     }
 
     private var lastRequestedPage = 0
     private var isRequestInProgress = false
-    fun refresh(query: String, itemResult: ItemResult) {
+    private fun refresh(query: String): LiveData<String> {
+        val networkState = MutableLiveData<String>()
         if (isRequestInProgress) {
-            return
+            return networkState
         }
         isRequestInProgress = true
         service.indexMainData(Api.getSmartApi(), query, ReaderListBoundaryCallback.NETWORK_PAGE_SIZE, lastRequestedPage, {
@@ -67,7 +77,7 @@ class IndexRepository(
                                 cache.insert(newlist) {
                                     isRequestInProgress = false
                                 }
-                                itemResult.newworkError.postValue("ok" + System.currentTimeMillis())
+                                networkState.postValue("ok" + System.currentTimeMillis())
                             }
                         }
                     }
@@ -75,9 +85,10 @@ class IndexRepository(
             }
         }, {
             Log.d("shejian", "失败" + it)
-            itemResult.newworkError.postValue(it)
+            networkState.postValue(it)
             isRequestInProgress = false
         })
+        return networkState
     }
 
 

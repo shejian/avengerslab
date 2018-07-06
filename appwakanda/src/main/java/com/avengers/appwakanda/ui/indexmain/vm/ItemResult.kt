@@ -7,7 +7,9 @@ import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 
 data class ItemResult(
         val data: LiveData<PagedList<ContextItemEntity>>,
-        val newworkError: MutableLiveData<String>
+        val newworkError: LiveData<String>,
+        val newworkState: LiveData<String>,
+        var refresh: () -> Unit
 )
 
 

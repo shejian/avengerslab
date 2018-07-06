@@ -40,11 +40,12 @@ class WakandaMainActivity : AppCompatActivity() {
 
         //初始化刷新控件的监听
         activityDataBinding.swipeRefreshView.setOnRefreshListener {
-            indexListViewModel.refresh()
+            //下拉触发运行刷新的值，联动触发刷新事件
+            indexListViewModel.runRefresh.postValue(true)
         }
-        //指定请求参数，作为livedata 数据，将自动触发请求
-        indexListViewModel.getIndexData("line/show")
-        activityDataBinding.swipeRefreshView.isRefreshing = true
+        //指定请求参数，作为livedata 数据，将自动触发请求，是否需要首次触发下拉刷新onRefresh
+        indexListViewModel.getIndexData("line/show",true)
+
     }
 
 
@@ -54,8 +55,12 @@ class WakandaMainActivity : AppCompatActivity() {
         indexListViewModel.items.observe(this, Observer {
             adapter.submitList(it)
         })
-        indexListViewModel.errorInfo?.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        //对刷新事件做了监控，刷新属性发生变化时，改变刷新UI
+        indexListViewModel.mRefreshing.observe(this, Observer {
+            activityDataBinding.swipeRefreshView.isRefreshing = true
+        })
+        //完成刷新请求，停止刷新UI
+        indexListViewModel.errorInfo.observe(this, Observer {
             activityDataBinding.swipeRefreshView.isRefreshing = false
         })
     }

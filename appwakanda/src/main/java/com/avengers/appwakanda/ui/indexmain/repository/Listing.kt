@@ -24,6 +24,9 @@ import android.arch.paging.PagedList
  *
  * 这是用于list的UI交互与系统解耦的必备的数据类
  *
+ *
+ *
+ *
  */
 data class Listing<T>(
         // the LiveData of paged lists for the UI to observe
