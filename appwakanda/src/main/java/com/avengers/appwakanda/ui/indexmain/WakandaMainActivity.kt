@@ -1,5 +1,6 @@
 package com.avengers.appwakanda.ui.indexmain
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
@@ -7,11 +8,15 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
+import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.appwakanda.Injection
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.databinding.ActivityWakandaMainBinding
 import com.avengers.appwakanda.databinding.IndexlistDbdItemBinding
+import com.avengers.appwakanda.ui.indexmain.repository.NetworkState
+import com.avengers.appwakanda.ui.indexmain.repository.Status
 import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
 import com.avengers.zombiebase.RcycyleHelper
 
@@ -43,7 +48,7 @@ class WakandaMainActivity : AppCompatActivity() {
             indexListViewModel.runRefresh.postValue(true)
         }
         //指定请求参数，作为livedata 数据，将自动触发请求，是否需要首次触发下拉刷新onRefresh
-        indexListViewModel.getIndexData("line/show", true)
+        indexListViewModel.getIndexData("line/show", false)
 
     }
 
@@ -53,16 +58,27 @@ class WakandaMainActivity : AppCompatActivity() {
         activityDataBinding.recyclerView.adapter = adapter
         indexListViewModel.items.observe(this, Observer {
             adapter.submitList(it)
+            scrollRetry = false
         })
         //对刷新事件做了监控，刷新属性发生变化时，改变刷新UI
         indexListViewModel.mRefreshing.observe(this, Observer {
-            activityDataBinding.swipeRefreshView.isRefreshing = true
+            activityDataBinding.swipeRefreshView.isRefreshing = it!!
         })
         //完成刷新请求，停止刷新UI
         indexListViewModel.refreshState.observe(this, Observer {
             activityDataBinding.swipeRefreshView.isRefreshing = false
         })
+
+        //完成刷新请求，停止刷新UI
+        indexListViewModel.netWorkState.observe(this, Observer {
+            Toast.makeText(this, "" + it?.status.toString(), Toast.LENGTH_SHORT).show()
+            if (Status.FAILED == it?.status) {
+                scrollRetry = true
+            }
+        })
     }
+
+    var scrollRetry = false
 
 
     /**
@@ -71,12 +87,30 @@ class WakandaMainActivity : AppCompatActivity() {
     private fun setupScrollListener() {
         val layoutManager = activityDataBinding.recyclerView.layoutManager as LinearLayoutManager
         activityDataBinding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            var ii = 0
+
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val totalItemCount = layoutManager.itemCount
                 val visibleItemCount = layoutManager.childCount
                 val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-                indexListViewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
+                Log.d("shejian", "onScrolled:" + visibleItemCount + "/" + lastVisibleItem + "/" + 5)
+                if (ii > 0) {
+                    return
+                }
+                if (visibleItemCount + lastVisibleItem + 5 >= totalItemCount) {
+                    if (scrollRetry) {
+                        ii++
+                        scrollRetry = false
+                        Toast.makeText(this@WakandaMainActivity, "onScrolled", Toast.LENGTH_SHORT).show()
+                        indexListViewModel.retry()
+
+                    }
+                } else {
+                    ii = 0
+                }
+                //indexListViewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
             }
         })
     }

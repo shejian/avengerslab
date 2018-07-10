@@ -49,6 +49,7 @@ class IndexListViewModel(private val repository: IndexRepository) : ViewModel() 
     var items: LiveData<PagedList<ContextItemEntity>> = switchMap(result) {
         it.data
     }
+
     var netWorkState: LiveData<NetworkState> = switchMap(result) {
         it.netWorkState
     }
@@ -66,11 +67,18 @@ class IndexListViewModel(private val repository: IndexRepository) : ViewModel() 
         }
     }
 
+
+    fun retry() {
+        result.value?.retry?.invoke()
+    }
+
+
     val runRefresh = MutableLiveData<Boolean>()
 
     //runRefresh属性的变化联动触发刷新
     var mRefreshing = map(runRefresh) {
         if (it) result.value?.refresh?.invoke()
+        it
     }
 
 }

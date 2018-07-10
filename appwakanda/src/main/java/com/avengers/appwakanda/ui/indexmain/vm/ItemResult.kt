@@ -9,7 +9,8 @@ data class ItemResult(
         val data: LiveData<PagedList<ContextItemEntity>>,
         val netWorkState: LiveData<NetworkState>,
         val refreshState: LiveData<NetworkState>,
-        var refresh: () -> Unit
+        var refresh: () -> Unit,
+        var retry: () -> Unit
 )
 
 

@@ -5,6 +5,8 @@ import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository
 import com.avengers.appwakanda.ui.indexmain.vm.ViewModelFactory
+import com.avengers.appwakanda.webapi.Api
+import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.appwakanda.webapi.SmartisanService
 
 object Injection {
@@ -18,7 +20,7 @@ object Injection {
 
     //2
     fun provideIndexRepository(): IndexRepository {
-        return IndexRepository(SmartisanService(), provideCache())
+        return IndexRepository(Api.getSmartApi(), provideCache())
     }
 
     //1

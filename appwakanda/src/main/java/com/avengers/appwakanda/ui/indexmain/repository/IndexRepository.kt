@@ -7,32 +7,40 @@ import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
 import android.util.Log
 import com.avengers.appwakanda.WakandaModule
+import com.avengers.appwakanda.bean.IndexReaderListBean
 import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.ui.indexmain.data.ReaderListBoundaryCallback
 import com.avengers.appwakanda.ui.indexmain.vm.ItemResult
-import com.avengers.appwakanda.webapi.Api
-import com.avengers.appwakanda.webapi.SmartisanService
+import com.avengers.appwakanda.webapi.SmartisanApi
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * 处理数据逻辑
  */
 class IndexRepository(
-        private val service: SmartisanService,
+        private val service: SmartisanApi,
         private val cache: IndexDataCache
 ) {
     companion object {
         private const val DB_PAGE_SIZE = 20
     }
 
+    /**
+     * 初始化BoundaryCallback，dataSourceFactory，LivePagedListBuilder，以及一些网络状态
+     */
     fun getIndexListData(query: String): ItemResult {
         //设置边界回调
-        val callback = ReaderListBoundaryCallback(query, service, cache)
+        val callback = ReaderListBoundaryCallback(
+                query,
+                service,
+                cache,
+                this::insertResultIntoDb)
 
         //缓存数据工厂类
         val dataSourceFactory = cache.queryIndexList()
-
-        val netWorkState = callback.netWorkState
 
         val mLiveData = LivePagedListBuilder(dataSourceFactory,
                 PagedList.Config.Builder()
@@ -50,20 +58,51 @@ class IndexRepository(
         }
 
         //数据封装
-        return ItemResult(mLiveData, netWorkState, refreshState) {
-            netWorkFun.value = null
-        }
+        return ItemResult(
+                mLiveData,
+                callback.networkState,
+                refreshState,
+                {
+                    netWorkFun.value = null
+                },
+                {
+                    //重试全部失败掉的请求
+                    callback.helper.retryAllFailed()
+                })
     }
 
     private var lastRequestedPage = 0
-    private var isRequestInProgress = false
+
+    /**
+     * 下拉刷新数据，清空旧数据
+     */
     private fun refresh(query: String): LiveData<NetworkState> {
-        val refreshState = MutableLiveData<NetworkState>()
-        if (isRequestInProgress) {
-            return refreshState
-        }
-        refreshState.postValue(NetworkState.LOADING)
-        isRequestInProgress = true
+        val netWorkState = MutableLiveData<NetworkState>()
+        netWorkState.postValue(NetworkState.LOADING)
+        service.getSmtIndex(query, ReaderListBoundaryCallback.NETWORK_PAGE_SIZE, lastRequestedPage)
+                .enqueue(object : Callback<IndexReaderListBean> {
+                    override fun onFailure(call: Call<IndexReaderListBean>?, t: Throwable?) {
+                        netWorkState.value = NetworkState.error(t?.message)
+                    }
+
+                    override fun onResponse(call: Call<IndexReaderListBean>?, response: Response<IndexReaderListBean>) {
+                        WakandaModule.appExecutors!!.diskIO()?.execute {
+                            response.body()?.let {
+                                RoomHelper.getWakandaDb().runInTransaction {
+                                    cache.cleanData {
+                                        insertResultIntoDb(it)
+                                        netWorkState.postValue(NetworkState.LOADED)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+        return netWorkState
+    }
+
+/*
+
         service.indexMainData(Api.getSmartApi(), query, ReaderListBoundaryCallback.NETWORK_PAGE_SIZE, lastRequestedPage, {
             WakandaModule.appExecutors!!.diskIO()?.execute {
                 it.let {
@@ -88,8 +127,21 @@ class IndexRepository(
             Log.d("shejian", "失败" + it)
             refreshState.postValue(NetworkState.error(it))
             isRequestInProgress = false
-        })
-        return refreshState
+        })*/
+
+
+    private fun insertResultIntoDb(response: IndexReaderListBean) {
+        response.data?.list?.let {
+            RoomHelper.getWakandaDb().runInTransaction {
+                val lastIndex = cache.queryMaxIndex().toLong()
+                var newlist = it.mapIndexed { index, contextItemEntity ->
+                    contextItemEntity.setMid(lastIndex + index)
+                    contextItemEntity
+                }
+                cache.insert(newlist) {}
+            }
+        }
+
     }
 
 

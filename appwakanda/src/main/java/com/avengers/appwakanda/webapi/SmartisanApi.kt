@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 
 @Service(alias = "SmartApi")
-interface SmartisanApi {
+open interface SmartisanApi {
 
     @GET("/index.php")
     fun getSmtIndex(@Query("r") r: String,
