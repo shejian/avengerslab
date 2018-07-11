@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello Worlddasdasdasdasdasdasdasdasdadasdasdasdasdasda中文中文中文sd!"
+            android:text="Hello!"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -25,11 +25,21 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
             android:onClick="buttonClick"
+            android:text="Button"
+            tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="169dp"
-            tools:layout_editor_absoluteY="126dp"
-            tools:ignore="MissingConstraints" />
+            tools:layout_editor_absoluteY="126dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="buttonClickweather"
+            android:text="weather"
+            app:layout_constraintTop_toBottomOf="@id/button"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="169dp"
+            tools:layout_editor_absoluteY="126dp" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

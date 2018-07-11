@@ -6,6 +6,7 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 
 import com.avengers.appgalaxy.db.room.dao.IndexDataDao
+import com.avengers.weather.db.WeatherDao
 import com.avengers.zombiebase.AppExecutors
 
 /**
@@ -20,6 +21,10 @@ object RoomHelper {
 
     fun indexDataDao(): IndexDataDao {
         return galaxyDb!!.indexDataDao()
+    }
+
+    fun weatherDao():WeatherDao {
+        return galaxyDb!!.weatherDao()
     }
 
     fun getInstance(context: Context, executors: AppExecutors): GalaxyDb? {

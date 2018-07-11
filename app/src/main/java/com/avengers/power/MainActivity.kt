@@ -33,13 +33,15 @@ class MainActivity : AppCompatActivity() {
 
 
     fun buttonClick(view: View) {
-        view.setOnClickListener { Log.d("","") }
 /*        RunTimePermission.requestPermission(this, {
             startActivity(Intent(this, ScrollingActivity::class.java))
         }, Permission.CALL_PHONE, Permission.CAMERA)*/
         ZombieBaseUtils.startNavigationBuild("/galaxy/scrollactivity")
                 .withString("frompath", "power MainActivity").navigation()
+    }
 
+    fun buttonClickweather(view: View){
+        ZombieBaseUtils.startNavigationBuild("/galaxy/weatherActivity").navigation()
     }
 
 

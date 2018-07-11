@@ -4,12 +4,16 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import com.avengers.appgalaxy.db.room.dao.IndexDataDao
 import com.avengers.appgalaxy.db.room.entity.ContextItemEntity
+import com.avengers.weather.bean.CityWeatherBean
+import com.avengers.weather.db.WeatherDao
 
 
-@Database(entities = [(ContextItemEntity::class)], version = 1, exportSchema = false)
+@Database(entities = [(ContextItemEntity::class),(CityWeatherBean::class)],version = 2,exportSchema = false)
 abstract class GalaxyDb : RoomDatabase() {
 
     abstract fun indexDataDao(): IndexDataDao
+
+    abstract fun weatherDao():WeatherDao
 
     companion object {
         fun installAllDefData() {
