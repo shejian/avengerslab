@@ -41,6 +41,8 @@ class WeatherRepository(private val api: WeatherApi,
             getWeatherFromNet(city)
         }
 
+        getWeatherFromNet(city)
+
         return com.avengers.weather.repository.State(
                 weather = weather,
                 netWorkState = networkState,

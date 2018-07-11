@@ -43,8 +43,6 @@ class WeatherActivity : AppCompatActivity() {
 
         weatherViewModel.request("上海")
 
-        window.decorView.postDelayed({ weatherViewModel.refresh() },1000)
-
     }
 
     fun initSwipeRefresh() {
