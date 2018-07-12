@@ -9,9 +9,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.avengers.appgalaxy.BR
-import com.avengers.appgalaxy.R
-import com.avengers.appgalaxy.databinding.ActivityScrollingBinding
+import com.avengers.BR
+import com.avengers.R
+import com.avengers.databinding.ActivityScrollingBinding
 import com.avengers.appgalaxy.ui.vm.ScrollingViewModel
 import com.avengers.zombiebase.RcycyleHelper
 import com.avengers.zombiebase.ZombieBaseUtils

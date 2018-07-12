@@ -9,8 +9,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.avengers.appgalaxy.R
-import com.avengers.appgalaxy.databinding.ActivityWeatherBinding
+import com.avengers.R
+import com.avengers.databinding.ActivityWeatherBinding
 import com.avengers.appgalaxy.db.room.RoomHelper
 import com.avengers.weather.api.Api
 import com.avengers.weather.api.WeatherApi
@@ -36,6 +36,10 @@ class WeatherActivity : AppCompatActivity() {
         contentView = DataBindingUtil.setContentView(this,R.layout.activity_weather)
 
         weatherViewModel = getViewModel()
+
+        contentView?.model = weatherViewModel
+        contentView?.setLifecycleOwner(this)
+
 
         initWithViewModel(weatherViewModel)
 
