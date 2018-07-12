@@ -13,12 +13,6 @@
             android:name=".ui.ScrollingActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity
-            android:name="com.avengers.weather.WeatherActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-
     </application>
 
 </manifest>

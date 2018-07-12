@@ -38,7 +38,7 @@
                     android:ellipsize="end"
                     android:gravity="start|center_vertical"
                     android:maxLines="1"
-                    android:text="@{contextItem.mid+contextItem.title}"
+                    android:text="@{contextItem.title}"
                     android:textColor="@color/black_87_color"
                     android:textSize="15sp"
                     tools:text="ssss" />

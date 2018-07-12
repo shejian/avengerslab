@@ -48,7 +48,7 @@ class WakandaMainActivity : AppCompatActivity() {
             indexListViewModel.runRefresh.postValue(true)
         }
         //指定请求参数，作为livedata 数据，将自动触发请求，是否需要首次触发下拉刷新onRefresh
-        indexListViewModel.getIndexData("line/show", false)
+        indexListViewModel.getIndexData("line/show", true)
 
     }
 
@@ -71,16 +71,14 @@ class WakandaMainActivity : AppCompatActivity() {
 
         //完成刷新请求，停止刷新UI
         indexListViewModel.netWorkState.observe(this, Observer {
-            Toast.makeText(this, "" + it?.status.toString(), Toast.LENGTH_SHORT).show()
-            if (Status.FAILED == it?.status) {
-                scrollRetry = true
-            }
+            scrollRetry = Status.FAILED == it?.status
         })
     }
 
     var scrollRetry = false
 
 
+    var cnum = 0
     /**
      * 滚动控制加载
      */
@@ -88,29 +86,23 @@ class WakandaMainActivity : AppCompatActivity() {
         val layoutManager = activityDataBinding.recyclerView.layoutManager as LinearLayoutManager
         activityDataBinding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-            var ii = 0
-
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val totalItemCount = layoutManager.itemCount
                 val visibleItemCount = layoutManager.childCount
                 val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-                Log.d("shejian", "onScrolled:" + visibleItemCount + "/" + lastVisibleItem + "/" + 5)
-                if (ii > 0) {
-                    return
-                }
-                if (visibleItemCount + lastVisibleItem + 5 >= totalItemCount) {
-                    if (scrollRetry) {
-                        ii++
+                Log.d("shejian", "onScrolled:$visibleItemCount/$lastVisibleItem/$totalItemCount")
+                if (lastVisibleItem + 5 == totalItemCount) {
+                    Log.d("shejian", "scrollRetry:$scrollRetry")
+                    if (scrollRetry && cnum == 0) {
+                        cnum++
                         scrollRetry = false
-                        Toast.makeText(this@WakandaMainActivity, "onScrolled", Toast.LENGTH_SHORT).show()
+                        //  Toast.makeText(this@WakandaMainActivity, "onScrolled", Toast.LENGTH_SHORT).show()
                         indexListViewModel.retry()
-
                     }
                 } else {
-                    ii = 0
+                    cnum = 0
                 }
-                //indexListViewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
             }
         })
     }

@@ -4,10 +4,8 @@ import android.arch.lifecycle.ViewModelProvider
 import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository
-import com.avengers.appwakanda.ui.indexmain.vm.ViewModelFactory
+import com.avengers.appwakanda.ui.common.ViewModelFactory
 import com.avengers.appwakanda.webapi.Api
-import com.avengers.appwakanda.webapi.SmartisanApi
-import com.avengers.appwakanda.webapi.SmartisanService
 
 object Injection {
 

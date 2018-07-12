@@ -79,7 +79,7 @@ class IndexRepository(
     private fun refresh(query: String): LiveData<NetworkState> {
         val netWorkState = MutableLiveData<NetworkState>()
         netWorkState.postValue(NetworkState.LOADING)
-        service.getSmtIndex(query, ReaderListBoundaryCallback.NETWORK_PAGE_SIZE, lastRequestedPage)
+        service.getSmtIndex(query, lastRequestedPage, ReaderListBoundaryCallback.NETWORK_PAGE_SIZE)
                 .enqueue(object : Callback<IndexReaderListBean> {
                     override fun onFailure(call: Call<IndexReaderListBean>?, t: Throwable?) {
                         netWorkState.value = NetworkState.error(t?.message)
@@ -135,7 +135,7 @@ class IndexRepository(
             RoomHelper.getWakandaDb().runInTransaction {
                 val lastIndex = cache.queryMaxIndex().toLong()
                 var newlist = it.mapIndexed { index, contextItemEntity ->
-                    contextItemEntity.setMid(lastIndex + index)
+                    contextItemEntity._mid = lastIndex + index
                     contextItemEntity
                 }
                 cache.insert(newlist) {}

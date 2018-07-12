@@ -39,16 +39,13 @@ class IndexPagedListAdapter<E : ViewDataBinding> :
         val POST_COMPARATOR = object : DiffUtil.ItemCallback<ContextItemEntity>() {
             override fun areContentsTheSame(oldItem: ContextItemEntity, newItem: ContextItemEntity): Boolean {
                 var asd = oldItem.id == newItem.id
-                Log.d("shejian", "areContentsTheSame$asd")
                 return asd
             }
 
             override fun areItemsTheSame(oldItem: ContextItemEntity, newItem: ContextItemEntity): Boolean {
-                var asd = oldItem.getTitle() == newItem.getTitle()
-                Log.d("shejian", "areItemsTheSame$asd")
+                var asd = oldItem.title == newItem.title
                 return asd
             }
-
 
         }
 

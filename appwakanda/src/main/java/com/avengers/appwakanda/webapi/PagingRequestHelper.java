@@ -204,6 +204,12 @@ public class PagingRequestHelper {
         return mRequestQueues[type.ordinal()].mStatus;
     }
 
+    /**
+     * 对
+     *
+     * @param wrapper
+     * @param throwable
+     */
     @AnyThread
     @VisibleForTesting
     void recordResult(@NonNull RequestWrapper wrapper, @Nullable Throwable throwable) {
@@ -360,7 +366,8 @@ public class PagingRequestHelper {
      * Data class that holds the information about the current status of the ongoing requests
      * using this helper.
      * 包含有关正在进行的请求的当前状态的信息数据类
-       使用这个助手
+     * 使用这个助手
+     * 对三种情况下的Paging请求做了状态存储
      */
     public static final class StatusReport {
         /**
