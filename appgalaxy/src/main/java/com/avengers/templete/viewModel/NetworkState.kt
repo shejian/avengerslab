@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.avengers.weather.repository
+package com.avengers.templete.viewModel
 
 enum class Status {
     RUNNING,

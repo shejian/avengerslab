@@ -18,6 +18,9 @@ class CityWeatherBean : JsonBeanResponse() {
     @Ignore
     var message: String = ""
 
+    @Ignore
+    var status:Int = 0
+
     var city: String = ""
 
     var count: String = ""

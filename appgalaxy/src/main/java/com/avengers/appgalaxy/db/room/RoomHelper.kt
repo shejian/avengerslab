@@ -48,9 +48,6 @@ object RoomHelper {
 
             }
 
-            override fun onOpen(db: SupportSQLiteDatabase) {
-                super.onOpen(db)
-            }
         }).build()
 
     }

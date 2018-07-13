@@ -26,12 +26,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun test() {
-
-
-    }
-
-
     fun buttonClick(view: View) {
 /*        RunTimePermission.requestPermission(this, {
             startActivity(Intent(this, ScrollingActivity::class.java))
@@ -40,9 +34,7 @@ class MainActivity : AppCompatActivity() {
                 .withString("frompath", "power MainActivity").navigation()
     }
 
-    fun buttonClickweather(view: View){
-        ZombieBaseUtils.startNavigationBuild("/galaxy/weatherActivity").navigation()
+    fun buttonClickweather(view: View) {
+        ZombieBaseUtils.startNavigationBuild("/galaxy/weatherMainActivity").navigation()
     }
-
-
 }
