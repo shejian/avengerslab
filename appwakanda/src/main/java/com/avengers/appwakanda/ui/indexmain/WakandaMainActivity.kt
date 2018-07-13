@@ -3,6 +3,7 @@ package com.avengers.appwakanda.ui.indexmain
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -15,6 +16,7 @@ import com.avengers.appwakanda.Injection
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.databinding.ActivityWakandaMainBinding
 import com.avengers.appwakanda.databinding.IndexlistDbdItemBinding
+import com.avengers.appwakanda.ui.detail.NewsDetailActivity
 import com.avengers.appwakanda.ui.indexmain.repository.NetworkState
 import com.avengers.appwakanda.ui.indexmain.repository.Status
 import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
@@ -39,6 +41,7 @@ class WakandaMainActivity : AppCompatActivity() {
         initAdapter()
 
         RcycyleHelper.initBaseRcycyleView(this, activityDataBinding.recyclerView)
+
         RcycyleHelper.initSwipeRefresh(activityDataBinding.swipeRefreshView)
         setupScrollListener()
 
@@ -55,6 +58,10 @@ class WakandaMainActivity : AppCompatActivity() {
 
     fun initAdapter() {
         val adapter = IndexPagedListAdapter<IndexlistDbdItemBinding>()
+        adapter.setOnItemClickListener { view, sd ->
+            Toast.makeText(this, "点击：$sd", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, NewsDetailActivity::class.java))
+        }
         activityDataBinding.recyclerView.adapter = adapter
         indexListViewModel.items.observe(this, Observer {
             adapter.submitList(it)

@@ -1,26 +1,39 @@
 package com.avengers.appwakanda.ui.indexmain
 
 import android.arch.paging.PagedListAdapter
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.v7.util.DiffUtil
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.avengers.appwakanda.BR
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
+import com.avengers.zombiebase.adapter.DataBindingLiteAdapter
+import com.avengers.zombiebase.adapter.DataBindingLiteAdapter.OnItemClickListener
 import com.avengers.zombiebase.adapter.DataBindingLiteHolder
+import com.avengers.zombiebase.adapter.DataBindingPagingLiteAdapter
 
 class IndexPagedListAdapter<E : ViewDataBinding> :
         PagedListAdapter<ContextItemEntity, DataBindingLiteHolder<E>>(POST_COMPARATOR) {
-
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int)
             : DataBindingLiteHolder<E> {
         //1.拿到itemView的viewDataBinding对象
         val viewDataBinding = DataBindingUtil.inflate<E>(LayoutInflater.from(parent.context), R.layout.indexlist_dbd_item, parent, false)
-        return DataBindingLiteHolder(viewDataBinding)
+        return DataBindingLiteHolder(viewDataBinding,
+                OnItemClickListener { view: View, sd: Int ->
+                    c.let { c?.invoke(view, sd) }
+                })
+    }
+
+    var c: ((view: View, sd: Int) -> Unit?)? = null
+
+    fun setOnItemClickListener(click: (view: View, sd: Int) -> Unit) {
+        c = click
     }
 
     override fun onBindViewHolder(

@@ -1,5 +1,6 @@
 package com.avengers.appwakanda.ui.detail
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -12,10 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.databinding.FragmentNewsDetailBinding
+import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.ui.detail.repository.NewsDetailRepository
 import com.avengers.appwakanda.ui.detail.vm.NewsDetailVM
-import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository
-import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
+import com.avengers.appwakanda.webapi.Api
 
 /**
  * A placeholder fragment containing a simple view.
@@ -28,7 +29,7 @@ class NewsDetailActivityFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         var newsDetail = DataBindingUtil.inflate<FragmentNewsDetailBinding>(inflater, R.layout.fragment_news_detail, container, false)
 
-        var repository = NewsDetailRepository()
+        var repository = NewsDetailRepository(Api.getSmartApi(), RoomHelper.getWakandaDb().newsDetailDao())
 
         newsDetailVM = ViewModelProviders.of(this, object : ViewModelProvider.Factory {
 
@@ -37,12 +38,16 @@ class NewsDetailActivityFragment : Fragment() {
                     @Suppress("UNCHECKED_CAST")
                     return NewsDetailVM(repository) as T
                 }
-                
+
                 throw IllegalArgumentException("Unknown ViewModel class")
             }
         }).get(NewsDetailVM::class.java)
 
+        newsDetailVM?.detail?.observe(this, Observer {
+            newsDetail.vo = it
+        })
 
+        newsDetailVM?.queryFrom?.postValue("123")
         return newsDetail.root
     }
 }

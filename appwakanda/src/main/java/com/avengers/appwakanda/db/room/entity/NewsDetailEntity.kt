@@ -28,49 +28,49 @@ class NewsDetailEntity : BaseObservable() {
     var update_time: String? = null
     var pub_date: String? = null
     var md5: String? = null
-    var _is_recommend: String? = null
+    //  var _is_recommend: String? = null
     var prepic1: String? = null
     var prepic2: String? = null
     var prepic3: String? = null
     var recommend_time: String? = null
     var sort_score: String? = null
 
-    @Embedded
-    var site_info: SiteInfo? = null
-    // to be consistent w/ changing backend order, we need to keep a data like this
+    /*  @Embedded
+      var site_info: SiteInfo? = null
+      // to be consistent w/ changing backend order, we need to keep a data like this
 
-    class SiteInfo : BaseObservable() {
-        var id: String? = null
-        var name: String? = null
-        var keyword: String? = null
-        var url: String? = null
-        var pic: String? = null
-        var brief: String? = null
-        var article_num: String? = null
-        var order_num: String? = null
-        var source: String? = null
-        var status: String? = null
-        var create_time: String? = null
-        var update_time: String? = null
-        var rss_url: String? = null
-        var pk: String? = null
-        var wx_biz: String? = null
-        var rss_update_time: String? = null
-        var last_rss_time: String? = null
-        var last_pub_time: String? = null
-        var is_multi_weixin: String? = null
-        var is_only_from_weixin: String? = null
-        var sort: String? = null
-        var is_recommend: String? = null
-        var admin_uid: String? = null
-        var is_grab: String? = null
-        var is_only_original: String? = null
-        var rss_type: String? = null
-        var online_time: String? = null
-        var is_findrecom: String? = null
-        var cid: Date? = null
+      class SiteInfo : BaseObservable() {
+          var id: String? = null
+          var name: String? = null
+          var keyword: String? = null
+          var url: String? = null
+          var pic: String? = null
+          var brief: String? = null
+          var article_num: String? = null
+          var order_num: String? = null
+          var source: String? = null
+          var status: String? = null
+          var create_time: String? = null
+          var update_time: String? = null
+          var rss_url: String? = null
+          var pk: String? = null
+          var wx_biz: String? = null
+          var rss_update_time: String? = null
+          var last_rss_time: String? = null
+          var last_pub_time: String? = null
+          //   var is_multi_weixin: String? = null
+          //  var is_only_from_weixin: String? = null
+          var sort: String? = null
+          //  var is_recommend: String? = null
+          var admin_uid: String? = null
+          //  var is_grab: String? = null
+          // var is_only_original: String? = null
+          var rss_type: String? = null
+          var online_time: String? = null
+          // var is_findrecom: String? = null
+          var cid: String? = null
 
-    }
-
+      }
+  */
 
 }

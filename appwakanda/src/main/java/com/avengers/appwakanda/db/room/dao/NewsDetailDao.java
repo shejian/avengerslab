@@ -1,6 +1,7 @@
 package com.avengers.appwakanda.db.room.dao;
 
 
+import android.arch.lifecycle.LiveData;
 import android.arch.paging.DataSource;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
@@ -19,10 +20,10 @@ public interface NewsDetailDao {
     void insertItemDetail(NewsDetailEntity entity);
 
     @Query("DELETE FROM NewsDetailEntity ")
-    void deleteByItem();
+    void deleteAll();
 
     @Query("SELECT * FROM NewsDetailEntity  WHERE id == :newsId ")
-    DataSource.Factory<Integer, NewsDetailEntity> quryDetail(String newsId);
+    LiveData<NewsDetailEntity> quryDetail(String newsId);
 
     @Query("SELECT  COUNT(site_id) FROM NewsDetailEntity")
     Integer quryAllCount();

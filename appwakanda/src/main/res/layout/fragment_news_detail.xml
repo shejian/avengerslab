@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vo"
+            type="com.avengers.appwakanda.db.room.entity.NewsDetailEntity" />
+
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -17,7 +21,7 @@
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="@{vo.brief}"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="76dp"
             tools:layout_editor_absoluteY="68dp" />

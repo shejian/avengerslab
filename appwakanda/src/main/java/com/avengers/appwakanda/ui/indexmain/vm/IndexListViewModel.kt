@@ -41,11 +41,12 @@ class IndexListViewModel(private val repository: IndexRepository) : ViewModel() 
     private val queryLiveData = MutableLiveData<String>()//"line/show"
 
     //queryLiveData 为参数 通过函数 转化为结果，Transformations将绑定queryLiveData与匿名函数的触发
+    //列表数据
+
     private var result: LiveData<ItemResult> = map(queryLiveData) {
         repository.getIndexListData(it)
     }
 
-    //列表数据
     var items: LiveData<PagedList<ContextItemEntity>> = switchMap(result) {
         it.data
     }
