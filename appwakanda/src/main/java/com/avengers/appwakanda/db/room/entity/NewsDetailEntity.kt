@@ -5,10 +5,11 @@ import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.support.annotation.NonNull
 import com.avengers.appwakanda.BR
+import com.avengers.appwakanda.ui.common.BeanResponse
 import java.util.*
 
 @Entity
-class NewsDetailEntity : BaseObservable() {
+class NewsDetailEntity : BaseObservable(), BeanResponse {
 
     @PrimaryKey
     @ColumnInfo
@@ -34,6 +35,9 @@ class NewsDetailEntity : BaseObservable() {
     var prepic3: String? = null
     var recommend_time: String? = null
     var sort_score: String? = null
+    override fun toString(): String {
+        return "NewsDetailEntity(id='$id', site_id=$site_id, title=$title, headpic=$headpic, author_id=$author_id, author_name=$author_name, brief=$brief, read_num=$read_num, collect_num=$collect_num, origin_url=$origin_url, url=$url, status=$status, create_time=$create_time, update_time=$update_time, pub_date=$pub_date, md5=$md5, prepic1=$prepic1, prepic2=$prepic2, prepic3=$prepic3, recommend_time=$recommend_time, sort_score=$sort_score)"
+    }
 
     /*  @Embedded
       var site_info: SiteInfo? = null
@@ -72,5 +76,6 @@ class NewsDetailEntity : BaseObservable() {
 
       }
   */
+
 
 }

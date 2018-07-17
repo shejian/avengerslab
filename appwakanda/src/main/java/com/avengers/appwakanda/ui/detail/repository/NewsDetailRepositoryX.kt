@@ -1,10 +1,12 @@
 package com.avengers.appwakanda.ui.detail.repository
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.bean.NewsDetailBean
 import com.avengers.appwakanda.db.room.dao.NewsDetailDao
 import com.avengers.appwakanda.db.room.entity.NewsDetailEntity
+import com.avengers.appwakanda.ui.common.AbsRepository
 import com.avengers.appwakanda.ui.common.BaseVMResult
 import com.avengers.appwakanda.ui.indexmain.repository.NetworkState
 import com.avengers.appwakanda.webapi.SmartisanApi
@@ -14,34 +16,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class NewsDetailRepository(
+class NewsDetailRepositoryX(
         private val service: SmartisanApi,
         private val newsDetailDao: NewsDetailDao,
-        private val appExecutors: AppExecutors) {
-
-    var netWorkState = MutableLiveData<NetworkState>()
+        private val appExecutors: AppExecutors) : AbsRepository<NewsDetailEntity>(false) {
 
     /**
-     * 组装livedata数据，包含网络状态，网络数据源，以及网络请求函数
+     * 请求数据
      */
-    fun getDetailData(qid: String): BaseVMResult<NewsDetailEntity> {
-        //本地数据缓存
-        val dataSource = newsDetailDao.quryDetail()
-
-        //触发请求
-        refreshData(qid)
-
-        //封装数据并传给上层
-        return BaseVMResult<NewsDetailEntity>(dataSource, netWorkState) {
-            refreshData(qid)
-        }
-    }
-
-    /**
-     * 网络请求数据
-     */
-    fun refreshData(qid: String) {
-        netWorkState.postValue(NetworkState.LOADING)
+    override fun refresh(vararg args: Any) {
         service.getDetailInfo("line/show", 0, 20).enqueue(object : Callback<NewsDetailBean> {
 
             override fun onFailure(call: Call<NewsDetailBean>?, t: Throwable?) {
@@ -49,10 +32,10 @@ class NewsDetailRepository(
             }
 
             override fun onResponse(call: Call<NewsDetailBean>?, response: Response<NewsDetailBean>?) {
-                var listData = response?.body()?.data?.list
-                var detail = listData?.get(0)
+                val listData = response?.body()?.data?.list
+                val detail = listData?.get(2)
                 appExecutors.diskIO().execute {
-                    addDetailToDb(detail!!)
+                    saveData(detail!!)
                     netWorkState.postValue(NetworkState.LOADED)
                 }
             }
@@ -60,24 +43,31 @@ class NewsDetailRepository(
     }
 
     /**
-     * 保存数据
+     * 在需要缓存时必须实现
      */
-    fun addDetailToDb(newsitem: NewsDetailEntity) {
+    override fun addToDb(newsitem: NewsDetailEntity) {
         newsitem.let {
             newsDetailDao.deleteAll()
             newsDetailDao.insertItemDetail(newsitem)
         }
     }
 
-    companion object {
+    /**
+     * 在需要缓存时必须实现
+     */
+    override fun queryFromDb(vararg args: Any): LiveData<NewsDetailEntity> {
+        return newsDetailDao.quryDetail()
 
+    }
+
+    companion object {
         // For Singleton instantiation
         @Volatile
-        private var instance: NewsDetailRepository? = null
+        private var instance: NewsDetailRepositoryX? = null
 
         fun getInstance(api: SmartisanApi, plantDao: NewsDetailDao, appExecutors: AppExecutors) =
                 instance ?: synchronized(this) {
-                    instance ?: NewsDetailRepository(api, plantDao, appExecutors).also {
+                    instance ?: NewsDetailRepositoryX(api, plantDao, appExecutors).also {
                         instance = it
                     }
                 }

@@ -6,12 +6,17 @@
     <data>
 
         <variable
-            name="vo"
-            type="com.avengers.appwakanda.db.room.entity.NewsDetailEntity" />
+            name="vm"
+            type="com.avengers.appwakanda.ui.detail.vm.NewsDetailVM" />
+
+        <variable
+            name="handlerClick"
+            type="com.avengers.appwakanda.ui.detail.NewsDetailActivityFragment.HandlerClick" />
+
 
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.detail.NewsDetailActivityFragment"
@@ -21,9 +26,19 @@
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{vo.brief}"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="76dp"
-            tools:layout_editor_absoluteY="68dp" />
-    </android.support.constraint.ConstraintLayout>
+            android:text="@{vm.detail.brief}"
+            tools:text="asdasdasdasdasdasd" />
+
+        <Button
+            android:id="@+id/refresh_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="189dp"
+            android:onClick="@{handlerClick::refreshClick}"
+            android:text="Button" />
+
+
+    </RelativeLayout>
 </layout>

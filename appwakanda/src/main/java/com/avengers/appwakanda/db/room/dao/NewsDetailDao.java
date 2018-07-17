@@ -22,8 +22,9 @@ public interface NewsDetailDao {
     @Query("DELETE FROM NewsDetailEntity ")
     void deleteAll();
 
-    @Query("SELECT * FROM NewsDetailEntity  WHERE id == :newsId ")
-    LiveData<NewsDetailEntity> quryDetail(String newsId);
+    //WHERE id == :newsId    String newsId
+    @Query("SELECT * FROM NewsDetailEntity   ")
+    LiveData<NewsDetailEntity> quryDetail();
 
     @Query("SELECT  COUNT(site_id) FROM NewsDetailEntity")
     Integer quryAllCount();
