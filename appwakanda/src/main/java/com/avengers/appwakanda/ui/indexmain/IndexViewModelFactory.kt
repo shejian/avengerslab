@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.avengers.appwakanda.ui.common
+package com.avengers.appwakanda.ui.indexmain
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
@@ -25,7 +25,7 @@ import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
  * Factory for ViewModels
  * 181987
  */
-class ViewModelFactory(private val repository: IndexRepository) : ViewModelProvider.Factory {
+class IndexViewModelFactory(private val repository: IndexRepository) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(IndexListViewModel::class.java)) {

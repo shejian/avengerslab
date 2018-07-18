@@ -1,8 +1,9 @@
 package com.avengers.appwakanda.ui.detail.vm
 
-import com.avengers.appwakanda.ui.common.IReqParam
+import com.avengers.zombiebase.accbase.IReqParam
 
-class IReqDetailParam: IReqParam{
+
+class IReqDetailParam: IReqParam {
 
 
 }

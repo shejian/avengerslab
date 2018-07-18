@@ -18,6 +18,7 @@ package com.avengers.appwakanda.ui.indexmain.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.paging.PagedList
+import com.avengers.zombiebase.accbase.NetworkState
 
 /**
  * Data class that is necessary for a UI to show a listing and interact w/ the rest of the system

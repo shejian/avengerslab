@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.avengers.appwakanda.ui.common
+package com.avengers.appwakanda.ui.detail
 
 import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.db.room.RoomHelper
@@ -24,6 +24,7 @@ import com.avengers.appwakanda.webapi.Api
 
 /**
  * Static methods used to inject classes needed for various Activities and Fragments.
+ * 使用InjectorUtils的静态函数构造Repository是为了方便进行替换对象用于测试
  */
 object InjectorUtils {
 

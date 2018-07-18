@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.databinding.FragmentNewsDetailBinding
-import com.avengers.appwakanda.ui.common.InjectorUtils
 import com.avengers.appwakanda.ui.detail.vm.IReqDetailParam
 import com.avengers.appwakanda.ui.detail.vm.NewsDetailVMX
 

@@ -8,7 +8,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.paging.PagedList
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository
-import com.avengers.appwakanda.ui.indexmain.repository.NetworkState
+import com.avengers.zombiebase.accbase.NetworkState
 
 class IndexListViewModel(private val repository: IndexRepository) : ViewModel() {
 

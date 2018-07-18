@@ -1,6 +1,5 @@
 package com.avengers.appwakanda.ui.indexmain
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -12,13 +11,11 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.avengers.appwakanda.Injection
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.databinding.ActivityWakandaMainBinding
 import com.avengers.appwakanda.databinding.IndexlistDbdItemBinding
 import com.avengers.appwakanda.ui.detail.NewsDetailActivity
-import com.avengers.appwakanda.ui.indexmain.repository.NetworkState
-import com.avengers.appwakanda.ui.indexmain.repository.Status
+import com.avengers.zombiebase.accbase.Status
 import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
 import com.avengers.zombiebase.RcycyleHelper
 

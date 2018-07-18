@@ -5,7 +5,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
-import android.util.Log
 import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.bean.IndexReaderListBean
 import com.avengers.appwakanda.db.room.RoomHelper
@@ -13,6 +12,7 @@ import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.ui.indexmain.data.ReaderListBoundaryCallback
 import com.avengers.appwakanda.ui.indexmain.vm.ItemResult
 import com.avengers.appwakanda.webapi.SmartisanApi
+import com.avengers.zombiebase.accbase.NetworkState
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

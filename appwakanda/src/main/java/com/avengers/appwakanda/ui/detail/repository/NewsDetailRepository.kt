@@ -1,14 +1,13 @@
 package com.avengers.appwakanda.ui.detail.repository
 
 import android.arch.lifecycle.MutableLiveData
-import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.bean.NewsDetailBean
 import com.avengers.appwakanda.db.room.dao.NewsDetailDao
 import com.avengers.appwakanda.db.room.entity.NewsDetailEntity
-import com.avengers.appwakanda.ui.common.BaseVMResult
-import com.avengers.appwakanda.ui.indexmain.repository.NetworkState
+import com.avengers.zombiebase.accbase.NetworkState
 import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.zombiebase.AppExecutors
+import com.avengers.zombiebase.accbase.BaseCoreResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +23,7 @@ class NewsDetailRepository(
     /**
      * 组装livedata数据，包含网络状态，网络数据源，以及网络请求函数
      */
-    fun getDetailData(qid: String): BaseVMResult<NewsDetailEntity> {
+    fun getDetailData(qid: String): BaseCoreResult<NewsDetailEntity> {
         //本地数据缓存
         val dataSource = newsDetailDao.quryDetail()
 
@@ -32,7 +31,7 @@ class NewsDetailRepository(
         refreshData(qid)
 
         //封装数据并传给上层
-        return BaseVMResult<NewsDetailEntity>(dataSource, netWorkState) {
+        return BaseCoreResult<NewsDetailEntity>(dataSource, netWorkState) {
             refreshData(qid)
         }
     }

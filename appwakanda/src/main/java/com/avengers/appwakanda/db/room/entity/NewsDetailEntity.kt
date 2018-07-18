@@ -2,7 +2,7 @@ package com.avengers.appwakanda.db.room.entity
 
 import android.arch.persistence.room.*
 import android.databinding.BaseObservable
-import com.avengers.appwakanda.ui.common.IBeanResponse
+import com.avengers.zombiebase.accbase.IBeanResponse
 
 @Entity
 class NewsDetailEntity : BaseObservable(), IBeanResponse {

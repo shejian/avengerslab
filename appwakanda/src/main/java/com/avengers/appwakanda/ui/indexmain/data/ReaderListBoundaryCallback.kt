@@ -1,13 +1,11 @@
 package com.avengers.appwakanda.ui.indexmain.data
 
-import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PagedList
 import android.util.Log
 import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.bean.IndexReaderListBean
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
-import com.avengers.appwakanda.ui.indexmain.repository.NetworkState
 import com.avengers.appwakanda.webapi.PagingRequestHelper
 import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.appwakanda.webapi.createStatusLiveData

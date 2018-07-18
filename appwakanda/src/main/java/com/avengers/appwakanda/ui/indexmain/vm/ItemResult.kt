@@ -3,7 +3,7 @@ package com.avengers.appwakanda.ui.indexmain.vm
 import android.arch.lifecycle.LiveData
 import android.arch.paging.PagedList
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
-import com.avengers.appwakanda.ui.indexmain.repository.NetworkState
+import com.avengers.zombiebase.accbase.NetworkState
 
 data class ItemResult(
         val data: LiveData<PagedList<ContextItemEntity>>,

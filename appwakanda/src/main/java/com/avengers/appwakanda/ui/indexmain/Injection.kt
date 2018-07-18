@@ -1,10 +1,10 @@
-package com.avengers.appwakanda
+package com.avengers.appwakanda.ui.indexmain
 
 import android.arch.lifecycle.ViewModelProvider
+import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository
-import com.avengers.appwakanda.ui.common.ViewModelFactory
 import com.avengers.appwakanda.webapi.Api
 
 object Injection {
@@ -23,7 +23,7 @@ object Injection {
 
     //1
     fun provideViewModuleFactory(): ViewModelProvider.Factory {
-        return ViewModelFactory(provideIndexRepository())
+        return IndexViewModelFactory(provideIndexRepository())
     }
 
 

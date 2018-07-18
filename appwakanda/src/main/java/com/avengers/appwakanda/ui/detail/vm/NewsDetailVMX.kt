@@ -3,9 +3,9 @@ package com.avengers.appwakanda.ui.detail.vm
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.avengers.appwakanda.db.room.entity.NewsDetailEntity
-import com.avengers.appwakanda.ui.common.BaseVM
-import com.avengers.appwakanda.ui.common.IReqParam
 import com.avengers.appwakanda.ui.detail.repository.NewsDetailRepositoryX
+import com.avengers.zombiebase.accbase.BaseVM
+import com.avengers.zombiebase.accbase.IReqParam
 
 class NewsDetailVMX(repository: NewsDetailRepositoryX) : BaseVM<IReqParam, NewsDetailEntity>(repository) {
 
