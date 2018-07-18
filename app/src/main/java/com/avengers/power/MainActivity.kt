@@ -37,4 +37,9 @@ class MainActivity : AppCompatActivity() {
     fun buttonClickweather(view: View) {
         ZombieBaseUtils.startNavigationBuild("/galaxy/weatherMainActivity").navigation()
     }
+
+    fun buttonClickLock(view : View) {
+        ZombieBaseUtils.startNavigationBuild("/patternlock/patternLockActivity").navigation()
+    }
+
 }

@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -19,12 +20,16 @@ import com.avengers.weather.api.WeatherApi
 import com.avengers.weather.bean.FakeRequest
 import com.avengers.weather.repository.NoDBWeatherRepository
 import com.avengers.weather.vm.NoDbweatherViewModel
+import com.avengers.zombiebase.BaseActivity
 import kotlinx.android.synthetic.main.activity_weather.*
 
 /**
  * Created by duo.chen on 2018/7/9
  */
-class NoDBWeatherActivity : AppCompatActivity() {
+class NoDBWeatherActivity : BaseActivity() {
+    override fun reloadData() {
+        weatherViewModel.refresh()
+    }
 
     private lateinit var weatherViewModel: NoDbweatherViewModel
     var contentView: NodbActivityWeatherBinding? = null
@@ -71,11 +76,12 @@ class NoDBWeatherActivity : AppCompatActivity() {
         })
 
         viewModel.networkState?.observe(this,Observer {
-
-            if (it?.status == Status.FAILED) {
-                retry.visibility = View.VISIBLE
+            if (it?.status == Status.RUNNING) {
+                showLoadTransView()
+            } else if(it?.status == Status.FAILED){
+                showErrorView("")
             } else {
-                retry.visibility = View.GONE
+                showContentView()
             }
         })
     }
