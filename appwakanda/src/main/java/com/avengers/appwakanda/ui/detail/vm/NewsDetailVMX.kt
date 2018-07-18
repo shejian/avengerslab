@@ -4,17 +4,16 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.avengers.appwakanda.db.room.entity.NewsDetailEntity
 import com.avengers.appwakanda.ui.common.BaseVM
-import com.avengers.appwakanda.ui.common.ReqParam
+import com.avengers.appwakanda.ui.common.IReqParam
 import com.avengers.appwakanda.ui.detail.repository.NewsDetailRepositoryX
 
-class NewsDetailVMX(private val repository: NewsDetailRepositoryX) :
-        BaseVM<ReqParam, NewsDetailEntity>(repository) {
+class NewsDetailVMX(repository: NewsDetailRepositoryX) : BaseVM<IReqParam, NewsDetailEntity>(repository) {
 
-    class VMfactory(var resp: NewsDetailRepositoryX) : ViewModelProvider.Factory {
+    class VMFactory(private var resp: NewsDetailRepositoryX) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(NewsDetailVMX::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return NewsDetailVM(resp) as T
+                return NewsDetailVMX(resp) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

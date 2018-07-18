@@ -2,14 +2,10 @@ package com.avengers.appwakanda.db.room.entity
 
 import android.arch.persistence.room.*
 import android.databinding.BaseObservable
-import android.databinding.Bindable
-import android.support.annotation.NonNull
-import com.avengers.appwakanda.BR
-import com.avengers.appwakanda.ui.common.BeanResponse
-import java.util.*
+import com.avengers.appwakanda.ui.common.IBeanResponse
 
 @Entity
-class NewsDetailEntity : BaseObservable(), BeanResponse {
+class NewsDetailEntity : BaseObservable(), IBeanResponse {
 
     @PrimaryKey
     @ColumnInfo

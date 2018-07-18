@@ -7,12 +7,11 @@
 
         <variable
             name="vm"
-            type="com.avengers.appwakanda.ui.detail.vm.NewsDetailVM" />
+            type="com.avengers.appwakanda.ui.detail.vm.NewsDetailVMX" />
 
         <variable
             name="handlerClick"
             type="com.avengers.appwakanda.ui.detail.NewsDetailActivityFragment.HandlerClick" />
-
 
     </data>
 
@@ -26,8 +25,18 @@
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{vm.detail.brief}"
+            android:text="@{vm.liveData.brief}"
             tools:text="asdasdasdasdasdasd" />
+
+        <TextView
+            android:id="@+id/title_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="133dp"
+            app:status="@{vm.netWorkState}"
+            tools:text="" />
 
         <Button
             android:id="@+id/refresh_button"
@@ -36,7 +45,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="189dp"
-            android:onClick="@{handlerClick::refreshClick}"
+            android:onClick="@{() -> handlerClick.refreshClick()}"
             android:text="Button" />
 
 

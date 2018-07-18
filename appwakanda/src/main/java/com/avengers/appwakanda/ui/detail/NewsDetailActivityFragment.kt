@@ -1,26 +1,25 @@
 package com.avengers.appwakanda.ui.detail
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.databinding.FragmentNewsDetailBinding
 import com.avengers.appwakanda.ui.common.InjectorUtils
-import com.avengers.appwakanda.ui.detail.vm.NewsDetailVM
-import com.avengers.appwakanda.ui.indexmain.repository.Status
+import com.avengers.appwakanda.ui.detail.vm.IReqDetailParam
+import com.avengers.appwakanda.ui.detail.vm.NewsDetailVMX
 
 /**
- * A placeholder fragment containing a simple view.
+ * @author Jervis
+ * @Date 2018-07-18
  */
 class NewsDetailActivityFragment : Fragment() {
 
-    var newsDetailVM: NewsDetailVM? = null
+    var newsDetailVM: NewsDetailVMX? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -29,8 +28,8 @@ class NewsDetailActivityFragment : Fragment() {
 
         //2.构建ViewModule，注意VMFactory的构建位置和步骤，如果构造函数没有参数，可以去掉factory
         newsDetailVM = ViewModelProviders
-                .of(this, NewsDetailVM.VMfactory(repository))
-                .get(NewsDetailVM::class.java)
+                .of(this, NewsDetailVMX.VMFactory(repository))
+                .get(NewsDetailVMX::class.java)
 
         //3.指定Layout，构建DataBinding
         var newsDetailBinding = DataBindingUtil
@@ -44,19 +43,7 @@ class NewsDetailActivityFragment : Fragment() {
                     setLifecycleOwner(this@NewsDetailActivityFragment)
                 }
         //7.设置参数，发送请求
-        newsDetailVM?.queryFrom?.postValue("123")
-
-        newsDetailVM?.netWorkState?.observe(this, Observer {
-            if (it?.status?.equals(Status.RUNNING)!!) {
-                Log.d("shejian", "加载中。。。")
-            }
-            if (it.status == Status.SUCCESS) {
-                Log.d("shejian", "成功。。。")
-            }
-            if (it.status == Status.FAILED) {
-                Log.d("shejian", "失败了。。。")
-            }
-        })
+        newsDetailVM?.queryParam?.postValue(IReqDetailParam())
         return newsDetailBinding.root
     }
 
@@ -65,8 +52,8 @@ class NewsDetailActivityFragment : Fragment() {
      * Handle点击事件
      */
     inner class HandlerClick {
-        fun refreshClick(view: View) {
-            newsDetailVM?.queryFrom?.postValue("123")
+        fun refreshClick() {
+            newsDetailVM?.queryParam?.postValue(IReqDetailParam())
         }
     }
 

@@ -10,7 +10,7 @@ import com.avengers.appwakanda.ui.indexmain.repository.NetworkState
  * Repository作用的抽象类
  * haveCache 默认具备缓存能力
  */
-abstract class AbsRepository<T : BeanResponse>(var haveCache: Boolean = true) {
+abstract class AbsRepository<T : IBeanResponse>(var haveCache: Boolean = true) {
 
     var netWorkState = MutableLiveData<NetworkState>()
 

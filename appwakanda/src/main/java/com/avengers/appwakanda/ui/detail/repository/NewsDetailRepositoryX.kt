@@ -19,7 +19,7 @@ import retrofit2.Response
 class NewsDetailRepositoryX(
         private val service: SmartisanApi,
         private val newsDetailDao: NewsDetailDao,
-        private val appExecutors: AppExecutors) : AbsRepository<NewsDetailEntity>(false) {
+        private val appExecutors: AppExecutors) : AbsRepository<NewsDetailEntity>(true) {
 
     /**
      * 请求数据
