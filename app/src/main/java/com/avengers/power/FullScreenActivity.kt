@@ -11,9 +11,9 @@ import com.yanzhenjie.permission.Permission
 class FullScreenActivity : BasePremissionActivity() {
 
 
-    override fun initPermission() {
-        requestPermission(Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE)
-    }
+   // override fun initPermission() {
+      //  requestPermission(Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE)
+  //  }
 
     override fun toMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
