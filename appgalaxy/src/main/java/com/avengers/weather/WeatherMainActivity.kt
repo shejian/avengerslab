@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.R
 import com.avengers.weather.ui.NoDBWeatherActivity
 import com.avengers.weather.ui.WeatherActivity
+import com.avengers.zombiebase.matisse.MatisseChooser
 
 /**
  * Created by duo.chen on 2018/7/13
@@ -30,4 +31,7 @@ class WeatherMainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun matisseChooser(view: View) {
+        MatisseChooser.choose(this,1)
+    }
 }

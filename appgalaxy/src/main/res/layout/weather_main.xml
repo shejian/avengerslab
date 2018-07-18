@@ -17,4 +17,9 @@
         android:onClick="buttonClickNoDbWeather"
         android:text="weather no db" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="matisseChooser"
+        android:text="matisse chooser" />
 </LinearLayout>
