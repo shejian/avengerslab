@@ -4,11 +4,10 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import com.avengers.power.databinding.ActivityFullscreenBinding
-import com.avengers.zombiebase.BasePremissionActivity
-import com.yanzhenjie.permission.Permission
+import com.avengers.zombiebase.BasePermissionActivity
 
 
-class FullScreenActivity : BasePremissionActivity() {
+class FullScreenActivity : BasePermissionActivity() {
 
 
     override fun toMainActivity() {

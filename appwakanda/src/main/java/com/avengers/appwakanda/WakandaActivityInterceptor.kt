@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
 import com.alibaba.android.arouter.facade.template.IInterceptor
-import com.avengers.zombiebase.RunTimePermission
+import com.avengers.zombiebase.RuntimePermissionUtil
 import com.yanzhenjie.permission.Permission
 
 /**
@@ -25,7 +25,7 @@ class WakandaActivityInterceptor : IInterceptor {
         this.callback = callback
 
         if ("/wakanda/mainactivity" == postcard.path) {
-            RunTimePermission.requestPermission(this.context!!, {
+            RuntimePermissionUtil.requestPermission(this.context!!, {
                 callback.onContinue(postcard)
             }, Permission.ACCESS_COARSE_LOCATION)
         }else{

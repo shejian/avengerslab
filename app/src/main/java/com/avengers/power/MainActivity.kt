@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun buttonClick(view: View) {
-/*        RunTimePermission.requestPermission(this, {
+/*        RuntimePermissionUtil.requestPermission(this, {
             startActivity(Intent(this, ScrollingActivity::class.java))
         }, Permission.CALL_PHONE, Permission.CAMERA)*/
         ZombieBaseUtils.startNavigationBuild("/galaxy/scrollactivity")
