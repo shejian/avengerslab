@@ -8,17 +8,21 @@ import com.avengers.weather.bean.CityWeatherBean
 import com.avengers.weather.db.WeatherDao
 
 
-@Database(entities = [(ContextItemEntity::class),(CityWeatherBean::class)],version = 2,exportSchema = false)
+@Database(entities = [(ContextItemEntity::class), (CityWeatherBean::class)], version = 3, exportSchema = false)
 abstract class GalaxyDb : RoomDatabase() {
 
     abstract fun indexDataDao(): IndexDataDao
 
-    abstract fun weatherDao():WeatherDao
+    abstract fun weatherDao(): WeatherDao
 
     companion object {
         fun installAllDefData() {
             val itemObjects = ITEM_DEFAULT_DATA.map { ContextItemEntity(0, it) }
             RoomHelper.indexDataDao().insertInfos(itemObjects)
+        }
+
+        fun getDataCount(): Int {
+            return RoomHelper.indexDataDao().hasData()
         }
     }
 }

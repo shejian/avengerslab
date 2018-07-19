@@ -39,17 +39,19 @@ public class RoomHelper {
     }
 
     private static WakandaDb buildDataBase(Context context, AppExecutors executors) {
-        return Room.databaseBuilder(context, WakandaDb.class, DB_NAME).addCallback(new RoomDatabase.Callback() {
-            @Override
-            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                super.onCreate(db);
-            }
+        return Room.databaseBuilder(context, WakandaDb.class, DB_NAME)
+                .fallbackToDestructiveMigration()
+                .addCallback(new RoomDatabase.Callback() {
+                    @Override
+                    public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                        super.onCreate(db);
+                    }
 
-            @Override
-            public void onOpen(@NonNull SupportSQLiteDatabase db) {
-                super.onOpen(db);
-            }
-        }).build();
+                    @Override
+                    public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                        super.onOpen(db);
+                    }
+                }).build();
 
     }
 

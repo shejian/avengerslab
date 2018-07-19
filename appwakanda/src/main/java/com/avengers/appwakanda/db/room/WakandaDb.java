@@ -12,7 +12,7 @@ import com.avengers.appwakanda.db.room.entity.NewsDetailEntity;
 @Database(entities = {
         ContextItemEntity.class,
         NewsDetailEntity.class
-}, version = 1, exportSchema = false)
+}, version = 2, exportSchema = false)
 public abstract class WakandaDb extends RoomDatabase {
 
     public abstract IndexDataDao indexDataDao();

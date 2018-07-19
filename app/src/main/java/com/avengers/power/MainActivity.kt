@@ -1,11 +1,11 @@
 package com.avengers.power
 
-import android.databinding.DataBindingUtil
+import android.databinding.DataBindingUtil.setContentView
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import com.avengers.power.databinding.ActivityMainBinding
+import com.avengers.power.databinding.ActivityIndexMainBinding
 import com.avengers.zombiebase.ZombieBaseUtils
 import com.spinytech.macore.router.RouterRequest
 
@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var activityMainBinding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        var activityMainBinding = setContentView<ActivityIndexMainBinding>(this, R.layout.activity_index_main)
         var routerRequest = RouterRequest.obtain(this)
                 .provider("WakandaProvider")
                 .action("WakandaAction")
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         var readsa = ZombieBaseUtils.onLocalRoute(this, routerRequest)
 
 
-        Log.d("shejian", "路由调用成功， 小程序重新出现现" )
+        Log.d("shejian", "路由调用成功， 小程序重新出现现")
     }
 
 
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         ZombieBaseUtils.startNavigationBuild("/galaxy/weatherMainActivity").navigation()
     }
 
-    fun buttonClickLock(view : View) {
+    fun buttonClickLock(view: View) {
         ZombieBaseUtils.startNavigationBuild("/patternlock/patternLockActivity").navigation()
     }
 

@@ -18,6 +18,8 @@ import com.avengers.appwakanda.ui.detail.NewsDetailActivity
 import com.avengers.zombiebase.accbase.Status
 import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
 import com.avengers.zombiebase.RcycyleHelper
+import com.avengers.zombiebase.ToastOneUtil
+import com.avengers.zombiebase.ToastUtil
 
 @Route(path = "/wakanda/mainactivity")
 class WakandaMainActivity : AppCompatActivity() {
@@ -56,7 +58,8 @@ class WakandaMainActivity : AppCompatActivity() {
     fun initAdapter() {
         val adapter = IndexPagedListAdapter<IndexlistDbdItemBinding>()
         adapter.setOnItemClickListener { view, sd ->
-            Toast.makeText(this, "点击：$sd", Toast.LENGTH_SHORT).show()
+            ToastUtil.showInBottom(this, "点击：$sd")
+            // Toast.makeText(this, "点击：$sd", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, NewsDetailActivity::class.java))
         }
         activityDataBinding.recyclerView.adapter = adapter

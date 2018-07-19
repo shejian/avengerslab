@@ -48,6 +48,5 @@
             android:onClick="@{() -> handlerClick.refreshClick()}"
             android:text="Button" />
 
-
     </RelativeLayout>
 </layout>

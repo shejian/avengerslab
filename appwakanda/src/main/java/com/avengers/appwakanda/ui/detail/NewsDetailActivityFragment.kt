@@ -3,7 +3,9 @@ package com.avengers.appwakanda.ui.detail
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.widget.SnapHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,8 @@ import com.avengers.appwakanda.R
 import com.avengers.appwakanda.databinding.FragmentNewsDetailBinding
 import com.avengers.appwakanda.ui.detail.vm.IReqDetailParam
 import com.avengers.appwakanda.ui.detail.vm.NewsDetailVMX
+import com.avengers.zombiebase.SnackbarUtil
+import com.avengers.zombiebase.ToastOneUtil
 
 /**
  * @author Jervis
@@ -52,7 +56,16 @@ class NewsDetailActivityFragment : Fragment() {
      */
     inner class HandlerClick {
         fun refreshClick() {
-            newsDetailVM?.queryParam?.postValue(IReqDetailParam())
+            view?.let {
+                // ToastOneUtil.showToastShort("测试我的提示")
+                SnackbarUtil.showActionLong(it,
+                        "我测试一下",
+                        "撤销", {
+                    ToastOneUtil.showToastShort("已撤销")
+                },    Snackbar.LENGTH_INDEFINITE)
+                // Snackbar.make(it, "测试我的Snackbar", Snackbar.LENGTH_LONG).show()
+            }
+            // newsDetailVM?.queryParam?.postValue(IReqDetailParam())
         }
     }
 

@@ -22,9 +22,7 @@
         <activity android:name=".MainActivity" />
 
         <activity
-            android:name=".patternlock.PatternLockActivity">
-
-        </activity>
+            android:name=".patternlock.PatternLockActivity"/>
     </application>
 
 </manifest>
