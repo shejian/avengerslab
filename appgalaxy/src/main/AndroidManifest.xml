@@ -26,6 +26,7 @@
         <activity
             android:name=".weather.WeatherMainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".weather.ui.ImageDemoActivity" />
 
 
     </application>

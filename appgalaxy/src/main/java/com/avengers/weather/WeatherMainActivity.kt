@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.R
+import com.avengers.weather.ui.ImageDemoActivity
 import com.avengers.weather.ui.NoDBWeatherActivity
 import com.avengers.weather.ui.WeatherActivity
-import com.avengers.zombiebase.matisse.MatisseChooser
 
 /**
  * Created by duo.chen on 2018/7/13
@@ -32,6 +32,10 @@ class WeatherMainActivity : AppCompatActivity() {
     }
 
     fun matisseChooser(view: View) {
-        MatisseChooser.choose(this,1)
+
+        var intent = Intent(this,ImageDemoActivity::class.java)
+        startActivity(intent)
+
     }
+
 }
