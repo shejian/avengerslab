@@ -6,10 +6,16 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import com.avengers.power.databinding.ActivityIndexMainBinding
+import com.avengers.zombiebase.BaseActivity
+import com.avengers.zombiebase.LogU
 import com.avengers.zombiebase.ZombieBaseUtils
 import com.spinytech.macore.router.RouterRequest
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+
+    override fun reloadData() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +27,7 @@ class MainActivity : AppCompatActivity() {
                 .data("params2", "参数B")
         var readsa = ZombieBaseUtils.onLocalRoute(this, routerRequest)
 
-
-        Log.d("shejian", "路由调用成功， 小程序重新出现现")
+        LogU.d("shejian", "fsdfsdfsdf")
     }
 
 

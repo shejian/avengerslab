@@ -17,6 +17,7 @@ import com.avengers.appwakanda.databinding.IndexlistDbdItemBinding
 import com.avengers.appwakanda.ui.detail.NewsDetailActivity
 import com.avengers.zombiebase.accbase.Status
 import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
+import com.avengers.zombiebase.DeviceUtil
 import com.avengers.zombiebase.RcycyleHelper
 import com.avengers.zombiebase.ToastOneUtil
 import com.avengers.zombiebase.ToastUtil
@@ -51,7 +52,12 @@ class WakandaMainActivity : AppCompatActivity() {
         }
         //指定请求参数，作为livedata 数据，将自动触发请求，是否需要首次触发下拉刷新onRefresh
         indexListViewModel.getIndexData("line/show", true)
-
+        Log.d("shejian", "w:" + DeviceUtil.nScreenWidth + "/h:" + DeviceUtil.nScreenHeight)
+        if (DeviceUtil.isFullDisplay) {
+            Log.d("shejian", "是全面屏手机")
+        } else {
+            Log.d("shejian", "不是全面屏手机")
+        }
     }
 
 
