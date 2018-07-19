@@ -2,8 +2,8 @@ package com.avengers.appwakanda.ui.detail.binding
 
 import android.databinding.BindingAdapter
 import android.widget.TextView
-import com.avengers.zombiebase.accbase.NetworkState
-import com.avengers.zombiebase.accbase.Status
+import com.avengers.zombiebase.aacbase.NetworkState
+import com.avengers.zombiebase.aacbase.Status
 
 object BindingAdapters {
 

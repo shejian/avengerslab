@@ -9,18 +9,16 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.databinding.ActivityWakandaMainBinding
 import com.avengers.appwakanda.databinding.IndexlistDbdItemBinding
 import com.avengers.appwakanda.ui.detail.NewsDetailActivity
-import com.avengers.zombiebase.accbase.Status
 import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
 import com.avengers.zombiebase.DeviceUtil
 import com.avengers.zombiebase.RcycyleHelper
-import com.avengers.zombiebase.ToastOneUtil
 import com.avengers.zombiebase.ToastUtil
+import com.avengers.zombiebase.aacbase.Status
 
 @Route(path = "/wakanda/mainactivity")
 class WakandaMainActivity : AppCompatActivity() {

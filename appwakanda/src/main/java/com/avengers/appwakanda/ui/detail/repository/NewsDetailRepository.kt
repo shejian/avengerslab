@@ -4,10 +4,10 @@ import android.arch.lifecycle.MutableLiveData
 import com.avengers.appwakanda.bean.NewsDetailBean
 import com.avengers.appwakanda.db.room.dao.NewsDetailDao
 import com.avengers.appwakanda.db.room.entity.NewsDetailEntity
-import com.avengers.zombiebase.accbase.NetworkState
+import com.avengers.zombiebase.aacbase.NetworkState
 import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.zombiebase.AppExecutors
-import com.avengers.zombiebase.accbase.BaseCoreResult
+import com.avengers.zombiebase.aacbase.BaseCoreResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

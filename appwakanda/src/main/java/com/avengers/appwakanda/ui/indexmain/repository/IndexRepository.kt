@@ -12,7 +12,7 @@ import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.ui.indexmain.data.ReaderListBoundaryCallback
 import com.avengers.appwakanda.ui.indexmain.vm.ItemResult
 import com.avengers.appwakanda.webapi.SmartisanApi
-import com.avengers.zombiebase.accbase.NetworkState
+import com.avengers.zombiebase.aacbase.NetworkState
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

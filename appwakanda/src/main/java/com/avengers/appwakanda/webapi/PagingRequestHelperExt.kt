@@ -2,7 +2,7 @@ package com.avengers.appwakanda.webapi
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import com.avengers.zombiebase.accbase.NetworkState
+import com.avengers.zombiebase.aacbase.NetworkState
 
 
 

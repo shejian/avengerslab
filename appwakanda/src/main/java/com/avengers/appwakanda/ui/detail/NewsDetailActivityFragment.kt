@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v7.widget.SnapHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,9 +28,10 @@ class NewsDetailActivityFragment : Fragment() {
         //1.构建数据来源加护的类-Repository
         var repository = InjectorUtils.getNewDetailRepository()
 
+
         //2.构建ViewModule，注意VMFactory的构建位置和步骤，如果构造函数没有参数，可以去掉factory
         newsDetailVM = ViewModelProviders
-                .of(this, NewsDetailVMX.VMFactory(repository))
+                .of(this,NewsDetailVMX.VMFactory(repository))
                 .get(NewsDetailVMX::class.java)
 
         //3.指定Layout，构建DataBinding
@@ -46,7 +46,7 @@ class NewsDetailActivityFragment : Fragment() {
                     setLifecycleOwner(this@NewsDetailActivityFragment)
                 }
         //7.设置参数，发送请求
-        newsDetailVM?.queryParam?.postValue(IReqDetailParam())
+        newsDetailVM?.request(IReqDetailParam())
         return newsDetailBinding.root
     }
 
