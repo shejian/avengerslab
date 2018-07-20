@@ -2,12 +2,10 @@ package com.avengers.power.patternlock
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.design.widget.Snackbar
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.power.R
 import com.avengers.power.databinding.ActivityPatternLockBinding
@@ -25,15 +23,15 @@ class PatternLockActivity : BaseActivity() {
     }
 
     private lateinit var activityDataBinding: ActivityPatternLockBinding
-    var paatterPassword:String = ""
+    var patternPassword:String = ""
     var confirmPassword:String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var routerRequest = RouterRequest.obtain(this)
                 .provider("WakandaProvider")
                 .action("WakandaAction")
-                .data("params1", "参数A")
-                .data("params2", "参数B")
+                .data("password", "")
+                .data("confirmPassword", "")
         var readsa = ZombieBaseUtils.onLocalRoute(this, routerRequest)
         activityDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_pattern_lock)
         activityDataBinding.patterLockView!!.dotCount = 3
@@ -43,6 +41,7 @@ class PatternLockActivity : BaseActivity() {
         activityDataBinding.patterLockView!!.isAspectRatioEnabled = true
         activityDataBinding.patterLockView!!.aspectRatio = PatternLockView.AspectRatio.ASPECT_RATIO_HEIGHT_BIAS
         activityDataBinding.patterLockView!!.setViewMode(PatternLockView.PatternViewMode.CORRECT)
+        activityDataBinding.patterLockView!!.wrongStateColor = resources.getColor(R.color.red)
         activityDataBinding.patterLockView!!.dotAnimationDuration = 150
         activityDataBinding.patterLockView!!.pathEndAnimationDuration = 100
         activityDataBinding.patterLockView!!.correctStateColor = ResourceUtils.getColor(this, R.color.white)
@@ -70,26 +69,38 @@ class PatternLockActivity : BaseActivity() {
                 activityDataBinding.textPattenType!!.setText("至少连接4个点")
                 activityDataBinding.patterLockView.clearPattern()
             } else {
-                if (TextUtils.isEmpty(paatterPassword)) {
+                if (TextUtils.isEmpty(patternPassword) && TextUtils.isEmpty(confirmPassword)) {
                     // 首次绘制
-                    paatterPassword = gesturePatternStr
+                    patternPassword = gesturePatternStr
                     activityDataBinding.patterLockView.clearPattern()
                     activityDataBinding.textPattenType!!.setText("验证图案")
                 } else {
-                    // 二次确认
-                    confirmPassword = gesturePatternStr
-                    if (!confirmPassword.equals(paatterPassword)) {
-                        // 不一致
-                        activityDataBinding.textTip!!.setText("密码不匹配，请重新设置")
-                        activityDataBinding.textPattenType!!.setText("绘制图案")
-                        activityDataBinding.patterLockView.clearPattern()
-                        paatterPassword = ""
-                        confirmPassword = ""
+                    if (TextUtils.isEmpty(confirmPassword)) {
+                        // 二次确认
+                        confirmPassword = gesturePatternStr
+                        if (!confirmPassword.equals(patternPassword)) {
+                            // 不一致
+                            activityDataBinding.textTip!!.setText("密码不匹配，请重新设置")
+                            activityDataBinding.textPattenType!!.setText("绘制图案")
+                            activityDataBinding.patterLockView.clearPattern()
+                            patternPassword = ""
+                            confirmPassword = ""
+                        } else {
+                            activityDataBinding.textTip!!.visibility = View.GONE
+                            activityDataBinding.textPattenType!!.setText("")
+                            activityDataBinding.textPattenType!!.setText("设置成功")
+                            finish()
+                        }
                     } else {
-                        activityDataBinding.textTip!!.visibility = View.GONE
-                        activityDataBinding.textPattenType!!.setText("")
-                        activityDataBinding.textPattenType!!.setText("设置成功")
-                        finish()
+                        // 校验手势密码, 解锁
+                        if (gesturePatternStr == patternPassword) {
+                            activityDataBinding.patterLockView!!.setViewMode(PatternLockView.PatternViewMode.CORRECT)
+                            finish()
+                        } else {
+                            activityDataBinding.patterLockView!!.setViewMode(PatternLockView.PatternViewMode.WRONG)
+                            activityDataBinding.patterLockView.clearPattern()
+                            activityDataBinding.textTip!!.setText("密码输入有误")
+                        }
                     }
                 }
             }

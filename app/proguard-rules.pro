@@ -154,3 +154,10 @@
 -dontwarn kotlin.**
 -dontwarn org.w3c.dom.events.*
 -dontwarn org.jetbrains.kotlin.di.InjectorForRuntimeDescriptorLoader
+
+#bugly
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+#tinker
+-dontwarn com.tencent.tinker.**
+-keep class com.tencent.tinker.** { *; }
