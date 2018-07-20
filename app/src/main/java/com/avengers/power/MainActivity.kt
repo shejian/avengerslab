@@ -14,7 +14,6 @@ import com.spinytech.macore.router.RouterRequest
 class MainActivity : BaseActivity() {
 
     override fun reloadData() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
