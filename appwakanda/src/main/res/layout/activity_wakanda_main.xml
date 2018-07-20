@@ -12,13 +12,30 @@
         android:layout_height="match_parent"
         tools:context=".ui.indexmain.WakandaMainActivity">
 
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="1px">
+
+            <com.avengers.zombiebase.widget.CustomToolBar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="新闻"
+                app:titleMargin="@dimen/_8"
+                app:titleTextAppearance="?android:attr/textAppearanceMedium"
+                app:titleTextColor="@color/black_87_color" />
+
+        </android.support.design.widget.AppBarLayout>
         <!--
             <include layout="@layout/content_main" />
         -->
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
