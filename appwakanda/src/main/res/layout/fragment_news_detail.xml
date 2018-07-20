@@ -21,6 +21,8 @@
         tools:context=".ui.detail.NewsDetailActivityFragment"
         tools:showIn="@layout/activity_news_detail">
 
+
+
         <TextView
             android:id="@+id/title_text"
             android:layout_width="wrap_content"

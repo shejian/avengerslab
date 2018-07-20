@@ -29,7 +29,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode=""
+                    app:layout_collapseMode="none"
                     app:titleMargin="@dimen/_8"
                     app:title="我的联系人" />
 
