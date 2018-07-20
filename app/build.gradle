@@ -1,4 +1,5 @@
 apply from: '../zombiebase/common_config.gradle'
+//apply from: 'tinker-support.gradle'
 appDefaultConfig project
 
 android {

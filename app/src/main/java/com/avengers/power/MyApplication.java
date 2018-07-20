@@ -2,21 +2,29 @@ package com.avengers.power;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.Environment;
 import android.support.multidex.MultiDex;
+import android.util.Log;
+import android.view.View;
 
 import com.avengers.appgalaxy.GalaxyModule;
 import com.avengers.appwakanda.BuildConfig;
 import com.avengers.appwakanda.WakandaModule;
+import com.avengers.power.util.BuglyInitUtil;
 import com.avengers.zombiebase.AppExecutors;
 import com.avengers.zombiebase.ApplicationInitBase;
 import com.avengers.zombiebase.BaseApplication;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
+import com.tencent.bugly.beta.UpgradeInfo;
+import com.tencent.bugly.beta.ui.UILifecycleListener;
+import com.tencent.bugly.crashreport.CrashReport;
 
 /**
  * @author jvis
  * @date
  */
 public class MyApplication extends BaseApplication {
-
     public static AppExecutors appExecutors;
 
     @Override
@@ -27,9 +35,8 @@ public class MyApplication extends BaseApplication {
         appExecutors = ApplicationInitBase.getInstanceExecutors();
         ApplicationInitBase.initARouter(this);
         ApplicationInitBase.initWebServer(BuildConfig.BASE_URL);
-
+        BuglyInitUtil.initBugly(this);
     }
-
 
     public AppExecutors getAppExecutors() {
         return appExecutors;
@@ -59,6 +66,8 @@ public class MyApplication extends BaseApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+        // 安装tinker
+        Beta.installTinker();
     }
 
     /**

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <paths>
+        <external-path
+            name="camera_photos"
+            path="" />
+
+        <!-- 巧房代码中的配置-->
+        <root-path
+            name="root"
+            path="" />
+        <external-path
+            name="external_root"
+            path="" />
+        <external-cache-path
+            name="external_cache_root"
+            path="" />
+        <external-files-path
+            name="external_files_root"
+            path="" />
+        <cache-path
+            name="cache_root"
+            path="" />
+        <files-path
+            name="files_root"
+            path="" />
+    </paths>
+</resources>
