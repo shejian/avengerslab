@@ -26,7 +26,6 @@ class MainActivity : BaseActivity() {
                 .data("params1", "参数A")
                 .data("params2", "参数B")
         var readsa = ZombieBaseUtils.onLocalRoute(this, routerRequest)
-        LogU.d("shejian", "fsdfsdfsdf")
         activityMainBinding.topbar?.toolbar?.hideBack()
         activityMainBinding.topbar?.toolbar?.setMiddleText("我是主标题")
     }
