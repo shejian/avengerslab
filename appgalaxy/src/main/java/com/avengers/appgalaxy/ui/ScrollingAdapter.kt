@@ -3,15 +3,25 @@ package com.avengers.appgalaxy.ui
 import android.databinding.ViewDataBinding
 import android.support.v7.util.DiffUtil
 import android.util.Log
+import android.view.View
 import com.avengers.appgalaxy.db.room.entity.ContextItemEntity
-import com.avengers.zombiebase.adapter.DataBindingPagingLiteAdapter
+import com.avengers.zombiebase.ToastOneUtil
+import com.avengers.zombiebase.adapter.DataBindingPagedListLiteAdapter
 
 class ScrollingAdapter<E : ViewDataBinding>(
         var layout: Int,
         var variableId: Int
-) : DataBindingPagingLiteAdapter<ContextItemEntity, E>(layout, variableId, POST_COMPARATOR) {
+) : DataBindingPagedListLiteAdapter<ContextItemEntity, E>(layout, variableId, POST_COMPARATOR) {
+
+    init {
+        onItemClickFun = { view: View, position: Int ->
+            ToastOneUtil.showToastShort("点击了$position")
+        }
+    }
 
     companion object {
+
+
         val POST_COMPARATOR = object : DiffUtil.ItemCallback<ContextItemEntity>() {
             override fun areContentsTheSame(oldItem: ContextItemEntity, newItem: ContextItemEntity): Boolean {
                 var asd = oldItem == newItem

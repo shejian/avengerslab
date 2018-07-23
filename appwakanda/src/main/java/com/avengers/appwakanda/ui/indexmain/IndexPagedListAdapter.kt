@@ -5,10 +5,10 @@ import android.support.v7.util.DiffUtil
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.avengers.appwakanda.BR
 import com.avengers.appwakanda.R
-import com.avengers.zombiebase.adapter.BasePagedListAdapter
+import com.avengers.zombiebase.adapter.DataBindingPagedListAdapter
 import com.avengers.zombiebase.adapter.DataBindingLiteHolder
 
-class IndexPagedListAdapter : BasePagedListAdapter<ContextItemEntity>(
+class IndexPagedListAdapter : DataBindingPagedListAdapter<ContextItemEntity>(
         R.layout.indexlist_dbd_item,
         BR.contextItem,
         POST_COMPARATOR,

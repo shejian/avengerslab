@@ -13,7 +13,7 @@ import com.avengers.BR
 import com.avengers.R
 import com.avengers.databinding.ActivityScrollingBinding
 import com.avengers.appgalaxy.ui.vm.ScrollingViewModel
-import com.avengers.zombiebase.RcycyleHelper
+import com.avengers.zombiebase.RecycleHelper
 import com.avengers.zombiebase.ZombieBaseUtils
 import com.spinytech.macore.router.RouterRequest
 
@@ -48,13 +48,13 @@ class ScrollingActivity : AppCompatActivity() {
 
         var res = ZombieBaseUtils.onLocalRoute(this, request234)
 
-        initRecycler()
+        initRecycle()
     }
 
-    var adapter: ScrollingAdapter<ActivityScrollingBinding>? = null
+    private var adapter: ScrollingAdapter<ActivityScrollingBinding>? = null
 
-    fun initRecycler() {
-        RcycyleHelper.initBaseRcycyleView(this, databinding?.inclodeview?.recyclerView)
+    private fun initRecycle() {
+        RecycleHelper.initBaseRecycleView(this, databinding?.inclodeview?.recyclerView!!)
         adapter = ScrollingAdapter(R.layout.list_dbd_item, BR.itemobj)
         databinding?.inclodeview?.recyclerView?.adapter = adapter
         scrollingViewModel?.getLiveData()?.observe(this, Observer {

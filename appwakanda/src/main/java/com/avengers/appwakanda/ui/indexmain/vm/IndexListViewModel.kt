@@ -12,20 +12,9 @@ import com.avengers.zombiebase.aacbase.NetworkState
 
 class IndexListViewModel(private val repository: IndexRepository) : ViewModel() {
 
-
     companion object {
         private const val VISIBLE_THRESHOLD = 5
     }
-
-    //   var indexListLiveData: LiveData<PagedList<ContextItemEntity>>? = null
-
-
-    // var indexpeository: IndexRepository? = null
-/*
-    fun init() {
-        val cache = IndexDataCache(RoomHelper.indexDataDao(), ApplicationInitBase.getInstanceExecutors().diskIO())
-        indexpeository = IndexRepository(SmartisanService(), cache)
-    }*/
 
     /**
      * 设置请求参数，
@@ -43,21 +32,13 @@ class IndexListViewModel(private val repository: IndexRepository) : ViewModel() 
     //queryLiveData 为参数 通过函数 转化为结果，Transformations将绑定queryLiveData与匿名函数的触发
     //列表数据
 
-    private var result: LiveData<ItemResult> = map(queryLiveData) {
-        repository.getIndexListData(it)
-    }
+    private var result: LiveData<ItemResult> = map(queryLiveData) { repository.getIndexListData(it) }
 
-    var items: LiveData<PagedList<ContextItemEntity>> = switchMap(result) {
-        it.data
-    }
+    var items: LiveData<PagedList<ContextItemEntity>> = switchMap(result) { it.data }
 
-    var netWorkState: LiveData<NetworkState> = switchMap(result) {
-        it.netWorkState
-    }
+    var netWorkState: LiveData<NetworkState> = switchMap(result) { it.netWorkState }
 
-    var refreshState: LiveData<NetworkState> = switchMap(result) {
-        it.refreshState
-    }
+    var refreshState: LiveData<NetworkState> = switchMap(result) { it.refreshState }
 
     fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
         if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
@@ -68,11 +49,9 @@ class IndexListViewModel(private val repository: IndexRepository) : ViewModel() 
         }
     }
 
-
     fun retry() {
         result.value?.retry?.invoke()
     }
-
 
     val runRefresh = MutableLiveData<Boolean>()
 
