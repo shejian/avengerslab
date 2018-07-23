@@ -22,8 +22,7 @@ import retrofit2.Response
  */
 class IndexRepository(
         private val service: SmartisanApi,
-        private val cache: IndexDataCache
-) {
+        private val cache: IndexDataCache) {
     companion object {
         private const val DB_PAGE_SIZE = 20
     }

@@ -10,6 +10,7 @@ import com.avengers.appwakanda.webapi.PagingRequestHelper
 import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.appwakanda.webapi.createStatusLiveData
 import com.avengers.zombiebase.ApplicationInitBase
+import com.avengers.zombiebase.LogU
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,44 +41,10 @@ class ReaderListBoundaryCallback(
     // avoid triggering multiple requests in the same time
     private var isRequestInProgress = false
 
-/*
-    private fun reqAndSaveData() {
-        if (isRequestInProgress) {
-            return
-        }
-        isRequestInProgress = true
-        _netWorkState.postValue(NetworkState.LOADING)
-        service.indexMainData(Api.getSmartApi(), query, NETWORK_PAGE_SIZE, lastRequestedPage, {
-            WakandaModule.appExecutors!!.diskIO()?.execute {
-                it.let {
-                    RoomHelper.getWakandaDb().runInTransaction {
-                        val lastIndex = cache.queryMaxIndex().toLong()
-                        var newlist = it.mapIndexed { index, contextItemEntity ->
-                            contextItemEntity.setMid(lastIndex + index)
-                            contextItemEntity
-                        }
-                        Log.d("shejian", "插入数据库完成$lastRequestedPage")
-                        cache.insert(newlist) {
-                            isRequestInProgress = false
-                        }
-                    }
-                }
-                _netWorkState.postValue(NetworkState.LOADED)
-            }
-
-
-        }, {
-            Log.d("shejian", "失败" + it)
-            //_networkErrors.postValue("fail" + System.currentTimeMillis())
-            _netWorkState.postValue(NetworkState.error(it))
-            isRequestInProgress = false
-        })
-    }*/
-
 
     override fun onZeroItemsLoaded() {
         super.onZeroItemsLoaded()
-        Log.d("shejian", "onZeroItemsLoaded")
+        LogU.d("shejian", "onZeroItemsLoaded")
         //reqAndSaveData()
     }
 

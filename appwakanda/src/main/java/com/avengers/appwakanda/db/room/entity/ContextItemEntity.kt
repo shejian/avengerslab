@@ -1,84 +1,46 @@
 package com.avengers.appwakanda.db.room.entity
 
-import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 import android.databinding.BaseObservable
-import android.databinding.Bindable
-import android.support.annotation.NonNull
-import com.avengers.appwakanda.BR
+import android.os.Parcel
+import android.os.Parcelable
 import java.util.*
 
 @Entity
-class ContextItemEntity : BaseObservable() {
+class ContextItemEntity {
 
-    @ColumnInfo
     var _mid: Long? = null
     @PrimaryKey
-    @ColumnInfo
     lateinit var id: String
-    @ColumnInfo
     var site_id: String? = null
-    @ColumnInfo
     var title: String? = null
-    @ColumnInfo
     var headpic: String? = null
-    @ColumnInfo
     var author_id: String? = null
-    @ColumnInfo
     var author_name: String? = null
-    @ColumnInfo
     var brief: String? = null
-    @ColumnInfo
     var read_num: String? = null
-
-    @ColumnInfo
     var collect_num: String? = null
-
-    @ColumnInfo
     var origin_url: String? = null
-
-    @ColumnInfo
     var url: String? = null
-
-    @ColumnInfo
     var status: String? = null
-
-    @ColumnInfo
     var create_time: String? = null
-
-    @ColumnInfo
     var update_time: String? = null
-
-    @ColumnInfo
     var pub_date: String? = null
-
-    @ColumnInfo
     var md5: String? = null
-
-    @ColumnInfo
     var _is_recommend: String? = null
-
-    @ColumnInfo
     var prepic1: String? = null
-
-    @ColumnInfo
     var prepic2: String? = null
-
-    @ColumnInfo
     var prepic3: String? = null
-
-    @ColumnInfo
     var recommend_time: String? = null
-
-    @ColumnInfo
     var sort_score: String? = null
+    @Ignore
+    private var site_info: SiteInfo? = null
 
-    //private var site_info: SiteInfo? = null
     // to be consistent w/ changing backend order, we need to keep a data like this
 
-
-    class SiteInfo : BaseObservable() {
+    inner class SiteInfo : BaseObservable() {
 
         var id: String? = null
         var name: String? = null

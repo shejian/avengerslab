@@ -1,68 +1,40 @@
 package com.avengers.appwakanda.ui.indexmain
 
-import android.arch.paging.PagedListAdapter
-import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.v7.util.DiffUtil
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.avengers.appwakanda.BR
 import com.avengers.appwakanda.R
-import com.avengers.appwakanda.db.room.entity.ContextItemEntity
-import com.avengers.zombiebase.adapter.DataBindingLiteAdapter
-import com.avengers.zombiebase.adapter.DataBindingLiteAdapter.OnItemClickListener
+import com.avengers.zombiebase.adapter.BasePagedListAdapter
 import com.avengers.zombiebase.adapter.DataBindingLiteHolder
-import com.avengers.zombiebase.adapter.DataBindingPagingLiteAdapter
 
-class IndexPagedListAdapter<E : ViewDataBinding> :
-        PagedListAdapter<ContextItemEntity, DataBindingLiteHolder<E>>(POST_COMPARATOR) {
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int)
-            : DataBindingLiteHolder<E> {
-        //1.拿到itemView的viewDataBinding对象
-        val viewDataBinding = DataBindingUtil.inflate<E>(LayoutInflater.from(parent.context), R.layout.indexlist_dbd_item, parent, false)
-        return DataBindingLiteHolder(viewDataBinding,
-                OnItemClickListener { view: View, sd: Int ->
-                    c.let { c?.invoke(view, sd) }
-                })
+class IndexPagedListAdapter : BasePagedListAdapter<ContextItemEntity>(
+        R.layout.indexlist_dbd_item,
+        BR.contextItem,
+        POST_COMPARATOR,
+        onBindView) {
+
+    override fun onBindView(holder: DataBindingLiteHolder<ViewDataBinding>, position: Int) {
+        //LogU.d("子类实现 onBindView")
     }
-
-    var c: ((view: View, sd: Int) -> Unit?)? = null
-
-    fun setOnItemClickListener(click: (view: View, sd: Int) -> Unit) {
-        c = click
-    }
-
-    override fun onBindViewHolder(
-            holder: DataBindingLiteHolder<E>,
-            position: Int
-    ) {
-        val binding = holder.binding
-        //2.为viewDataBinding对象设置XML中的数据属性
-        binding.setVariable(BR.contextItem, getItem(position))
-        //3.据说时为了解决使用dataBinding导致RecycleView 的闪烁问题
-        binding.executePendingBindings()
-    }
-
 
     companion object {
+
+        val onBindView = { view: ViewDataBinding, sd: Int ->
+           // LogU.d("闭包 onBindView")
+        }
+
         val POST_COMPARATOR = object : DiffUtil.ItemCallback<ContextItemEntity>() {
             override fun areContentsTheSame(oldItem: ContextItemEntity, newItem: ContextItemEntity): Boolean {
-                var asd = oldItem.id == newItem.id
-                return asd
+                return oldItem == newItem
             }
 
             override fun areItemsTheSame(oldItem: ContextItemEntity, newItem: ContextItemEntity): Boolean {
-                var asd = oldItem.title == newItem.title
-                return asd
+                return oldItem.title == newItem.title
             }
 
         }
-
-
     }
+
 }
 

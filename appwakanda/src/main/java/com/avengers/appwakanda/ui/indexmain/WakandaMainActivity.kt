@@ -16,6 +16,7 @@ import com.avengers.appwakanda.databinding.IndexlistDbdItemBinding
 import com.avengers.appwakanda.ui.detail.NewsDetailActivity
 import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
 import com.avengers.zombiebase.DeviceUtil
+import com.avengers.zombiebase.LogU
 import com.avengers.zombiebase.RcycyleHelper
 import com.avengers.zombiebase.ToastUtil
 import com.avengers.zombiebase.aacbase.Status
@@ -41,6 +42,7 @@ class WakandaMainActivity : AppCompatActivity() {
         RcycyleHelper.initBaseRcycyleView(this, activityDataBinding.recyclerView)
 
         RcycyleHelper.initSwipeRefresh(activityDataBinding.swipeRefreshView)
+
         setupScrollListener()
 
         //初始化刷新控件的监听
@@ -50,24 +52,25 @@ class WakandaMainActivity : AppCompatActivity() {
         }
         //指定请求参数，作为livedata 数据，将自动触发请求，是否需要首次触发下拉刷新onRefresh
         indexListViewModel.getIndexData("line/show", true)
-        Log.d("shejian", "w:" + DeviceUtil.nScreenWidth + "/h:" + DeviceUtil.nScreenHeight)
         if (DeviceUtil.isFullDisplay) {
-            Log.d("shejian", "是全面屏手机")
+            LogU.d("shejian", "是全面屏手机")
         } else {
-            Log.d("shejian", "不是全面屏手机")
+            LogU.d("shejian", "不是全面屏手机")
         }
     }
 
 
-    fun initAdapter() {
-        val adapter = IndexPagedListAdapter<IndexlistDbdItemBinding>()
-        adapter.setOnItemClickListener { view, sd ->
-            ToastUtil.showInBottom(this, "点击：$sd")
-            // Toast.makeText(this, "点击：$sd", Toast.LENGTH_SHORT).show()
+    private fun initAdapter() {
+        val adapter = IndexPagedListAdapter()
+        adapter.onItemClickFun = { _, _ ->
             startActivity(Intent(this, NewsDetailActivity::class.java))
         }
+        // val adapter = ReposAdapter()
         activityDataBinding.recyclerView.adapter = adapter
         indexListViewModel.items.observe(this, Observer {
+            if (it?.size == 0) {
+                return@Observer
+            }
             adapter.submitList(it)
             scrollRetry = false
         })
@@ -80,9 +83,10 @@ class WakandaMainActivity : AppCompatActivity() {
             activityDataBinding.swipeRefreshView.isRefreshing = false
         })
 
-        //完成刷新请求，停止刷新UI
+        //完成"更多"加载请求
         indexListViewModel.netWorkState.observe(this, Observer {
             scrollRetry = Status.FAILED == it?.status
+            adapter.setNetworkState(it)
         })
     }
 
@@ -102,9 +106,9 @@ class WakandaMainActivity : AppCompatActivity() {
                 val totalItemCount = layoutManager.itemCount
                 val visibleItemCount = layoutManager.childCount
                 val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-                Log.d("shejian", "onScrolled:$visibleItemCount/$lastVisibleItem/$totalItemCount")
+                //  LogU.d("shejian", "onScrolled:$visibleItemCount/$lastVisibleItem/$totalItemCount")
                 if (lastVisibleItem + 5 == totalItemCount) {
-                    Log.d("shejian", "scrollRetry:$scrollRetry")
+                    //LogU.d("shejian", "scrollRetry:$scrollRetry")
                     if (scrollRetry && cnum == 0) {
                         cnum++
                         scrollRetry = false
