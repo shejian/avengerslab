@@ -32,7 +32,7 @@ class IndexListViewModel(private val repository: IndexRepository) : ViewModel() 
     //queryLiveData 为参数 通过函数 转化为结果，Transformations将绑定queryLiveData与匿名函数的触发
     //列表数据
 
-    private var result: LiveData<ItemResult> = map(queryLiveData) { repository.getIndexListData(it) }
+    private var result: LiveData<ItemResult> = map(queryLiveData) { repository.assembleResult(it) }
 
     var items: LiveData<PagedList<ContextItemEntity>> = switchMap(result) { it.data }
 
@@ -44,7 +44,7 @@ class IndexListViewModel(private val repository: IndexRepository) : ViewModel() 
         if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
             val immutableQuery = lastQueryValue()
             if (immutableQuery != null) {
-                repository.getIndexListData(immutableQuery)
+                repository.assembleResult(immutableQuery)
             }
         }
     }

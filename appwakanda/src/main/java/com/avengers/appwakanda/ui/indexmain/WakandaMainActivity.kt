@@ -36,14 +36,13 @@ class WakandaMainActivity : AppCompatActivity() {
 
         setUIObserve()
 
-        setupScrollListener()
+        //  setupScrollListener()
 
         //将Adapter设置到RecycleView上，将ViewModel中的数据增加监听，设置到Adapter中
         initAdapter()
 
         //指定请求参数，作为LiveData 数据，将自动触发请求，是否需要首次触发下拉刷新onRefresh
         indexListViewModel.getIndexData("line/show", true)
-
         /**
         if (DeviceUtil.isFullDisplay) {
         LogU.d("shejian", "是全面屏手机")

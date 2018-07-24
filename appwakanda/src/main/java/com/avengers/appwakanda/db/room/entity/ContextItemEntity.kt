@@ -6,10 +6,11 @@ import android.arch.persistence.room.PrimaryKey
 import android.databinding.BaseObservable
 import android.os.Parcel
 import android.os.Parcelable
+import com.avengers.zombiebase.aacbase.IBeanResponse
 import java.util.*
 
 @Entity
-class ContextItemEntity {
+class ContextItemEntity : IBeanResponse {
 
     var _mid: Long? = null
     @PrimaryKey
