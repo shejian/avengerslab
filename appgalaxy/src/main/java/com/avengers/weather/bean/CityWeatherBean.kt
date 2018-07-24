@@ -5,14 +5,18 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 import com.avengers.zombiebase.aacbase.IBeanResponse
-import com.bty.retrofit.net.bean.JsonBeanResponse
 
 /**
  * Created by duo.chen on 2018/7/9
  */
 
 @Entity(tableName = "cityWeather")
-class CityWeatherBean : IBeanResponse() {
+class CityWeatherBean : IBeanResponse {
+
+    @Ignore
+    var message: String = ""
+    @Ignore
+    var status: String = ""
 
     @PrimaryKey
     var date: Long = 0

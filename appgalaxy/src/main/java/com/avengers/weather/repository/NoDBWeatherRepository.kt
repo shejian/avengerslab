@@ -21,7 +21,7 @@ class NoDBWeatherRepository(private val api: WeatherApi) : Repository<FakeReques
             }
 
             override fun onResponse(call: Call<CityWeatherBean>?,response: Response<CityWeatherBean>?) {
-                if (response!!.body()?.status == 200) {
+                if (response!!.body()?.status.equals("200")) {
                     saveData(response.body()!!)
                     netWorkState.postValue(NetworkState.LOADED)
                 } else {
