@@ -4,6 +4,7 @@ import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
+import com.avengers.zombiebase.aacbase.IBeanResponse
 import com.bty.retrofit.net.bean.JsonBeanResponse
 
 /**
@@ -11,15 +12,10 @@ import com.bty.retrofit.net.bean.JsonBeanResponse
  */
 
 @Entity(tableName = "cityWeather")
-class CityWeatherBean : JsonBeanResponse() {
+class CityWeatherBean : IBeanResponse() {
 
     @PrimaryKey
     var date: Long = 0
-    @Ignore
-    var message: String = ""
-
-    @Ignore
-    var status:Int = 0
 
     var city: String = ""
 

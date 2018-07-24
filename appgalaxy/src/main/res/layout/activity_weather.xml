@@ -5,14 +5,6 @@
 
     <data>
 
-        <import type="com.avengers.weather.bean.CityWeatherBean" />
-
-        <variable
-            name="cityWeather"
-            type="CityWeatherBean" />
-
-        <import type="com.avengers.weather.vm.WeatherViewModel" />
-
         <variable
             name="model"
             type="com.avengers.weather.vm.WeatherViewModel" />
@@ -33,52 +25,52 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cityWeather.city}" />
+                android:text="@{model.liveData.city}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cityWeather.date}" />
+                android:text="@{model.liveData.date}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cityWeather.data.wendu}" />
+                android:text="@{model.liveData.data.wendu}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cityWeather.data.shidu}" />
+                android:text="@{model.liveData.data.shidu}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cityWeather.data.pm25}" />
+                android:text="@{model.liveData.data.pm25}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cityWeather.data.pm10}" />
+                android:text="@{model.liveData.data.pm10}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cityWeather.data.quality}" />
+                android:text="@{model.liveData.data.quality}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cityWeather.data.ganmao}" />
+                android:text="@{model.liveData.data.ganmao}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cityWeather.time}" />
+                android:text="@{model.liveData.time}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{model.response.time}"/>
+                android:text="@{model.liveData.time}"/>
 
             <Button
                 android:id="@+id/retry"

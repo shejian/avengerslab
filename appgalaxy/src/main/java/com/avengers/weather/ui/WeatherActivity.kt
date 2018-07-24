@@ -9,17 +9,16 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.R
 import com.avengers.appgalaxy.db.room.RoomHelper
 import com.avengers.databinding.ActivityWeatherBinding
-import com.avengers.templete.viewModel.NetworkState
-import com.avengers.templete.viewModel.Status
 import com.avengers.weather.api.Api
 import com.avengers.weather.api.WeatherApi
 import com.avengers.weather.bean.FakeRequest
 import com.avengers.weather.repository.WeatherRepository
 import com.avengers.weather.vm.WeatherViewModel
+import com.avengers.zombiebase.aacbase.NetworkState
+import com.avengers.zombiebase.aacbase.Status
 import kotlinx.android.synthetic.main.activity_weather.*
 import java.util.concurrent.Executors
 
@@ -29,32 +28,25 @@ import java.util.concurrent.Executors
 class WeatherActivity : AppCompatActivity() {
 
     private lateinit var weatherViewModel: WeatherViewModel
-    var contentView: ActivityWeatherBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        contentView = DataBindingUtil.setContentView(this,R.layout.activity_weather)
+        val contentView: ActivityWeatherBinding = DataBindingUtil.setContentView(this,R.layout.activity_weather)
 
         weatherViewModel = getViewModel()
-
-        contentView?.model = weatherViewModel
-        contentView?.setLifecycleOwner(this)
-
-
+        contentView.model = weatherViewModel
+        contentView.setLifecycleOwner(this)
         initWithViewModel(weatherViewModel)
-
         initSwipeRefresh()
 
-        var request = FakeRequest("上海")
-
+        val request = FakeRequest("上海")
         weatherViewModel.request(request)
 
     }
 
     fun initSwipeRefresh() {
 
-        weatherViewModel.refreshState?.observe(this,Observer {
+        weatherViewModel.netWorkState.observe(this,Observer {
             swipe_refresh.isRefreshing = it == NetworkState.LOADING
         })
 
@@ -62,19 +54,11 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun initWithViewModel(viewModel: WeatherViewModel) {
-        viewModel.response.observe(this,Observer {
-            contentView!!.cityWeather = it
 
-        })
-        viewModel.refreshState?.observe(this,Observer {
+        viewModel.netWorkState.observe(this,Observer {
+
             if (it?.status == Status.FAILED) {
                 Toast.makeText(this,it.msg,Toast.LENGTH_SHORT).show()
-            }
-        })
-
-        viewModel.networkState?.observe(this,Observer {
-
-            if (it?.status == Status.FAILED) {
                 retry.visibility = View.VISIBLE
             } else {
                 retry.visibility = View.GONE
