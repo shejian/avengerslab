@@ -21,7 +21,7 @@ class LogoTitle extends Component {
         return (
             <Image
                 source={{uri: 'aa'}}
-                style={{width: 30, height: 30}}/>
+                style={{width: 40, height: 30}}/>
 
         )
     }
@@ -30,7 +30,7 @@ class LogoTitle extends Component {
 class HomeScreen extends Component {
     static navigationOptions = ({navigation}) => {
         return {
-            headerTitle: <LogoTitle/>,
+            headerTitle: '测试',
             headerLeft: (
                 <Button
                     onPress={() => navigation.navigate('MyModal')}

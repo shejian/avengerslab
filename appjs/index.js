@@ -1,6 +1,8 @@
-import { AppRegistry } from 'react-native';
+import {AppRegistry} from 'react-native';
 import jjr from "./jjr/login";
-import app from "./s1/d2"
+import CodePushDemo from "./s1/CodePushDemo";
+import AddStore from './twbigdata/AllRoutes';
 
-AppRegistry.registerComponent('rn', () => app);
 AppRegistry.registerComponent('jjr', () => jjr);
+AppRegistry.registerComponent('CodePush', () => CodePushDemo);
+AppRegistry.registerComponent('AddStore', () => AddStore);
