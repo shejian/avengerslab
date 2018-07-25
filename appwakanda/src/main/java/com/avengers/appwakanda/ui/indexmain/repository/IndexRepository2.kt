@@ -8,7 +8,9 @@ import com.avengers.appwakanda.bean.IndexReaderListBean
 import com.avengers.appwakanda.bean.NewsListReqParam
 import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
+import com.avengers.appwakanda.db.room.dao.NewsDetailDao
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
+import com.avengers.appwakanda.ui.detail.repository.NewsDetailRepositoryX
 import com.avengers.appwakanda.ui.indexmain.data.ReaderListBoundaryCallback2
 import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.zombiebase.AppExecutors
@@ -68,7 +70,7 @@ class IndexRepository2(
      * 请求Api，刷新数据
      */
     override fun refresh(args: NewsListReqParam) {
-        LogU.d("shejian","refresh(args: NewsListReqParam)")
+        LogU.d("shejian", "refresh(args: NewsListReqParam)")
         service.getSmtIndex(args.keyWord!!, 0, NETWORK_PAGE_SIZE).enqueue(object : Callback<IndexReaderListBean> {
             override fun onFailure(call: Call<IndexReaderListBean>?, t: Throwable?) {
                 refreshState.value = NetworkState.error(t?.message)
@@ -104,6 +106,22 @@ class IndexRepository2(
             }
         }
 
+    }
+
+
+    companion object {
+        // For Singleton instantiation
+        @Volatile
+        private var instance: IndexRepository2? = null
+
+        fun getInstance(service: SmartisanApi,
+                        cache: IndexDataCache,
+                        appExecutors: AppExecutors) =
+                instance ?: synchronized(this) {
+                    instance ?: IndexRepository2(service, cache, appExecutors).also {
+                        instance = it
+                    }
+                }
     }
 
 

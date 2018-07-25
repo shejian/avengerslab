@@ -1,40 +1,57 @@
 package com.avengers.appwakanda.ui.indexmain
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.appwakanda.R
+import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.bean.NewsListReqParam
 import com.avengers.appwakanda.databinding.ActivityWakandaMainBinding
+import com.avengers.appwakanda.db.room.RoomHelper
+import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.ui.detail.NewsDetailActivity
+import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository2
 import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
+import com.avengers.appwakanda.webapi.Api
 import com.avengers.zombiebase.RecycleHelper
-import com.avengers.zombiebase.aacbase.IReqParam
 import com.avengers.zombiebase.aacbase.Status
 
 @Route(path = "/wakanda/mainactivity")
-class WakandaMainActivity : AppCompatActivity() {
+class WakandaMainActivity : IBindingActivityJava<ActivityWakandaMainBinding, IndexListViewModel, IndexRepository2>() {
 
-    private lateinit var indexListViewModel: IndexListViewModel
+    override val layout: Int
+        get() = R.layout.activity_wakanda_main
 
-    private lateinit var activityDataBinding: ActivityWakandaMainBinding
+    override fun createRepository(): IndexRepository2 {
+        return IndexRepository2.getInstance(
+                Api.getSmartApi(),
+                IndexDataCache(RoomHelper.indexDataDao(), WakandaModule.appExecutors.diskIO()),
+                WakandaModule.appExecutors)
+    }
+
+    override fun createModelFactory(repository: IndexRepository2): ViewModelProvider.Factory {
+        return object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                if (modelClass.isAssignableFrom(IndexListViewModel::class.java)) {
+                    @Suppress("UNCHECKED_CAST")
+                    return IndexListViewModel(repository) as T
+                }
+                throw IllegalArgumentException("Unknown ViewModel class")
+            }
+        }
+
+        //IndexViewModelFactory(repository)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        indexListViewModel = ViewModelProviders
-                .of(this, Injection.provideViewModuleFactory())
-                .get(IndexListViewModel::class.java)
-
-        activityDataBinding = DataBindingUtil.setContentView(this@WakandaMainActivity,
-                R.layout.activity_wakanda_main)
+        init(this, IndexListViewModel::class.java)
 
         initRecycle()
 
@@ -48,23 +65,51 @@ class WakandaMainActivity : AppCompatActivity() {
         newsListReqParam.keyWord = "line/show"
 
         //指定请求参数，作为LiveData 数据，将自动触发请求
-        indexListViewModel.getPagedListData(newsListReqParam)
+        mViewModel!!.getPagedListData(newsListReqParam)
 
     }
 
+
+/*    companion object {
+
+        private fun createRepository(): IndexRepository2 {
+            return IndexRepository2.getInstance(
+                    Api.getSmartApi(),
+                    IndexDataCache(RoomHelper.indexDataDao(), WakandaModule.appExecutors.diskIO()),
+                    WakandaModule.appExecutors)
+        }
+
+        fun createViewModel(activity: FragmentActivity): mViewModel {
+            return ViewModelProviders
+                    .of(activity, IndexViewModelFactory(createRepository()))
+                    .get(mViewModel::class.java)
+        }
+
+        fun setDataBinding(activity: FragmentActivity): ActivityWakandaMainBinding {
+            return DataBindingUtil.setContentView(activity, getLayout())
+        }
+
+
+        private fun getLayout(): Int {
+            return R.layout.activity_wakanda_main
+        }
+
+    }*/
+
+
     private fun initRecycle() {
-        RecycleHelper.initBaseRecycleView(this, activityDataBinding.recyclerView)
-        RecycleHelper.initSwipeRefresh(activityDataBinding.swipeRefreshView) {
+        RecycleHelper.initBaseRecycleView(this, mDataBinding!!.recyclerView)
+        RecycleHelper.initSwipeRefresh(mDataBinding!!.swipeRefreshView) {
             //下拉触发运行刷新的值，联动触发刷新事件
-            indexListViewModel.refresh()
+            mViewModel?.refresh()
         }
     }
 
 
     private fun setUIObserve() {
         //完成刷新请求，停止刷新UI
-        indexListViewModel.refreshState.observe(this, Observer {
-            activityDataBinding.swipeRefreshView.isRefreshing = it?.status == Status.RUNNING
+        mViewModel!!.refreshState.observe(this, Observer {
+            mDataBinding!!.swipeRefreshView.isRefreshing = it?.status == Status.RUNNING
         })
     }
 
@@ -76,11 +121,11 @@ class WakandaMainActivity : AppCompatActivity() {
         }
 
         adapter.onRetryFun = { _, _ ->
-            indexListViewModel.retry()
+            mViewModel!!.retry()
         }
 
-        activityDataBinding.recyclerView.adapter = adapter
-        indexListViewModel.items.observe(this, Observer {
+        mDataBinding!!.recyclerView.adapter = adapter
+        mViewModel!!.items.observe(this, Observer {
             if (it?.size == 0) {
                 //极端情况需要处理空数据的情况，按具体业务而定
                 return@Observer
@@ -90,7 +135,7 @@ class WakandaMainActivity : AppCompatActivity() {
         })
 
         //完成"更多"加载请求
-        indexListViewModel.netWorkState.observe(this, Observer {
+        mViewModel!!.netWorkState.observe(this, Observer {
             scrollRetry = Status.FAILED == it?.status
             adapter.setNetworkState(it)
         })
@@ -104,8 +149,8 @@ class WakandaMainActivity : AppCompatActivity() {
      * 滚动控制加载
      */
     private fun setupScrollListener() {
-        val layoutManager = activityDataBinding.recyclerView.layoutManager as LinearLayoutManager
-        activityDataBinding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        val layoutManager = mDataBinding!!.recyclerView.layoutManager as LinearLayoutManager
+        mDataBinding!!.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -119,7 +164,7 @@ class WakandaMainActivity : AppCompatActivity() {
                         cnum++
                         scrollRetry = false
                         //  Toast.makeText(this@WakandaMainActivity, "onScrolled", Toast.LENGTH_SHORT).show()
-                        indexListViewModel.retry()
+                        mViewModel!!.retry()
                     }
                 } else {
                     cnum = 0
