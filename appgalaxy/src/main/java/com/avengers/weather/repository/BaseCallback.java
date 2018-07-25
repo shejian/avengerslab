@@ -1,6 +1,7 @@
 package com.avengers.weather.repository;
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.avengers.weather.bean.CityWeatherBean;
@@ -37,7 +38,7 @@ public class BaseCallback<T extends CityWeatherBean> extends LifeCallAdapterFact
     }
 
     @Override
-    public void onResponse(Call<T> call, Response<T> response) {
+    public void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
         if ("200".equals(response.body().getStatus())) {
             if (activityRef != null) {
                 activityRef.get().showContentView();
@@ -57,7 +58,7 @@ public class BaseCallback<T extends CityWeatherBean> extends LifeCallAdapterFact
     }
 
     @Override
-    public void onFailure(Call<T> call, Throwable t) {
+    public void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
         if (activityRef != null) {
             activityRef.get().showErrorView(t.getMessage());
         }
