@@ -46,4 +46,8 @@ class MainActivity : BaseActivity() {
         ZombieBaseUtils.startNavigationBuild("/patternlock/patternLockActivity").navigation()
     }
 
+    fun buttonClickLocation(view: View) {
+        ZombieBaseUtils.startNavigationBuild("/location/LocationActivity").navigation()
+    }
+
 }
