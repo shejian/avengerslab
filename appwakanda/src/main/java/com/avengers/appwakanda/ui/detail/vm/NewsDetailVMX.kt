@@ -7,7 +7,8 @@ import com.avengers.appwakanda.ui.detail.repository.NewsDetailRepositoryX
 import com.avengers.zombiebase.aacbase.BaseViewModel
 import com.avengers.zombiebase.aacbase.IReqParam
 
-class NewsDetailVMX(repository: NewsDetailRepositoryX) : BaseViewModel<IReqParam, NewsDetailEntity>(repository) {
+class NewsDetailVMX(repository: NewsDetailRepositoryX)
+    : BaseViewModel<IReqParam, NewsDetailEntity>(repository) {
 
     class VMFactory(private var repository: NewsDetailRepositoryX) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

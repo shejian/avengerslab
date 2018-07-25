@@ -12,6 +12,7 @@ import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.avengers.appwakanda.ui.indexmain.data.ReaderListBoundaryCallback2
 import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.zombiebase.AppExecutors
+import com.avengers.zombiebase.LogU
 import com.avengers.zombiebase.aacbase.NetworkState
 import com.avengers.zombiebase.aacbase.paging.PageListRepository
 import com.avengers.zombiebase.aacbase.paging.PagedListBoundaryCallback
@@ -67,6 +68,7 @@ class IndexRepository2(
      * 请求Api，刷新数据
      */
     override fun refresh(args: NewsListReqParam) {
+        LogU.d("shejian","refresh(args: NewsListReqParam)")
         service.getSmtIndex(args.keyWord!!, 0, NETWORK_PAGE_SIZE).enqueue(object : Callback<IndexReaderListBean> {
             override fun onFailure(call: Call<IndexReaderListBean>?, t: Throwable?) {
                 refreshState.value = NetworkState.error(t?.message)

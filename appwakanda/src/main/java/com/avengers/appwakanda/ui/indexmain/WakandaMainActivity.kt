@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.bean.NewsListReqParam
@@ -27,6 +28,7 @@ class WakandaMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         indexListViewModel = ViewModelProviders
                 .of(this, Injection.provideViewModuleFactory())
                 .get(IndexListViewModel::class.java)
@@ -40,41 +42,29 @@ class WakandaMainActivity : AppCompatActivity() {
 
         //  setupScrollListener()
 
-        //将Adapter设置到RecycleView上，将ViewModel中的数据增加监听，设置到Adapter中
         initAdapter()
 
-
-        var newsListReqParam = NewsListReqParam()
+        val newsListReqParam = NewsListReqParam()
         newsListReqParam.keyWord = "line/show"
 
-        //指定请求参数，作为LiveData 数据，将自动触发请求，是否需要首次触发下拉刷新onRefresh
-        indexListViewModel.getIndexData(newsListReqParam, true)
-        /**
-        if (DeviceUtil.isFullDisplay) {
-        LogU.d("shejian", "是全面屏手机")
-        } else {
-        LogU.d("shejian", "不是全面屏手机")
-        }
-         */
+        //指定请求参数，作为LiveData 数据，将自动触发请求
+        indexListViewModel.getPagedListData(newsListReqParam)
+
     }
 
     private fun initRecycle() {
         RecycleHelper.initBaseRecycleView(this, activityDataBinding.recyclerView)
         RecycleHelper.initSwipeRefresh(activityDataBinding.swipeRefreshView) {
             //下拉触发运行刷新的值，联动触发刷新事件
-            indexListViewModel.runRefresh.postValue(true)
+            indexListViewModel.refresh()
         }
     }
 
 
     private fun setUIObserve() {
-        //对刷新事件做了监控，刷新属性发生变化时，改变刷新UI
-        indexListViewModel.mRefreshing.observe(this, Observer {
-            activityDataBinding.swipeRefreshView.isRefreshing = it!!
-        })
         //完成刷新请求，停止刷新UI
         indexListViewModel.refreshState.observe(this, Observer {
-            activityDataBinding.swipeRefreshView.isRefreshing = false
+            activityDataBinding.swipeRefreshView.isRefreshing = it?.status == Status.RUNNING
         })
     }
 

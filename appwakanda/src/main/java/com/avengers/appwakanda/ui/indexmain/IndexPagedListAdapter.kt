@@ -1,10 +1,13 @@
 package com.avengers.appwakanda.ui.indexmain
 
+import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.support.v7.util.DiffUtil
+import android.view.View
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.avengers.appwakanda.BR
 import com.avengers.appwakanda.R
+import com.avengers.appwakanda.ui.detail.NewsDetailActivity
 import com.avengers.zombiebase.adapter.DataBindingPagedListAdapter
 import com.avengers.zombiebase.adapter.DataBindingLiteHolder
 
