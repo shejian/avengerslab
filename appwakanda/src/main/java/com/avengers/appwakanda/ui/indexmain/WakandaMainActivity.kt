@@ -10,10 +10,12 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.appwakanda.R
+import com.avengers.appwakanda.bean.NewsListReqParam
 import com.avengers.appwakanda.databinding.ActivityWakandaMainBinding
 import com.avengers.appwakanda.ui.detail.NewsDetailActivity
 import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
 import com.avengers.zombiebase.RecycleHelper
+import com.avengers.zombiebase.aacbase.IReqParam
 import com.avengers.zombiebase.aacbase.Status
 
 @Route(path = "/wakanda/mainactivity")
@@ -41,8 +43,12 @@ class WakandaMainActivity : AppCompatActivity() {
         //将Adapter设置到RecycleView上，将ViewModel中的数据增加监听，设置到Adapter中
         initAdapter()
 
+
+        var newsListReqParam = NewsListReqParam()
+        newsListReqParam.keyWord = "line/show"
+
         //指定请求参数，作为LiveData 数据，将自动触发请求，是否需要首次触发下拉刷新onRefresh
-        indexListViewModel.getIndexData("line/show", true)
+        indexListViewModel.getIndexData(newsListReqParam, true)
         /**
         if (DeviceUtil.isFullDisplay) {
         LogU.d("shejian", "是全面屏手机")

@@ -18,14 +18,14 @@ package com.avengers.appwakanda.ui.indexmain
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository
+import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository2
 import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
 
 /**
  * Factory for ViewModels
  * 181987
  */
-class IndexViewModelFactory(private val repository: IndexRepository) : ViewModelProvider.Factory {
+class IndexViewModelFactory(private val repository: IndexRepository2) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(IndexListViewModel::class.java)) {

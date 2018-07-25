@@ -11,8 +11,8 @@ import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.avengers.appwakanda.ui.indexmain.data.ReaderListBoundaryCallback
-import com.avengers.appwakanda.ui.indexmain.vm.ItemResult
 import com.avengers.appwakanda.webapi.SmartisanApi
+import com.avengers.zombiebase.aacbase.ItemCoreResult
 import com.avengers.zombiebase.aacbase.NetworkState
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,7 +31,7 @@ class IndexRepository(
     /**
      * 初始化BoundaryCallback，dataSourceFactory，LivePagedListBuilder，以及一些网络状态
      */
-    fun getIndexListData(query: String): ItemResult<ContextItemEntity> {
+    fun getIndexListData(query: String): ItemCoreResult<ContextItemEntity> {
         //设置边界回调
         val callback = ReaderListBoundaryCallback(
                 query,
@@ -58,7 +58,7 @@ class IndexRepository(
         }
 
         //数据封装
-        return ItemResult(
+        return ItemCoreResult(
                 mLiveData,
                 callback.networkState,
                 refreshState,

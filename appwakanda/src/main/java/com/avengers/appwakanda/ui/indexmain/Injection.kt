@@ -5,6 +5,7 @@ import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository
+import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository2
 import com.avengers.appwakanda.webapi.Api
 
 object Injection {
@@ -17,8 +18,8 @@ object Injection {
     }
 
     //2
-    fun provideIndexRepository(): IndexRepository {
-        return IndexRepository(Api.getSmartApi(), provideCache())
+    fun provideIndexRepository(): IndexRepository2 {
+        return IndexRepository2(Api.getSmartApi(), provideCache(), WakandaModule.appExecutors)
     }
 
     //1

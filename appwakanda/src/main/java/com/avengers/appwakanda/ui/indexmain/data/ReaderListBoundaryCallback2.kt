@@ -2,26 +2,29 @@ package com.avengers.appwakanda.ui.indexmain.data
 
 import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.bean.IndexReaderListBean
+import com.avengers.appwakanda.bean.NewsListReqParam
 import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
-import com.avengers.appwakanda.webapi.PagingRequestHelper
 import com.avengers.appwakanda.webapi.SmartisanApi
-import com.avengers.zombiebase.aacbase.IReqParam
+import com.avengers.zombiebase.aacbase.paging.PagedListBoundaryCallback
+import com.avengers.zombiebase.aacbase.paging.PagingRequestHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 //分页的边界回调类
 class ReaderListBoundaryCallback2(
-        private val query: IReqParam,
+        private val query: NewsListReqParam,
         private val service: SmartisanApi,
         private val cache: IndexDataCache,
         //处理网络返回数据的匿名函数
         private val handleResponse: (IndexReaderListBean) -> Unit
 ) : PagedListBoundaryCallback<ContextItemEntity>() {
 
+
     override fun loadInit() {
+        //放弃在此处做初始化，自己实现刷新会更方便控制
     }
 
     private var lastRequestedPage = 0
@@ -30,7 +33,7 @@ class ReaderListBoundaryCallback2(
         //取出数据库中最后一个时计算页码，也可以取索引
         val pageNum = (itemAtEnd._mid?.plus(1))?.div(NETWORK_PAGE_SIZE)
         lastRequestedPage = pageNum?.toInt()!!
-        service.getSmtIndex("", lastRequestedPage, NETWORK_PAGE_SIZE)
+        service.getSmtIndex(query.keyWord!!, lastRequestedPage, NETWORK_PAGE_SIZE)
                 .enqueue(createWebserviceCallback(callBack!!))
     }
 
