@@ -30,7 +30,7 @@ class WeatherRepository(private val api: WeatherApi,
             override fun onResponse(call: Call<CityWeatherBean>?,response: Response<CityWeatherBean>?) {
 
                 ioExecutor.execute {
-                    if (response!!.body()?.status == 200) {
+                    if (response!!.body()?.status == "200") {
                         saveData(response.body()!!)
                         netWorkState.postValue(NetworkState.LOADED)
                     } else {
