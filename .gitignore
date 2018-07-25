@@ -34,3 +34,4 @@ publiclibrary/libs/
 
 #react native
 node_modules
+yarn.lock
