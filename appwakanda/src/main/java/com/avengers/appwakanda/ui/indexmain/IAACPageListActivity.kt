@@ -28,8 +28,6 @@ abstract class IAACPageListActivity<B : ViewDataBinding, V : ViewModel, P : Page
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         aacHelp = AACPageListHelp(this, this)
-        mViewModel = aacHelp.mViewModel!!
-        mDataBinding = aacHelp.mDataBinding!!
         genericViewModelClassToInit()
     }
 

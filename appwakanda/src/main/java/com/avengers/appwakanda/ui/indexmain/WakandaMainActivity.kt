@@ -23,7 +23,7 @@ import com.avengers.zombiebase.RecycleHelper
 import com.avengers.zombiebase.aacbase.Status
 
 @Route(path = "/wakanda/mainactivity")
-class WakandaMainActivity : AppCompatActivity(), AACPageListHelp.IAACPageListHelp<IndexRepository2> {
+class WakandaMainActivity : IAACPageListActivity<ActivityWakandaMainBinding, IndexListViewModel, IndexRepository2>() {
 
     override val layout: Int
         get() = R.layout.activity_wakanda_main
@@ -48,17 +48,14 @@ class WakandaMainActivity : AppCompatActivity(), AACPageListHelp.IAACPageListHel
         }
     }
 
-
+/*
     var mViewModel: IndexListViewModel? = null
     var mDataBinding: ActivityWakandaMainBinding? = null
+*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val aacHelp = AACPageListHelp<ActivityWakandaMainBinding, IndexListViewModel, IndexRepository2>(this, this)
-        aacHelp.init(this, IndexListViewModel::class.java)
-        mViewModel = aacHelp.mViewModel
-        mDataBinding = aacHelp.mDataBinding
 
         initRecycle()
         setUIObserve()
