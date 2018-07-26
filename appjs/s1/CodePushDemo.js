@@ -117,7 +117,7 @@ class App extends Component{
                     <Text style={styles.syncButton}>Press for Update Metadata</Text>
                 </TouchableOpacity>
                 <Text style={styles.messages}>{this.state.syncMessage || ""}</Text>
-                <Text>版本-v1</Text>
+                <Text>版本-v0</Text>
             </View>
         );
     }

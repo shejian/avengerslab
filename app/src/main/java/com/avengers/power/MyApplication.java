@@ -10,19 +10,23 @@ import com.avengers.appwakanda.WakandaModule;
 import com.avengers.zombiebase.AppExecutors;
 import com.avengers.zombiebase.ApplicationInitBase;
 import com.avengers.zombiebase.BaseApplication;
-import com.taiwu.rn.RNApplicationLogic;
+import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactNativeHost;
+import com.facebook.soloader.SoLoader;
+import com.taiwu.rn.SimpleReactNativeHost;
 
 /**
  * @author jvis
  * @date
  */
-public class MyApplication extends BaseApplication {
+public class MyApplication extends BaseApplication implements ReactApplication {
 
     public static AppExecutors appExecutors;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        SoLoader.init(this, false);
         //注册全局的activity生命周期监听
         registerActivityLifecycleCallbacks(new MyAppActivityLifecycleCallbacks());
         appExecutors = ApplicationInitBase.getInstanceExecutors();
@@ -46,7 +50,6 @@ public class MyApplication extends BaseApplication {
         //注册Application逻辑
         //进程名称，初始化的优先级，application逻辑类，在需要的会反射初始化
         registerApplicationLogic("com.avengers.power", 999, MyApplicationLogic.class);
-        registerApplicationLogic("com.avengers.power", 998, RNApplicationLogic.class);
         registerApplicationLogic("com.avengers.power", 997, WakandaModule.class);
         registerApplicationLogic("com.avengers.power", 996, GalaxyModule.class);
     }
@@ -87,5 +90,10 @@ public class MyApplication extends BaseApplication {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
+    }
+
+    @Override
+    public ReactNativeHost getReactNativeHost() {
+        return SimpleReactNativeHost.getInstance(this, com.avengers.power.BuildConfig.DEBUG);
     }
 }

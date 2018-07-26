@@ -1,10 +1,8 @@
 include ':app',':appgalaxy', ':appwakanda', ':submoon', ':subearth', ':zombiebase'
 
-include ':subrn'
-include ':react-native-code-push'
-project(':react-native-code-push').projectDir = new File('appjs/node_modules/react-native-code-push/android/app')
-//def codePush = file('appjs/node_modules/react-native-code-push/android/app')
-//if (codePush.exists()) {
-//    include ':react-native-code-push'
-//    project(':react-native-code-push').projectDir = codePush
-//}
+def codePush = file('appjs/node_modules')
+if (codePush.exists()) {
+    include ':subrn'
+    include ':react-native-code-push'
+    project(':react-native-code-push').projectDir = file('appjs/node_modules/react-native-code-push/android/app')
+}

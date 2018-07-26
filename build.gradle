@@ -6,12 +6,12 @@ buildscript {
         classpath "gradle.plugin.com.dorongold.plugins:task-tree:1.3"
 
     }
-    addRepos(repositories)
+    addRepos(repositories, rootDir)
 
 }
 
 allprojects {
-    addRepos(repositories)
+    addRepos(repositories, rootDir)
     apply plugin:"com.dorongold.task-tree"
 }
 
