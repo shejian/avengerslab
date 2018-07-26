@@ -8,15 +8,13 @@ import com.avengers.appwakanda.bean.IndexReaderListBean
 import com.avengers.appwakanda.bean.NewsListReqParam
 import com.avengers.appwakanda.db.room.RoomHelper
 import com.avengers.appwakanda.db.room.dao.IndexDataCache
-import com.avengers.appwakanda.db.room.dao.NewsDetailDao
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
-import com.avengers.appwakanda.ui.detail.repository.NewsDetailRepositoryX
 import com.avengers.appwakanda.ui.indexmain.data.ReaderListBoundaryCallback2
 import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.zombiebase.AppExecutors
 import com.avengers.zombiebase.LogU
 import com.avengers.zombiebase.aacbase.NetworkState
-import com.avengers.zombiebase.aacbase.paging.PageListRepository
+import com.avengers.zombiebase.aacbase.paging.PagedListRepository
 import com.avengers.zombiebase.aacbase.paging.PagedListBoundaryCallback
 import com.avengers.zombiebase.aacbase.paging.PagedListBoundaryCallback.Companion.NETWORK_PAGE_SIZE
 import retrofit2.Call
@@ -30,7 +28,7 @@ class IndexRepository2(
         private val service: SmartisanApi,
         private val cache: IndexDataCache,
         private val appExecutors: AppExecutors)
-    : PageListRepository<NewsListReqParam, ContextItemEntity>() {
+    : PagedListRepository<NewsListReqParam, ContextItemEntity>() {
 
     /**
      * 构建LivePagedList

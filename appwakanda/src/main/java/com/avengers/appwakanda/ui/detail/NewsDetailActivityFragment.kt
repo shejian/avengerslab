@@ -1,55 +1,50 @@
 package com.avengers.appwakanda.ui.detail
 
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.avengers.appwakanda.R
+import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.databinding.FragmentNewsDetailBinding
+import com.avengers.appwakanda.db.room.RoomHelper
+import com.avengers.appwakanda.ui.detail.repository.NewsDetailRepositoryX
 import com.avengers.appwakanda.ui.detail.vm.IReqDetailParam
-import com.avengers.appwakanda.ui.detail.vm.NewsDetailVMX
+import com.avengers.appwakanda.ui.detail.vm.NewsDetailViewModel
+import com.avengers.appwakanda.webapi.Api
 import com.avengers.zombiebase.SnackbarUtil
 import com.avengers.zombiebase.ToastOneUtil
+import com.avengers.zombiebase.aacbase.AACBaseFragment
 
 /**
  * @author Jervis
  * @Date 2018-07-18
  */
-class NewsDetailActivityFragment : Fragment() {
+class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, NewsDetailViewModel, NewsDetailRepositoryX>() {
 
-    var newsDetailVM: NewsDetailVMX? = null
+    override val layout: Int
+        get() = R.layout.fragment_news_detail
+
+    override fun createRepository(): NewsDetailRepositoryX {
+        return NewsDetailRepositoryX.getInstance(
+                Api.getSmartApi(),
+                RoomHelper.getWakandaDb().newsDetailDao(),
+                WakandaModule.appExecutors)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        //1.构建数据来源加护的类-Repository
-        var repository = InjectorUtils.getNewDetailRepository()
-
-
-        //2.构建ViewModule，注意VMFactory的构建位置和步骤，如果构造函数没有参数，可以去掉factory
-        newsDetailVM = ViewModelProviders
-                .of(this,NewsDetailVMX.VMFactory(repository))
-                .get(NewsDetailVMX::class.java)
-
-        //3.指定Layout，构建DataBinding
-        var newsDetailBinding = DataBindingUtil
-                .inflate<FragmentNewsDetailBinding>(inflater, R.layout.fragment_news_detail, container, false)
-                .apply {
-                    //4.指定DataBinding中的ViewModule
-                    vm = newsDetailVM
-                    //5.指定点击事件
-                    handlerClick = HandlerClick()
-                    //6.设置Lifecycle 否则监听将无效
-                    setLifecycleOwner(this@NewsDetailActivityFragment)
-                }
+        super.onCreateView(inflater, container, savedInstanceState)
+        mDataBinding.apply {
+            //4.指定DataBinding中的ViewModule
+            vm = mViewModel
+        }
+        mDataBinding.handlerClick = this.HandlerClick()
         //7.设置参数，发送请求
-        newsDetailVM?.request(IReqDetailParam())
-        return newsDetailBinding.root
+        mViewModel.request(IReqDetailParam())
+        return mDataBinding.root
     }
-
 
     /**
      * Handle点击事件
@@ -62,10 +57,11 @@ class NewsDetailActivityFragment : Fragment() {
                         "我测试一下",
                         "撤销", {
                     ToastOneUtil.showToastShort("已撤销")
-                },    Snackbar.LENGTH_INDEFINITE)
+                }, Snackbar.LENGTH_INDEFINITE)
                 // Snackbar.make(it, "测试我的Snackbar", Snackbar.LENGTH_LONG).show()
             }
-            // newsDetailVM?.queryParam?.postValue(IReqDetailParam())
+            mViewModel.refresh()
+            //  mViewModel.request(IReqDetailParam())
         }
     }
 

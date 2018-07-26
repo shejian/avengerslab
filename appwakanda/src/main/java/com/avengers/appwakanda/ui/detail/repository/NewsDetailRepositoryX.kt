@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import com.avengers.appwakanda.bean.NewsDetailBean
 import com.avengers.appwakanda.db.room.dao.NewsDetailDao
 import com.avengers.appwakanda.db.room.entity.NewsDetailEntity
+import com.avengers.appwakanda.ui.detail.vm.IReqDetailParam
 import com.avengers.zombiebase.aacbase.NetworkState
 import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.zombiebase.AppExecutors
@@ -17,13 +18,13 @@ import retrofit2.Response
 class NewsDetailRepositoryX(
         private val service: SmartisanApi,
         private val newsDetailDao: NewsDetailDao,
-        private val appExecutors: AppExecutors) : Repository<IReqParam,NewsDetailEntity>(true) {
+        private val appExecutors: AppExecutors) : Repository<IReqDetailParam,NewsDetailEntity>(true) {
 
     /**
      * 请求数据
      */
-    override fun refresh(args: IReqParam) {
-        service.getDetailInfo("line/show", 0, 20).enqueue(object : Callback<NewsDetailBean> {
+    override fun refresh(args: IReqDetailParam) {
+        service.getDetailInfo(args.lineshow, 0, 20).enqueue(object : Callback<NewsDetailBean> {
 
             override fun onFailure(call: Call<NewsDetailBean>?, t: Throwable?) {
                 netWorkState.postValue(NetworkState.error(t.toString()))
@@ -53,7 +54,7 @@ class NewsDetailRepositoryX(
     /**
      * 在需要缓存时必须实现
      */
-    override fun queryFromDb(args: IReqParam): LiveData<NewsDetailEntity>? {
+    override fun queryFromDb(args: IReqDetailParam): LiveData<NewsDetailEntity>? {
         return newsDetailDao.quryDetail()
 
     }

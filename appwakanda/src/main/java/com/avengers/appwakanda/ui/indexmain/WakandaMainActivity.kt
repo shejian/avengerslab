@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -21,9 +20,10 @@ import com.avengers.appwakanda.ui.indexmain.vm.IndexListViewModel
 import com.avengers.appwakanda.webapi.Api
 import com.avengers.zombiebase.RecycleHelper
 import com.avengers.zombiebase.aacbase.Status
+import com.avengers.zombiebase.aacbase.paging.AACPagedListActivity
 
 @Route(path = "/wakanda/mainactivity")
-class WakandaMainActivity : IAACPageListActivity<ActivityWakandaMainBinding, IndexListViewModel, IndexRepository2>() {
+class WakandaMainActivity : AACPagedListActivity<ActivityWakandaMainBinding, IndexListViewModel, IndexRepository2>() {
 
     override val layout: Int
         get() = R.layout.activity_wakanda_main

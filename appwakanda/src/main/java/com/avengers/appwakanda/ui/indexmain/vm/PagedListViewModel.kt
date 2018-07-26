@@ -7,10 +7,10 @@ import android.arch.lifecycle.Transformations.switchMap
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.PagedList
 import com.avengers.zombiebase.aacbase.*
-import com.avengers.zombiebase.aacbase.paging.PageListRepository
+import com.avengers.zombiebase.aacbase.paging.PagedListRepository
 
 open
-class PagedListViewModel<I : IReqParam, O : IBeanResponse>(private val repository: PageListRepository<I, O>) : ViewModel() {
+class PagedListViewModel<I : IReqParam, O : IBeanResponse>(private val repository: PagedListRepository<I, O>) : ViewModel() {
 
     companion object {
         const val VISIBLE_THRESHOLD = 5
