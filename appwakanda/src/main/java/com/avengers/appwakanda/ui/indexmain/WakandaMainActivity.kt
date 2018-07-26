@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -22,7 +23,7 @@ import com.avengers.zombiebase.RecycleHelper
 import com.avengers.zombiebase.aacbase.Status
 
 @Route(path = "/wakanda/mainactivity")
-class WakandaMainActivity : IBindingActivityJava<ActivityWakandaMainBinding, IndexListViewModel, IndexRepository2>() {
+class WakandaMainActivity : AppCompatActivity(), AACPageListHelp.IAACPageListHelp<IndexRepository2> {
 
     override val layout: Int
         get() = R.layout.activity_wakanda_main
@@ -34,6 +35,7 @@ class WakandaMainActivity : IBindingActivityJava<ActivityWakandaMainBinding, Ind
                 WakandaModule.appExecutors)
     }
 
+
     override fun createModelFactory(repository: IndexRepository2): ViewModelProvider.Factory {
         return object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -44,19 +46,22 @@ class WakandaMainActivity : IBindingActivityJava<ActivityWakandaMainBinding, Ind
                 throw IllegalArgumentException("Unknown ViewModel class")
             }
         }
-
-        //IndexViewModelFactory(repository)
     }
+
+
+    var mViewModel: IndexListViewModel? = null
+    var mDataBinding: ActivityWakandaMainBinding? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        init(this, IndexListViewModel::class.java)
+        val aacHelp = AACPageListHelp<ActivityWakandaMainBinding, IndexListViewModel, IndexRepository2>(this, this)
+        aacHelp.init(this, IndexListViewModel::class.java)
+        mViewModel = aacHelp.mViewModel
+        mDataBinding = aacHelp.mDataBinding
 
         initRecycle()
-
         setUIObserve()
-
         //  setupScrollListener()
 
         initAdapter()
