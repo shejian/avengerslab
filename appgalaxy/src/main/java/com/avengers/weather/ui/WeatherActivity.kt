@@ -17,6 +17,7 @@ import com.avengers.weather.api.WeatherApi
 import com.avengers.weather.bean.FakeRequest
 import com.avengers.weather.repository.WeatherRepository
 import com.avengers.weather.vm.WeatherViewModel
+import com.avengers.zombiebase.BaseActivity
 import com.avengers.zombiebase.aacbase.NetworkState
 import com.avengers.zombiebase.aacbase.Status
 import kotlinx.android.synthetic.main.activity_weather.*
@@ -25,7 +26,10 @@ import java.util.concurrent.Executors
 /**
  * Created by duo.chen on 2018/7/9
  */
-class WeatherActivity : AppCompatActivity() {
+class WeatherActivity : BaseActivity() {
+    override fun reloadData() {
+        weatherViewModel.refresh()
+    }
 
     private lateinit var weatherViewModel: WeatherViewModel
 
@@ -73,7 +77,7 @@ class WeatherActivity : AppCompatActivity() {
     private fun getViewModel(): WeatherViewModel {
         return ViewModelProviders.of(this,object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val weatherRepository = WeatherRepository(getApi(),RoomHelper.weatherDao(),Executors.newSingleThreadExecutor())
+                val weatherRepository = WeatherRepository(this@WeatherActivity,this@WeatherActivity,getApi(),RoomHelper.weatherDao(),Executors.newSingleThreadExecutor())
                 @Suppress("UNCHECKED_CAST")
                 return WeatherViewModel(weatherRepository) as T
             }

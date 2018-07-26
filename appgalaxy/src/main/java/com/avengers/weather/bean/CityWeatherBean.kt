@@ -2,7 +2,6 @@ package com.avengers.weather.bean
 
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 import com.avengers.zombiebase.aacbase.IBeanResponse
 
@@ -11,12 +10,7 @@ import com.avengers.zombiebase.aacbase.IBeanResponse
  */
 
 @Entity(tableName = "cityWeather")
-class CityWeatherBean : IBeanResponse {
-
-    @Ignore
-    var message: String = ""
-    @Ignore
-    var status: String = ""
+class CityWeatherBean : IBeanResponse() {
 
     @PrimaryKey
     var date: Long = 0

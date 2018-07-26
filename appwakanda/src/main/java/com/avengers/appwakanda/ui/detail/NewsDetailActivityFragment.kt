@@ -17,12 +17,31 @@ import com.avengers.appwakanda.webapi.Api
 import com.avengers.zombiebase.SnackbarUtil
 import com.avengers.zombiebase.ToastOneUtil
 import com.avengers.zombiebase.aacbase.AACBaseFragment
+import com.avengers.zombiebase.ui.LaeView
 
 /**
  * @author Jervis
  * @Date 2018-07-18
  */
-class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, NewsDetailViewModel, NewsDetailRepositoryX>() {
+class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, NewsDetailViewModel, NewsDetailRepositoryX>(),LaeView{
+    override fun showLoadView() {
+    }
+
+    override fun reloadData() {
+    }
+
+    override fun showLoadTransView() {
+    }
+
+    override fun initErrorLayout(): Boolean {
+        return false
+    }
+
+    override fun showContentView() {
+    }
+
+    override fun showErrorView(error: String?) {
+    }
 
 
     override val layout: Int
@@ -30,6 +49,7 @@ class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, Ne
 
     override fun createRepository(): NewsDetailRepositoryX {
         return NewsDetailRepositoryX.getInstance(
+                this,this,
                 Api.getSmartApi(),
                 RoomHelper.getWakandaDb().newsDetailDao(),
                 WakandaModule.appExecutors)

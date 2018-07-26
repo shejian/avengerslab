@@ -1,34 +1,25 @@
 package com.avengers.weather.repository
 
+import android.arch.lifecycle.LifecycleOwner
 import com.avengers.weather.api.WeatherApi
 import com.avengers.weather.bean.CityWeatherBean
 import com.avengers.weather.bean.FakeRequest
-import com.avengers.zombiebase.aacbase.NetworkState
+import com.avengers.zombiebase.aacbase.BaseCallback
 import com.avengers.zombiebase.aacbase.Repository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.avengers.zombiebase.ui.LaeView
+import java.util.concurrent.Executor
 
 /**
  * Created by duo.chen on 2018/7/13
  */
-class NoDBWeatherRepository(private val api: WeatherApi) : Repository<FakeRequest,CityWeatherBean>(haveCache = false) {
+class NoDBWeatherRepository(
+        private val lifecycleOwner: LifecycleOwner,
+        private val laeView: LaeView,
+        private val api: WeatherApi,
+        ioExecutor: Executor) : Repository<FakeRequest,CityWeatherBean>(ioExecutor,haveCache = false) {
 
     override fun refresh(args: FakeRequest) {
-        api.getCityWeather(args.city).enqueue(object : Callback<CityWeatherBean> {
-            override fun onFailure(call: Call<CityWeatherBean>?,t: Throwable?) {
-                netWorkState.postValue(NetworkState.error("failed"))
-            }
-
-            override fun onResponse(call: Call<CityWeatherBean>?,response: Response<CityWeatherBean>?) {
-                if (response!!.body()?.status.equals("200")) {
-                    saveData(response.body()!!)
-                    netWorkState.postValue(NetworkState.LOADED)
-                } else {
-                    netWorkState.postValue(NetworkState.error("failed" + response.body()?.message))
-                }
-            }
-        })
+        api.getCityWeather(args.city).enqueue(BaseCallback(lifecycleOwner,laeView,this))
 
     }
 }

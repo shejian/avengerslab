@@ -21,12 +21,12 @@ public interface IndexDataDao {
     void deleteByItem();
 
     @Query("SELECT * FROM ContextItemEntity  ORDER BY _mid ASC")
-    DataSource.Factory<Integer, ContextItemEntity> quryAllItem();
+    DataSource.Factory<Integer, ContextItemEntity> queryAllItem();
 
     @Query("SELECT  COUNT(_mid) FROM ContextItemEntity")
-    Integer quryAllCount();
+    Integer queryAllCount();
 
     @Query("SELECT MAX(_mid)+ 1 FROM ContextItemEntity")
-    Integer quryMaxMId();
+    Integer queryMaxMId();
 
 }

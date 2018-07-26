@@ -29,7 +29,7 @@
             android:layout_margin="@dimen/_16"
             android:textSize="@dimen/_16"
             android:background="@color/red"
-            android:text="@{vm.liveData.brief}"
+            android:text="@{vm.liveData.data.list.get(0).brief}"
             tools:text="asdasdasdasdasdasd" />
 
         <TextView

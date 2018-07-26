@@ -1,66 +1,54 @@
 package com.avengers.appwakanda.ui.detail.repository
 
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import com.avengers.appwakanda.bean.NewsDetailBean
 import com.avengers.appwakanda.db.room.dao.NewsDetailDao
-import com.avengers.appwakanda.db.room.entity.NewsDetailEntity
 import com.avengers.appwakanda.ui.detail.vm.IReqDetailParam
 import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.zombiebase.AppExecutors
-import com.avengers.zombiebase.aacbase.NetworkState
+import com.avengers.zombiebase.aacbase.BaseCallback
 import com.avengers.zombiebase.aacbase.Repository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.avengers.zombiebase.ui.LaeView
 
 
 class NewsDetailRepositoryX(
+        private val lifecycleOwner: LifecycleOwner,
+        private val laeView: LaeView,
         private val service: SmartisanApi,
         private val newsDetailDao: NewsDetailDao,
-        private val appExecutors: AppExecutors) : Repository<IReqDetailParam, NewsDetailEntity>(true) {
+        appExecutors: AppExecutors) : Repository<IReqDetailParam,NewsDetailBean>(appExecutors.diskIO(),true) {
+
 
     /**
      * 请求数据
      */
     override fun refresh(args: IReqDetailParam) {
-        service.getDetailInfo(args.lineshow, 0, 20).enqueue(object : Callback<NewsDetailBean> {
-
-            override fun onFailure(call: Call<NewsDetailBean>?, t: Throwable?) {
-                netWorkState.postValue(NetworkState.error(t.toString()))
-            }
-
-            override fun onResponse(call: Call<NewsDetailBean>?, response: Response<NewsDetailBean>?) {
-                val detail = tran.invoke(response?.body()!!)
-                appExecutors.diskIO().execute {
-                    saveData(detail!!)
-                    netWorkState.postValue(NetworkState.LOADED)
-                }
-            }
-        })
+        service.getDetailInfo(args.lineshow,0,20).enqueue(BaseCallback<NewsDetailBean>(lifecycleOwner,laeView,this))
     }
-
-
-    var tran: (NewsDetailBean) -> NewsDetailEntity? = {
-        val listData = it?.data?.list
-        listData?.get(2)
-    }
-
 
     /**
      * 在需要缓存时必须实现
      */
-    override fun addToDb(newsitem: NewsDetailEntity) {
-        newsitem.let {
+    override fun addToDb(t: NewsDetailBean) {
+        t.let {
             newsDetailDao.deleteAll()
-            newsDetailDao.insertItemDetail(newsitem)
+            newsDetailDao.insertItemDetail(t.data!!.list)
         }
     }
 
     /**
      * 在需要缓存时必须实现
      */
-    override fun queryFromDb(args: IReqDetailParam): LiveData<NewsDetailEntity>? {
-        return newsDetailDao.quryDetail()
+    override fun queryFromDb(args: IReqDetailParam): LiveData<NewsDetailBean>? {
+
+        var bean: MutableLiveData<NewsDetailBean> = MutableLiveData()
+
+        newsDetailDao.queryDetail().value!!.forEach {
+            bean.value!!.data!!.list!!.plus(it)
+        }
+        return bean
 
     }
 
@@ -69,11 +57,13 @@ class NewsDetailRepositoryX(
         @Volatile
         private var instance: NewsDetailRepositoryX? = null
 
-        fun getInstance(api: SmartisanApi, plantDao: NewsDetailDao, appExecutors: AppExecutors) =
+        fun getInstance(lifecycleOwner: LifecycleOwner,
+                        laeView: LaeView,api: SmartisanApi,plantDao: NewsDetailDao,appExecutors: AppExecutors) =
                 instance ?: synchronized(this) {
-                    instance ?: NewsDetailRepositoryX(api, plantDao, appExecutors).also {
-                        instance = it
-                    }
+                    instance
+                            ?: NewsDetailRepositoryX(lifecycleOwner,laeView,api,plantDao,appExecutors).also {
+                                instance = it
+                            }
                 }
     }
 

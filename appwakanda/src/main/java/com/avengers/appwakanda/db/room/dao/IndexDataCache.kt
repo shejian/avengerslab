@@ -38,12 +38,12 @@ class IndexDataCache(
     }
 
     fun queryIndexList(): DataSource.Factory<Int, ContextItemEntity> {
-        return indexDao.quryAllItem()
+        return indexDao.queryAllItem()
     }
 
 
     fun queryMaxIndex(): Int {
-        var dds = indexDao.quryMaxMId()
+        var dds = indexDao.queryMaxMId()
         if (dds == null) {
             dds = 0
         }
@@ -51,7 +51,7 @@ class IndexDataCache(
     }
 
     fun queryTotal(): Int {
-        return indexDao.quryAllCount()
+        return indexDao.queryAllCount()
     }
 
 

@@ -10,7 +10,7 @@ import com.avengers.zombiebase.aacbase.IBeanResponse
 import java.util.*
 
 @Entity
-class ContextItemEntity : IBeanResponse {
+class ContextItemEntity : IBeanResponse() {
 
     var _mid: Long? = null
     @PrimaryKey
@@ -25,7 +25,6 @@ class ContextItemEntity : IBeanResponse {
     var collect_num: String? = null
     var origin_url: String? = null
     var url: String? = null
-    var status: String? = null
     var create_time: String? = null
     var update_time: String? = null
     var pub_date: String? = null
