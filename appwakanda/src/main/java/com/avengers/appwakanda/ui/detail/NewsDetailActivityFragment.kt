@@ -1,5 +1,6 @@
 package com.avengers.appwakanda.ui.detail
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ import com.avengers.zombiebase.aacbase.AACBaseFragment
  */
 class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, NewsDetailViewModel, NewsDetailRepositoryX>() {
 
+
     override val layout: Int
         get() = R.layout.fragment_news_detail
 
@@ -43,6 +45,13 @@ class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, Ne
         mDataBinding.handlerClick = this.HandlerClick()
         //7.设置参数，发送请求
         mViewModel.request(IReqDetailParam())
+
+        mViewModel.netWorkState.observe(this, Observer {
+            sViewHelper.setNs(it!!)
+        })
+        sViewHelper.setRefreshClick {
+            mViewModel.refresh()
+        }
         return mDataBinding.root
     }
 
