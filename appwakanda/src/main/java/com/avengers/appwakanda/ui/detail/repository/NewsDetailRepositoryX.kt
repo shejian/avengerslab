@@ -15,7 +15,6 @@ import com.avengers.zombiebase.ui.LaeView
 
 class NewsDetailRepositoryX(
         private val lifecycleOwner: LifecycleOwner,
-        private val laeView: LaeView,
         private val service: SmartisanApi,
         private val newsDetailDao: NewsDetailDao,
         appExecutors: AppExecutors) : Repository<IReqDetailParam,NewsDetailBean>(appExecutors.diskIO(),true) {
@@ -25,7 +24,7 @@ class NewsDetailRepositoryX(
      * 请求数据
      */
     override fun refresh(args: IReqDetailParam) {
-        service.getDetailInfo(args.lineshow,0,20).enqueue(BaseCallback<NewsDetailBean>(lifecycleOwner,laeView,this))
+        service.getDetailInfo(args.lineshow,0,20).enqueue(BaseCallback<NewsDetailBean>(lifecycleOwner,this))
     }
 
 
@@ -62,7 +61,7 @@ class NewsDetailRepositoryX(
                         laeView: LaeView,api: SmartisanApi,plantDao: NewsDetailDao,appExecutors: AppExecutors) =
                 instance ?: synchronized(this) {
                     instance
-                            ?: NewsDetailRepositoryX(lifecycleOwner,laeView,api,plantDao,appExecutors).also {
+                            ?: NewsDetailRepositoryX(lifecycleOwner,api,plantDao,appExecutors).also {
                                 instance = it
                             }
                 }

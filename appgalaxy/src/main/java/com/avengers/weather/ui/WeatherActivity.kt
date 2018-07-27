@@ -45,7 +45,6 @@ class WeatherActivity : AACBaseActivity<ActivityWeatherBinding, WeatherViewModel
     override fun createRepository(): WeatherRepository {
         return WeatherRepository(
                 this,
-                this,
                 Api.getWeatherApi(),
                 RoomHelper.weatherDao(),
                 Executors.newSingleThreadExecutor())

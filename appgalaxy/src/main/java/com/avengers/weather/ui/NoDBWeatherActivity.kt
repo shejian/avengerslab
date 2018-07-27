@@ -19,7 +19,6 @@ import com.avengers.zombiebase.BaseActivity
 import com.avengers.zombiebase.aacbase.NetworkState
 import com.avengers.zombiebase.aacbase.Status
 import kotlinx.android.synthetic.main.activity_weather.*
-import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 /**
@@ -80,7 +79,7 @@ class NoDBWeatherActivity : BaseActivity() {
     private fun getViewModel(): NoDbweatherViewModel {
         return ViewModelProviders.of(this,object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                val weatherRepository = NoDBWeatherRepository(this@NoDBWeatherActivity,this@NoDBWeatherActivity,getApi(),Executors.newSingleThreadExecutor())
+                val weatherRepository = NoDBWeatherRepository(this@NoDBWeatherActivity,getApi(),Executors.newSingleThreadExecutor())
                 @Suppress("UNCHECKED_CAST")
                 return NoDbweatherViewModel(weatherRepository) as T
             }

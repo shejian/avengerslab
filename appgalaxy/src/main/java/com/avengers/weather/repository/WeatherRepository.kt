@@ -8,7 +8,6 @@ import com.avengers.weather.bean.FakeRequest
 import com.avengers.weather.db.WeatherDao
 import com.avengers.zombiebase.aacbase.BaseCallback
 import com.avengers.zombiebase.aacbase.Repository
-import com.avengers.zombiebase.ui.LaeView
 import java.util.*
 import java.util.concurrent.Executor
 
@@ -17,13 +16,12 @@ import java.util.concurrent.Executor
  */
 class WeatherRepository(
         private val lifecycleOwner: LifecycleOwner,
-        private val laeView: LaeView,
         private val api: WeatherApi,
         private val db: WeatherDao,
         ioExecutor: Executor) : Repository<FakeRequest,CityWeatherBean>(ioExecutor,haveCache = true) {
 
     override fun refresh(args: FakeRequest) {
-        api.getCityWeather(args.city).enqueue(BaseCallback(lifecycleOwner,laeView,this))
+        api.getCityWeather(args.city).enqueue(BaseCallback(lifecycleOwner,this))
     }
 
     override fun addToDb(t: CityWeatherBean) {
