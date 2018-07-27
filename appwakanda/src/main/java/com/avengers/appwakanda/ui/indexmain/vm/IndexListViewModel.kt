@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.avengers.appwakanda.bean.NewsListReqParam
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
 import com.avengers.appwakanda.ui.indexmain.repository.IndexRepository2
+import com.avengers.zombiebase.aacbase.paging.PagedListViewModel
 
 class IndexListViewModel(private val repository: IndexRepository2)
     : PagedListViewModel<NewsListReqParam, ContextItemEntity>(repository) {

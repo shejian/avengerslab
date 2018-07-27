@@ -28,6 +28,7 @@ class NewsDetailRepositoryX(
         service.getDetailInfo(args.lineshow,0,20).enqueue(BaseCallback<NewsDetailBean>(lifecycleOwner,laeView,this))
     }
 
+
     /**
      * 在需要缓存时必须实现
      */
