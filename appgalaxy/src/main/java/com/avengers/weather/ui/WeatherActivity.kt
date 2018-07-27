@@ -12,30 +12,13 @@ import com.avengers.weather.repository.WeatherRepository
 import com.avengers.weather.vm.WeatherViewModel
 import com.avengers.zombiebase.aacbase.AACBaseActivity
 import com.avengers.zombiebase.aacbase.NetworkState
-import com.avengers.zombiebase.ui.LaeView
 import kotlinx.android.synthetic.main.activity_weather.*
 import java.util.concurrent.Executors
 
 /**
  * Created by duo.chen on 2018/7/9
  */
-class WeatherActivity : AACBaseActivity<ActivityWeatherBinding, WeatherViewModel, WeatherRepository>(), LaeView {
-    override fun showLoadView() {
-    }
-
-    override fun showLoadTransView() {
-    }
-
-    override fun initErrorLayout(): Boolean {
-        return false
-    }
-
-    override fun showContentView() {
-    }
-
-    override fun showErrorView(error: String?) {
-    }
-
+class WeatherActivity : AACBaseActivity<ActivityWeatherBinding, WeatherViewModel, WeatherRepository>() {
     override val layout: Int
         get() = R.layout.activity_weather
 
@@ -46,11 +29,6 @@ class WeatherActivity : AACBaseActivity<ActivityWeatherBinding, WeatherViewModel
                 RoomHelper.weatherDao(),
                 Executors.newSingleThreadExecutor())
     }
-
-    override fun reloadData() {
-        mViewModel.refresh()
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +42,7 @@ class WeatherActivity : AACBaseActivity<ActivityWeatherBinding, WeatherViewModel
 
     private fun initWithViewModel() {
         mViewModel.netWorkState.observe(this, Observer {
-            settingStatusView(it!!, mViewModel.liveData.value != null)
+            settingStatusView(it!!)
         })
     }
 

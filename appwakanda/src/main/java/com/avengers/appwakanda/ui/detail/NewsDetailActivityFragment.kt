@@ -48,7 +48,7 @@ class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, Ne
 
         mViewModel.netWorkState.observe(this, Observer {
             //  statusViewHelper.setNs(it!!)
-            settingStatusView(it!!, mViewModel.liveData.value == null)
+            settingStatusView(it!!)
         })
         return mDataBinding.root
     }
