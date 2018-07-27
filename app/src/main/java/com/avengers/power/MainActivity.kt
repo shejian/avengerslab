@@ -2,16 +2,11 @@ package com.avengers.power
 
 import android.databinding.DataBindingUtil.setContentView
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import com.avengers.power.databinding.ActivityIndexMainBinding
 import com.avengers.zombiebase.BaseActivity
-import com.avengers.zombiebase.LogU
 import com.avengers.zombiebase.ZombieBaseUtils
 import com.avengers.zombiebase.widget.calendarwidget.CalendarDialogBuild
-import com.avengers.zombiebase.widget.calendarwidget.CalendarDialogBuild.ICalendarDialogEvent
-import com.avengers.zombiebase.widget.calendarwidget.CalendarDialogBuild.showRangeDialog
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.spinytech.macore.router.RouterRequest
 import java.util.*
@@ -57,12 +52,12 @@ class MainActivity : BaseActivity() {
     }
 
     fun buttonCanlClickLocation(view: View) {
-        /*
-        "选择周"
+
+       // "选择周"
          CalendarDialogBuild.showSelectionWeeksDialog(this,
                    calendarDialogEvent,
                    Date(1519112440000L),
-                   Date(1532677240000L))*/
+                   Date(1532677240000L))
 
         /*
         "选择年月"
@@ -79,7 +74,7 @@ class MainActivity : BaseActivity() {
     }
 
 
-    var calendarDialogEvent: ICalendarDialogEvent = object : ICalendarDialogEvent {
+    var calendarDialogEvent: CalendarDialogBuild.ICalendarDialogEvent = object : CalendarDialogBuild.ICalendarDialogEvent {
         override fun onRangeSelected(startDay: CalendarDay, endDay: CalendarDay?) {
         }
 

@@ -19,5 +19,4 @@ dependencies {
     implementation project(path: ':zombiebase')
     implementation project(path: ':appgalaxy')
     implementation project(path: ':appwakanda')
-    compile project(path: ':subdatelib')
 }
