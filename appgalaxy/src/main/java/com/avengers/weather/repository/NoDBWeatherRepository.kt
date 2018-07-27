@@ -11,10 +11,11 @@ import java.util.concurrent.Executor
 /**
  * Created by duo.chen on 2018/7/13
  */
-class NoDBWeatherRepository(
+open class NoDBWeatherRepository(
         private val lifecycleOwner: LifecycleOwner,
         private val api: WeatherApi,
-        ioExecutor: Executor) : Repository<FakeRequest,CityWeatherBean>(ioExecutor,haveCache = false) {
+        ioExecutor: Executor,
+        haveCache: Boolean) : Repository<FakeRequest,CityWeatherBean>(ioExecutor,haveCache = haveCache) {
 
     override fun refresh(args: FakeRequest) {
         api.getCityWeather(args.city).enqueue(BaseCallback(lifecycleOwner,this))

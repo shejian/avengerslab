@@ -47,7 +47,7 @@ class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, Ne
         mViewModel.request(IReqDetailParam())
 
         mViewModel.netWorkState.observe(this, Observer {
-            //  statusViewHelper.setNs(it!!)
+            //  statusViewHelper.setNetworkState(it!!)
             settingStatusView(it!!)
         })
         return mDataBinding.root

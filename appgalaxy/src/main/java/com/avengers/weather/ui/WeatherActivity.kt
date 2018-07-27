@@ -18,13 +18,12 @@ import java.util.concurrent.Executors
 /**
  * Created by duo.chen on 2018/7/9
  */
-class WeatherActivity : AACBaseActivity<ActivityWeatherBinding, WeatherViewModel, WeatherRepository>() {
+open class WeatherActivity : AACBaseActivity<ActivityWeatherBinding,WeatherViewModel,WeatherRepository>() {
     override val layout: Int
         get() = R.layout.activity_weather
 
     override fun createRepository(): WeatherRepository {
-        return WeatherRepository(
-                this,
+        return WeatherRepository(this,
                 Api.getWeatherApi(),
                 RoomHelper.weatherDao(),
                 Executors.newSingleThreadExecutor())
@@ -37,18 +36,21 @@ class WeatherActivity : AACBaseActivity<ActivityWeatherBinding, WeatherViewModel
         initSwipeRefresh()
         val request = FakeRequest("上海")
         mViewModel.request(request)
+
     }
 
 
     private fun initWithViewModel() {
-        mViewModel.netWorkState.observe(this, Observer {
-            settingStatusView(it!!)
+        mViewModel.netWorkState.observe(this,Observer { networkState: NetworkState? ->
+            mViewModel.liveData.value?.let {
+                settingStatusView(networkState!!,it.time >= 1532680800000) { mViewModel.refresh() }
+            }
         })
     }
 
     fun initSwipeRefresh() {
 
-        mViewModel.netWorkState.observe(this, Observer {
+        mViewModel.netWorkState.observe(this,Observer {
             swipe_refresh.isRefreshing = it == NetworkState.LOADING
         })
 
@@ -59,6 +61,5 @@ class WeatherActivity : AACBaseActivity<ActivityWeatherBinding, WeatherViewModel
     fun click(view: View) {
         mViewModel.refresh()
     }
-
 
 }
