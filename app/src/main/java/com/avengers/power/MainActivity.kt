@@ -9,7 +9,12 @@ import com.avengers.power.databinding.ActivityIndexMainBinding
 import com.avengers.zombiebase.BaseActivity
 import com.avengers.zombiebase.LogU
 import com.avengers.zombiebase.ZombieBaseUtils
+import com.avengers.zombiebase.widget.calendarwidget.CalendarDialogBuild
+import com.avengers.zombiebase.widget.calendarwidget.CalendarDialogBuild.ICalendarDialogEvent
+import com.avengers.zombiebase.widget.calendarwidget.CalendarDialogBuild.showRangeDialog
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.spinytech.macore.router.RouterRequest
+import java.util.*
 
 class MainActivity : BaseActivity() {
 
@@ -18,7 +23,8 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var activityMainBinding = setContentView<ActivityIndexMainBinding>(this, R.layout.activity_index_main)
+        var activityMainBinding = setContentView<ActivityIndexMainBinding>(this,
+                R.layout.activity_index_main)
         var routerRequest = RouterRequest.obtain(this)
                 .provider("WakandaProvider")
                 .action("WakandaAction")
@@ -48,6 +54,38 @@ class MainActivity : BaseActivity() {
 
     fun buttonClickLocation(view: View) {
         ZombieBaseUtils.startNavigationBuild("/location/LocationActivity").navigation()
+    }
+
+    fun buttonCanlClickLocation(view: View) {
+        /*
+        "选择周"
+         CalendarDialogBuild.showSelectionWeeksDialog(this,
+                   calendarDialogEvent,
+                   Date(1519112440000L),
+                   Date(1532677240000L))*/
+
+        /*
+        "选择年月"
+             CalendarDialogBuild.showMonthDialog(this,
+                       calendarDialogEvent,
+                       Date(1519112440000L),
+                       Date(1532677240000L))*/
+
+        /* "选择天"
+             CalendarDialogBuild.showRangeDialog(this,
+                      calendarDialogEvent,
+                      Date(1519112440000),
+                      Date(1532677240000L))*/
+    }
+
+
+    var calendarDialogEvent: ICalendarDialogEvent = object : ICalendarDialogEvent {
+        override fun onRangeSelected(startDay: CalendarDay, endDay: CalendarDay?) {
+        }
+
+        override fun onRangeSelected(list: MutableList<Date>?) {
+        }
+
     }
 
 }

@@ -1,1 +1,1 @@
-include ':app',':appgalaxy', ':appwakanda', ':submoon', ':subearth', ':zombiebase'
+include ':app',':appgalaxy', ':appwakanda', ':submoon', ':subearth', ':zombiebase','subdatelib'
