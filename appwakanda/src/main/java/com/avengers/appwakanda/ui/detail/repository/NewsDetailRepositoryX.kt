@@ -10,7 +10,6 @@ import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.zombiebase.AppExecutors
 import com.avengers.zombiebase.aacbase.BaseCallback
 import com.avengers.zombiebase.aacbase.Repository
-import com.avengers.zombiebase.ui.LaeView
 
 
 class NewsDetailRepositoryX(
@@ -58,7 +57,7 @@ class NewsDetailRepositoryX(
         private var instance: NewsDetailRepositoryX? = null
 
         fun getInstance(lifecycleOwner: LifecycleOwner,
-                        laeView: LaeView,api: SmartisanApi,plantDao: NewsDetailDao,appExecutors: AppExecutors) =
+                        api: SmartisanApi,plantDao: NewsDetailDao,appExecutors: AppExecutors) =
                 instance ?: synchronized(this) {
                     instance
                             ?: NewsDetailRepositoryX(lifecycleOwner,api,plantDao,appExecutors).also {
