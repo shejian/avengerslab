@@ -10,20 +10,22 @@ import com.avengers.appwakanda.webapi.SmartisanApi
 import com.avengers.zombiebase.AppExecutors
 import com.avengers.zombiebase.aacbase.BaseCallback
 import com.avengers.zombiebase.aacbase.Repository
-
+import android.arch.lifecycle.Transformations.switchMap
+import com.avengers.appwakanda.db.room.entity.NewsDetailEntity
+import com.avengers.zombiebase.LogU
 
 class NewsDetailRepositoryX(
         private val lifecycleOwner: LifecycleOwner,
         private val service: SmartisanApi,
         private val newsDetailDao: NewsDetailDao,
-        appExecutors: AppExecutors) : Repository<IReqDetailParam,NewsDetailBean>(appExecutors.diskIO(),true) {
+        appExecutors: AppExecutors) : Repository<IReqDetailParam, NewsDetailBean>(appExecutors.diskIO(), true) {
 
 
     /**
      * 请求数据
      */
     override fun refresh(args: IReqDetailParam) {
-        service.getDetailInfo(args.lineshow,0,20).enqueue(BaseCallback<NewsDetailBean>(lifecycleOwner,this))
+        service.getDetailInfo(args.lineshow, 0, 20).enqueue(BaseCallback<NewsDetailBean>(lifecycleOwner, this))
     }
 
 
@@ -33,6 +35,7 @@ class NewsDetailRepositoryX(
     override fun addToDb(t: NewsDetailBean) {
         t.let {
             newsDetailDao.deleteAll()
+            LogU.d("GithubLocalCache", "inserting ${t.data!!.list!!.size} repos")
             newsDetailDao.insertItemDetail(t.data!!.list)
         }
     }
@@ -42,14 +45,30 @@ class NewsDetailRepositoryX(
      */
     override fun queryFromDb(args: IReqDetailParam): LiveData<NewsDetailBean>? {
 
-        var bean: MutableLiveData<NewsDetailBean> = MutableLiveData()
+        var entitys = newsDetailDao.queryDetail()
 
-        newsDetailDao.queryDetail().value!!.forEach {
-            bean.value!!.data!!.list!!.plus(it)
+        return switchMap(entitys) {
+            val bean: MutableLiveData<NewsDetailBean> = MutableLiveData()
+
+            val newsDetailBean = NewsDetailBean()
+
+            val data = NewsDetailBean.ContextData()
+
+            val list = ArrayList<NewsDetailEntity>()
+
+            list.add(it)
+
+            data.list=list
+
+            newsDetailBean.data=data
+
+            bean.postValue(newsDetailBean)
+
+            bean
         }
-        return bean
 
     }
+
 
     companion object {
         // For Singleton instantiation
@@ -57,10 +76,10 @@ class NewsDetailRepositoryX(
         private var instance: NewsDetailRepositoryX? = null
 
         fun getInstance(lifecycleOwner: LifecycleOwner,
-                        api: SmartisanApi,plantDao: NewsDetailDao,appExecutors: AppExecutors) =
+                        api: SmartisanApi, plantDao: NewsDetailDao, appExecutors: AppExecutors) =
                 instance ?: synchronized(this) {
                     instance
-                            ?: NewsDetailRepositoryX(lifecycleOwner,api,plantDao,appExecutors).also {
+                            ?: NewsDetailRepositoryX(lifecycleOwner, api, plantDao, appExecutors).also {
                                 instance = it
                             }
                 }

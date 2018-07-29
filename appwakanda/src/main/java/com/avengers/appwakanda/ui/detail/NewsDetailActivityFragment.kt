@@ -50,6 +50,9 @@ class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, Ne
             //  statusViewHelper.setNetworkState(it!!)
             settingStatusView(it!!)
         })
+        mViewModel.liveData.observe(this, Observer {
+            ToastOneUtil.showToastShort(""+it?.data?.list?.get(0)?.brief)
+        })
         return mDataBinding.root
     }
 

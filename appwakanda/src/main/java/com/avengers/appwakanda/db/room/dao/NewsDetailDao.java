@@ -21,6 +21,6 @@ public interface NewsDetailDao {
     void deleteAll();
 
     @Query("SELECT * FROM NewsDetailEntity")
-    LiveData<List<NewsDetailEntity>> queryDetail();
+    LiveData<NewsDetailEntity> queryDetail();
 
 }

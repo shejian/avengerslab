@@ -30,7 +30,7 @@
             android:textSize="@dimen/_16"
             android:background="@color/red"
             android:text="@{vm.liveData.data.list.get(0).brief}"
-            tools:text="asdasdasdasdasdasd" />
+            tools:text="" />
 
         <TextView
             android:id="@+id/title_text2"
