@@ -1,9 +1,6 @@
 package com.avengers.appwakanda.ui.detail
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
@@ -12,13 +9,11 @@ import android.view.ViewGroup
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.WakandaModule
 import com.avengers.appwakanda.bean.QdailyDetailReqParam
-import com.avengers.appwakanda.databinding.FragmentNewsDetailBinding
+import com.avengers.appwakanda.databinding.FragmentNewsDetailV2Binding
 import com.avengers.appwakanda.db.room.RoomHelper
-import com.avengers.appwakanda.ui.detail.repository.NewsDetailRepositoryV1
-import com.avengers.appwakanda.ui.detail.repository.QdailyDetailRepository
+import com.avengers.appwakanda.ui.detail.repository.NewsDetailRepositoryV2
 import com.avengers.appwakanda.ui.detail.vm.IReqDetailParam
-import com.avengers.appwakanda.ui.detail.vm.NewsDetailViewModel
-import com.avengers.appwakanda.ui.detail.vm.QdailyDetailViewModel
+import com.avengers.appwakanda.ui.detail.vm.NewsDetailViewModelV2
 import com.avengers.appwakanda.webapi.Api
 import com.avengers.zombiebase.SnackbarUtil
 import com.avengers.zombiebase.ToastOneUtil
@@ -28,15 +23,16 @@ import com.avengers.zombiebase.aacbase.AACBaseFragment
  * @author Jervis
  * @Date 2018-07-18
  */
-class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, NewsDetailViewModel, NewsDetailRepositoryV1>() {
+class NewsDetailActivityV2Fragment : AACBaseFragment<FragmentNewsDetailV2Binding, NewsDetailViewModelV2, NewsDetailRepositoryV2>() {
 
     override val layout: Int
-        get() = R.layout.fragment_news_detail
+        get() = R.layout.fragment_news_detail_v2
 
-    override fun createRepository(): NewsDetailRepositoryV1 {
-        return NewsDetailRepositoryV1.getInstance(
+    override fun createRepository(): NewsDetailRepositoryV2 {
+        return NewsDetailRepositoryV2.getInstance(
                 this,
                 Api.getSmartApi(),
+                Api.getQdailyApi(),
                 RoomHelper.getWakandaDb().newsDetailDao(),
                 WakandaModule.appExecutors)
     }
@@ -46,7 +42,7 @@ class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, Ne
         super.onCreateView(inflater, container, savedInstanceState)
         mDataBinding.apply {
             //4.指定DataBinding中的ViewModule
-            vm = mViewModel
+            vm2 = mViewModel
         }
         mDataBinding.handlerClick = this.HandlerClick()
         //7.设置参数，发送请求
@@ -57,31 +53,18 @@ class NewsDetailActivityFragment : AACBaseFragment<FragmentNewsDetailBinding, Ne
             settingStatusView(it!!)
         })
         mViewModel.liveData.observe(this, Observer {
-         //   ToastOneUtil.showToastShort("" + it?.data?.list?.get(0)?.brief)
+            //   ToastOneUtil.showToastShort("" + it?.data?.list?.get(0)?.brief)
         })
         initQdaily()
         return mDataBinding.root
     }
 
     fun initQdaily() {
-        var qdRep = QdailyDetailRepository.getInstance(this, Api.getQdailyApi(), WakandaModule.appExecutors)
-        val qdailyDetailViewModel = ViewModelProviders.of(this,
-                object : ViewModelProvider.Factory {
-                    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                        if (modelClass.isAssignableFrom(QdailyDetailViewModel::class.java)) {
-                            @Suppress("UNCHECKED_CAST")
-                            return QdailyDetailViewModel(qdRep) as T
-                        }
-                        throw IllegalArgumentException("Unknown ViewModel class")
-                    }
-                })
-                .get(QdailyDetailViewModel::class.java)
-        mDataBinding.qdvm=qdailyDetailViewModel
-        val qqqq=QdailyDetailReqParam()
-        qqqq.keyWord="54743.json"
-        qdailyDetailViewModel.request(qqqq)
-        qdailyDetailViewModel.liveData.observe(this, Observer {
-          //  ToastOneUtil.showToastShort(it?.response?.article?.body!!)
+        val qqqq = QdailyDetailReqParam()
+        qqqq.keyWord = "54743.json"
+        mViewModel.qdqueryParam.postValue(qqqq)
+        mViewModel.qdliveData.observe(this, Observer {
+           // ToastOneUtil.showToastShort(it?.response?.article?.body!!)
         })
     }
 

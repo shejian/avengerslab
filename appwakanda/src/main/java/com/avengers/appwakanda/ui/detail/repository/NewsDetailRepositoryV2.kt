@@ -11,12 +11,16 @@ import com.avengers.zombiebase.AppExecutors
 import com.avengers.zombiebase.aacbase.BaseCallback
 import com.avengers.zombiebase.aacbase.Repository
 import android.arch.lifecycle.Transformations.switchMap
+import com.avengers.appwakanda.bean.QdailyDetailBean
+import com.avengers.appwakanda.bean.QdailyDetailReqParam
 import com.avengers.appwakanda.db.room.entity.NewsDetailEntity
+import com.avengers.appwakanda.webapi.QdailyApi
 import com.avengers.zombiebase.LogU
 
-class NewsDetailRepositoryX(
+class NewsDetailRepositoryV2(
         private val lifecycleOwner: LifecycleOwner,
         private val service: SmartisanApi,
+        private val qdservice: QdailyApi,
         private val newsDetailDao: NewsDetailDao,
         appExecutors: AppExecutors) : Repository<IReqDetailParam, NewsDetailBean>(appExecutors.diskIO(), true) {
 
@@ -26,6 +30,23 @@ class NewsDetailRepositoryX(
      */
     override fun refresh(args: IReqDetailParam) {
         service.getDetailInfo(args.lineshow, 0, 20).enqueue(BaseCallback<NewsDetailBean>(lifecycleOwner, this))
+    }
+
+
+    var qdRepository = object : Repository<QdailyDetailReqParam, QdailyDetailBean>(appExecutors.diskIO(), false) {
+        override fun refresh(args: QdailyDetailReqParam) {
+            refreshQd(args)
+        }
+    }
+
+
+
+    /**
+     * 请求数据
+     */
+
+    fun refreshQd(args: QdailyDetailReqParam) {
+        qdservice.getQdailyDetail(args.keyWord!!).enqueue(BaseCallback<QdailyDetailBean>(lifecycleOwner, qdRepository))
     }
 
 
@@ -58,9 +79,9 @@ class NewsDetailRepositoryX(
 
             list.add(it)
 
-            data.list=list
+            data.list = list
 
-            newsDetailBean.data=data
+            newsDetailBean.data = data
 
             bean.postValue(newsDetailBean)
 
@@ -73,13 +94,13 @@ class NewsDetailRepositoryX(
     companion object {
         // For Singleton instantiation
         @Volatile
-        private var instance: NewsDetailRepositoryX? = null
+        private var instance: NewsDetailRepositoryV2? = null
 
         fun getInstance(lifecycleOwner: LifecycleOwner,
-                        api: SmartisanApi, plantDao: NewsDetailDao, appExecutors: AppExecutors) =
+                        api: SmartisanApi, api2: QdailyApi, plantDao: NewsDetailDao, appExecutors: AppExecutors) =
                 instance ?: synchronized(this) {
                     instance
-                            ?: NewsDetailRepositoryX(lifecycleOwner, api, plantDao, appExecutors).also {
+                            ?: NewsDetailRepositoryV2(lifecycleOwner, api, api2, plantDao, appExecutors).also {
                                 instance = it
                             }
                 }
