@@ -1,6 +1,9 @@
 package com.avengers.appwakanda.ui.indexmain.repository
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
+import android.arch.lifecycle.Transformations.switchMap
 import android.arch.paging.DataSource
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
@@ -28,29 +31,79 @@ class IndexRepository2(
         private val service: SmartisanApi,
         private val cache: IndexDataCache,
         private val appExecutors: AppExecutors)
-    : PagedListRepository<NewsListReqParam, ContextItemEntity>() {
+    : PagedListRepository<NewsListReqParam, ContextItemEntity>(haveCache = false) {
+
+
+    override fun getRetryFun(factory: DataSource.Factory<Int, ContextItemEntity>,
+                             callback: PagedListBoundaryCallback<ContextItemEntity>?): () -> Unit {
+        return when {
+            haveCache -> {
+                { callback?.helper?.retryAllFailed() }
+            }
+            else -> {
+                { (factory as SubIndexListDataSourceFactory).sourceLiveData.value?.retryAllFailed() }
+            }
+        }
+
+    }
+
+    override fun getNetworkState(factory: DataSource.Factory<Int, ContextItemEntity>,
+                                 callback: PagedListBoundaryCallback<ContextItemEntity>?):
+            LiveData<NetworkState> {
+        return when {
+            haveCache -> {
+                callback?.networkState!!
+            }
+            else -> switchMap((factory as SubIndexListDataSourceFactory).sourceLiveData) {
+                it.networkState
+            }
+        }
+    }
+
 
     /**
      * 构建LivePagedList
      */
     override fun buildLiveDataPagedList(factory: DataSource.Factory<Int, ContextItemEntity>,
-                                        callback: PagedListBoundaryCallback<ContextItemEntity>)
+                                        callback: PagedListBoundaryCallback<ContextItemEntity>?)
             : LiveData<PagedList<ContextItemEntity>> {
-        return LivePagedListBuilder(factory,
-                PagedList.Config.Builder()
-                        .setPageSize(DB_PAGE_SIZE)
-                        .setEnablePlaceholders(true)
-                        .setPrefetchDistance(VISIBLE_THRESHOLD)
-                        .build())
-                .setBoundaryCallback(callback)
-                .build()
+        return when {
+            haveCache -> LivePagedListBuilder(factory,
+                    PagedList.Config.Builder()
+                            .setPageSize(DB_PAGE_SIZE)
+                            .setEnablePlaceholders(true)
+                            .setPrefetchDistance(VISIBLE_THRESHOLD)
+                            .build())
+                    .setBoundaryCallback(callback)
+                    .build()
+            else -> LivePagedListBuilder(factory, 20)
+                    // provide custom executor for network requests, otherwise it will default to
+                    // Arch Components' IO pool which is also used for disk access
+                    .setFetchExecutor(appExecutors.networkIO())
+                    .build()
+        }
     }
 
     /**
      * 查询数据库，获取DataSource
      */
-    override fun getDataSourceFactory(): DataSource.Factory<Int, ContextItemEntity> {
-        return cache.queryIndexList()
+    override fun getDataSourceFactory(args: NewsListReqParam): DataSource.Factory<Int, ContextItemEntity> {
+        return when {
+            haveCache -> cache.queryIndexList()
+            else -> {
+
+                var ddd = SubIndexListDataSourceFactory(service, args, appExecutors.networkIO())
+
+                return ddd
+            }
+        }
+    }
+
+    override fun getRefreshState(factory: DataSource.Factory<Int, ContextItemEntity>): LiveData<NetworkState> {
+        return switchMap((factory as SubIndexListDataSourceFactory).sourceLiveData) {
+            it.initialLoad
+        }
+
     }
 
     /**
@@ -67,26 +120,34 @@ class IndexRepository2(
     /**
      * 请求Api，刷新数据
      */
-    override fun refresh(args: NewsListReqParam) {
+    override fun refresh(args: NewsListReqParam, factory: DataSource.Factory<Int, ContextItemEntity>) {
         LogU.d("shejian", "refresh(args: NewsListReqParam)")
-        service.getSmtIndex(args.keyWord!!, 0, NETWORK_PAGE_SIZE).enqueue(object : Callback<IndexReaderListBean> {
-            override fun onFailure(call: Call<IndexReaderListBean>?, t: Throwable?) {
-                refreshState.value = NetworkState.error(t?.message)
-            }
+        when {
+            haveCache ->
+                service.getSmtIndex(args.keyWord!!, 0, NETWORK_PAGE_SIZE).enqueue(object : Callback<IndexReaderListBean> {
+                    override fun onFailure(call: Call<IndexReaderListBean>?, t: Throwable?) {
+                      //  refreshState.value = NetworkState.error(t?.message)
+                    }
 
-            override fun onResponse(call: Call<IndexReaderListBean>?, response: Response<IndexReaderListBean>) {
-                appExecutors.diskIO().execute {
-                    response.body()?.let {
-                        RoomHelper.getWakandaDb().runInTransaction {
-                            cache.cleanData {
-                                insertResultIntoDb(it)
-                                refreshState.postValue(NetworkState.LOADED)
+                    override fun onResponse(call: Call<IndexReaderListBean>?, response: Response<IndexReaderListBean>) {
+                        appExecutors.diskIO().execute {
+                            response.body()?.let {
+                                RoomHelper.getWakandaDb().runInTransaction {
+                                    cache.cleanData {
+                                        insertResultIntoDb(it)
+                        //                refreshState.postValue(NetworkState.LOADED)
+                                    }
+                                }
                             }
                         }
                     }
-                }
-            }
-        })
+                })
+
+            else -> (factory as SubIndexListDataSourceFactory).sourceLiveData.value?.invalidate()
+
+        }
+
+
     }
 
     /**

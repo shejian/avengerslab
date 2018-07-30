@@ -67,7 +67,7 @@ class WakandaMainActivity : AACPagedListActivity<ActivityWakandaMainBinding, Ind
         newsListReqParam.keyWord = "line/show"
 
         //指定请求参数，作为LiveData 数据，将自动触发请求
-        mViewModel!!.getPagedListData(newsListReqParam)
+        mViewModel.getPagedListData(newsListReqParam)
 
     }
 
@@ -103,15 +103,15 @@ class WakandaMainActivity : AACPagedListActivity<ActivityWakandaMainBinding, Ind
         RecycleHelper.initBaseRecycleView(this, mDataBinding!!.recyclerView)
         RecycleHelper.initSwipeRefresh(mDataBinding!!.swipeRefreshView) {
             //下拉触发运行刷新的值，联动触发刷新事件
-            mViewModel?.refresh()
+            mViewModel.refresh()
         }
     }
 
 
     private fun setUIObserve() {
         //完成刷新请求，停止刷新UI
-        mViewModel!!.refreshState.observe(this, Observer {
-            mDataBinding!!.swipeRefreshView.isRefreshing = it?.status == Status.RUNNING
+        mViewModel.refreshState.observe(this, Observer {
+            mDataBinding.swipeRefreshView.isRefreshing = it?.status == Status.RUNNING
         })
     }
 
