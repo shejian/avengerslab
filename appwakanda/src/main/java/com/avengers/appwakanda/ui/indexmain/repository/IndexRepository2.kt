@@ -31,7 +31,7 @@ class IndexRepository2(
         private val service: SmartisanApi,
         private val cache: IndexDataCache,
         private val appExecutors: AppExecutors)
-    : PagedListRepository<NewsListReqParam, ContextItemEntity>(haveCache = false) {
+    : PagedListRepository<NewsListReqParam, ContextItemEntity>(haveCache = true) {
 
 
     override fun getRetryFun(factory: DataSource.Factory<Int, ContextItemEntity>,
@@ -91,19 +91,23 @@ class IndexRepository2(
         return when {
             haveCache -> cache.queryIndexList()
             else -> {
-
-                var ddd = SubIndexListDataSourceFactory(service, args, appExecutors.networkIO())
-
-                return ddd
+                SubIndexListDataSourceFactory(service, args, appExecutors.networkIO())
             }
         }
     }
 
-    override fun getRefreshState(factory: DataSource.Factory<Int, ContextItemEntity>): LiveData<NetworkState> {
-        return switchMap((factory as SubIndexListDataSourceFactory).sourceLiveData) {
-            it.initialLoad
-        }
 
+    var haveCacheRefreshState = MutableLiveData<NetworkState>()
+
+
+    override fun getRefreshState(factory: DataSource.Factory<Int, ContextItemEntity>): LiveData<NetworkState> {
+        return when {
+            haveCache -> haveCacheRefreshState
+            else -> switchMap((factory as SubIndexListDataSourceFactory).sourceLiveData) {
+                it.initialLoad
+            }
+
+        }
     }
 
     /**
@@ -126,7 +130,7 @@ class IndexRepository2(
             haveCache ->
                 service.getSmtIndex(args.keyWord!!, 0, NETWORK_PAGE_SIZE).enqueue(object : Callback<IndexReaderListBean> {
                     override fun onFailure(call: Call<IndexReaderListBean>?, t: Throwable?) {
-                      //  refreshState.value = NetworkState.error(t?.message)
+                        haveCacheRefreshState.value = NetworkState.error(t?.message)
                     }
 
                     override fun onResponse(call: Call<IndexReaderListBean>?, response: Response<IndexReaderListBean>) {
@@ -135,7 +139,7 @@ class IndexRepository2(
                                 RoomHelper.getWakandaDb().runInTransaction {
                                     cache.cleanData {
                                         insertResultIntoDb(it)
-                        //                refreshState.postValue(NetworkState.LOADED)
+                                        haveCacheRefreshState.postValue(NetworkState.LOADED)
                                     }
                                 }
                             }

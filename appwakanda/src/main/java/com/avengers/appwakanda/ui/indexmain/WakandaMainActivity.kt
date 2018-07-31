@@ -100,8 +100,8 @@ class WakandaMainActivity : AACPagedListActivity<ActivityWakandaMainBinding, Ind
 
 
     private fun initRecycle() {
-        RecycleHelper.initBaseRecycleView(this, mDataBinding!!.recyclerView)
-        RecycleHelper.initSwipeRefresh(mDataBinding!!.swipeRefreshView) {
+        RecycleHelper.initBaseRecycleView(this, mDataBinding.recyclerView)
+        RecycleHelper.initSwipeRefresh(mDataBinding.swipeRefreshView) {
             //下拉触发运行刷新的值，联动触发刷新事件
             mViewModel.refresh()
         }
@@ -110,6 +110,9 @@ class WakandaMainActivity : AACPagedListActivity<ActivityWakandaMainBinding, Ind
 
     private fun setUIObserve() {
         //完成刷新请求，停止刷新UI
+        mViewModel.refreshState.observe(this, Observer {
+            mDataBinding.swipeRefreshView.isRefreshing = it?.status == Status.RUNNING
+        })
         mViewModel.refreshState.observe(this, Observer {
             mDataBinding.swipeRefreshView.isRefreshing = it?.status == Status.RUNNING
         })
@@ -123,11 +126,13 @@ class WakandaMainActivity : AACPagedListActivity<ActivityWakandaMainBinding, Ind
         }
 
         adapter.onRetryFun = { _, _ ->
-            mViewModel!!.retry()
+            mViewModel.retry()
         }
 
-        mDataBinding!!.recyclerView.adapter = adapter
-        mViewModel!!.items.observe(this, Observer {
+        mDataBinding.recyclerView.adapter = adapter
+
+
+        mViewModel.items.observe(this, Observer {
             if (it?.size == 0) {
                 //极端情况需要处理空数据的情况，按具体业务而定
                 return@Observer
@@ -137,7 +142,7 @@ class WakandaMainActivity : AACPagedListActivity<ActivityWakandaMainBinding, Ind
         })
 
         //完成"更多"加载请求
-        mViewModel!!.netWorkState.observe(this, Observer {
+        mViewModel.netWorkState.observe(this, Observer {
             scrollRetry = Status.FAILED == it?.status
             adapter.setNetworkState(it)
         })
@@ -151,8 +156,8 @@ class WakandaMainActivity : AACPagedListActivity<ActivityWakandaMainBinding, Ind
      * 滚动控制加载
      */
     private fun setupScrollListener() {
-        val layoutManager = mDataBinding!!.recyclerView.layoutManager as LinearLayoutManager
-        mDataBinding!!.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        val layoutManager = mDataBinding.recyclerView.layoutManager as LinearLayoutManager
+        mDataBinding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -166,7 +171,7 @@ class WakandaMainActivity : AACPagedListActivity<ActivityWakandaMainBinding, Ind
                         cnum++
                         scrollRetry = false
                         //  Toast.makeText(this@WakandaMainActivity, "onScrolled", Toast.LENGTH_SHORT).show()
-                        mViewModel!!.retry()
+                        mViewModel.retry()
                     }
                 } else {
                     cnum = 0

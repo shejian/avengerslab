@@ -13,7 +13,7 @@ import com.avengers.appwakanda.webapi.QdailyApi
 class QdailyDetailRepository(
         private val lifecycleOwner: LifecycleOwner,
         private val service: QdailyApi,
-        appExecutors: AppExecutors) : Repository<QdailyDetailReqParam, QdailyDetailBean>(appExecutors.diskIO(), false) {
+        appExecutors: AppExecutors) : Repository<QdailyDetailReqParam, QdailyDetailBean>(appExecutors.diskIO()) {
 
     /**
      * 请求数据
