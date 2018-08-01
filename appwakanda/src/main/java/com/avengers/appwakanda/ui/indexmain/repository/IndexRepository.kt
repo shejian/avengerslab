@@ -133,12 +133,11 @@ class IndexRepository(
     private fun insertResultIntoDb(response: IndexReaderListBean) {
         response.data?.list?.let {
             RoomHelper.getWakandaDb().runInTransaction {
-                val lastIndex = cache.queryMaxIndex().toLong()
-                var newlist = it.mapIndexed { index, contextItemEntity ->
-                    contextItemEntity._mid = lastIndex + index
-                    contextItemEntity
-                }
-                cache.insert(newlist) {}
+            //    val lastIndex = cache.queryMaxIndex().toLong()
+               // var newlist = it.mapIndexed { index, contextItemEntity ->
+                 //   contextItemEntity._mid = lastIndex + index contextItemEntity
+                //}
+             //   cache.insert(newlist) {}
             }
         }
 

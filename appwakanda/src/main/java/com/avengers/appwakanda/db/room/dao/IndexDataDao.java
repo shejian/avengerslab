@@ -9,24 +9,25 @@ import android.arch.persistence.room.Query;
 
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
 public interface IndexDataDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     void insertList(List<ContextItemEntity> contextItemBean);
 
     @Query("DELETE FROM ContextItemEntity ")
     void deleteByItem();
 
-    @Query("SELECT * FROM ContextItemEntity  ORDER BY _mid ASC")
+    @Query("SELECT * FROM ContextItemEntity  ORDER BY oid ASC")
     DataSource.Factory<Integer, ContextItemEntity> queryAllItem();
 
-    @Query("SELECT  COUNT(_mid) FROM ContextItemEntity")
+    @Query("SELECT  COUNT(oid) FROM ContextItemEntity")
     Integer queryAllCount();
 
-    @Query("SELECT MAX(_mid)+ 1 FROM ContextItemEntity")
-    Integer queryMaxMId();
+ /*   @Query("SELECT MAX(_mid)+ 1 FROM ContextItemEntity")
+    Integer queryMaxMId();*/
 
 }

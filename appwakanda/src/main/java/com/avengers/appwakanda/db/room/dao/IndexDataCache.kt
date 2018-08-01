@@ -3,6 +3,7 @@ package com.avengers.appwakanda.db.room.dao
 import android.arch.paging.DataSource
 import android.util.Log
 import com.avengers.appwakanda.db.room.entity.ContextItemEntity
+import java.util.ArrayList
 import java.util.concurrent.Executor
 
 class IndexDataCache(
@@ -29,7 +30,7 @@ class IndexDataCache(
     }
 
 
-    fun refresh(repos: List<ContextItemEntity>,finished: () -> Unit) {
+    fun refresh(repos:List<ContextItemEntity>, finished: () -> Unit) {
         ioExecutor.execute {
             indexDao.deleteByItem()
             indexDao.insertList(repos)
@@ -41,6 +42,7 @@ class IndexDataCache(
         return indexDao.queryAllItem()
     }
 
+/*
 
     fun queryMaxIndex(): Int {
         var dds = indexDao.queryMaxMId()
@@ -49,6 +51,7 @@ class IndexDataCache(
         }
         return dds
     }
+*/
 
     fun queryTotal(): Int {
         return indexDao.queryAllCount()

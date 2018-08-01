@@ -23,6 +23,7 @@ import com.avengers.zombiebase.aacbase.paging.PagedListBoundaryCallback.Companio
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 /**
  * 处理数据逻辑
@@ -67,12 +68,12 @@ class IndexRepository2(
     override fun buildLiveDataPagedList(factory: DataSource.Factory<Int, ContextItemEntity>,
                                         callback: PagedListBoundaryCallback<ContextItemEntity>?)
             : LiveData<PagedList<ContextItemEntity>> {
-        return when {
+        return when {//PagedList.Config.Builder().setPageSize(20).build()
             haveCache -> LivePagedListBuilder(factory,
                     PagedList.Config.Builder()
                             .setPageSize(DB_PAGE_SIZE)
-                            .setEnablePlaceholders(true)
-                            .setPrefetchDistance(VISIBLE_THRESHOLD)
+                         //   .setEnablePlaceholders(false)
+                          //  .setPrefetchDistance(VISIBLE_THRESHOLD)
                             .build())
                     .setBoundaryCallback(callback)
                     .build()
@@ -134,39 +135,29 @@ class IndexRepository2(
                     }
 
                     override fun onResponse(call: Call<IndexReaderListBean>?, response: Response<IndexReaderListBean>) {
-                        appExecutors.diskIO().execute {
-                            response.body()?.let {
-                                RoomHelper.getWakandaDb().runInTransaction {
-                                    cache.cleanData {
-                                        insertResultIntoDb(it)
-                                        haveCacheRefreshState.postValue(NetworkState.LOADED)
-                                    }
-                                }
-                            }
+                        response.body()?.data?.list?.let {
+                            cache.refresh(it) { haveCacheRefreshState.postValue(NetworkState.LOADED) }
                         }
+
                     }
                 })
-
             else -> (factory as SubIndexListDataSourceFactory).sourceLiveData.value?.invalidate()
-
         }
-
-
     }
 
     /**
      * 插入数据
      */
-    private fun insertResultIntoDb(response: IndexReaderListBean) {
+    private fun insertResultIntoDb(response: IndexReaderListBean, insertFinished: () -> Unit) {
         response.data?.list?.let {
-            RoomHelper.getWakandaDb().runInTransaction {
-                val lastIndex = cache.queryMaxIndex().toLong()
-                var newlist = it.mapIndexed { index, contextItemEntity ->
-                    contextItemEntity._mid = lastIndex + index
-                    contextItemEntity
-                }
-                cache.insert(newlist) {}
-            }
+            cache.insert(it) { insertFinished.invoke() }
+            /*     RoomHelper.getWakandaDb().runInTransaction {
+                     //val lastIndex = cache.queryMaxIndex().toLong()
+                     *//*     var newlist = it.mapIndexed { index, contextItemEntity ->
+                         contextItemEntity._mid = lastIndex + index
+                     }*//*
+                // contextItemEntity
+            }*/
         }
 
     }

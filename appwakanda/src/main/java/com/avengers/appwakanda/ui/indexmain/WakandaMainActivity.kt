@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.avengers.appwakanda.R
 import com.avengers.appwakanda.WakandaModule
@@ -133,6 +134,7 @@ class WakandaMainActivity : AACPagedListActivity<ActivityWakandaMainBinding, Ind
 
 
         mViewModel.items.observe(this, Observer {
+            Log.d("shejian","it?.size= "+it?.size)//缓存情况下，数据是全部替换。。。。。难怪会闪
             if (it?.size == 0) {
                 //极端情况需要处理空数据的情况，按具体业务而定
                 return@Observer

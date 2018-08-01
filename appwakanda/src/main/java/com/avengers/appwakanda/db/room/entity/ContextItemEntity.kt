@@ -12,8 +12,10 @@ import java.util.*
 @Entity
 class ContextItemEntity : IBeanResponse() {
 
-    var _mid: Long? = null
-    @PrimaryKey
+    //var _mid: Long? = null
+    @PrimaryKey(autoGenerate = true)
+    var oid: Long = 0
+
     lateinit var id: String
     var site_id: String? = null
     var title: String? = null

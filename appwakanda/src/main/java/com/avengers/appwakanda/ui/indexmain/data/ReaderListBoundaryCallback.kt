@@ -52,7 +52,7 @@ class ReaderListBoundaryCallback(
         super.onItemAtEndLoaded(itemAtEnd)
         //取出数据库中最后一个时计算页码
         Log.d("shejian", "onItemAtEndLoaded")
-        val pageNum = (itemAtEnd._mid?.plus(1))?.div(NETWORK_PAGE_SIZE)
+        val pageNum = (itemAtEnd.oid)?.div(NETWORK_PAGE_SIZE)
         lastRequestedPage = pageNum?.toInt()!!
         helper.runIfNotRunning(PagingRequestHelper.RequestType.AFTER) {
             service.getSmtIndex(query, lastRequestedPage, NETWORK_PAGE_SIZE).enqueue(createWebserviceCallback(it))
