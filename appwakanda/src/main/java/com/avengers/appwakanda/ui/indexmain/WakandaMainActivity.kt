@@ -132,9 +132,9 @@ class WakandaMainActivity : AACPagedListActivity<ActivityWakandaMainBinding, Ind
 
         mDataBinding.recyclerView.adapter = adapter
 
-
+      //  mViewModel.items.observe(this, Observer {adapter::submitList})
         mViewModel.items.observe(this, Observer {
-            Log.d("shejian","it?.size= "+it?.size)//缓存情况下，数据是全部替换。。。。。难怪会闪
+            Log.d("shejian","it?.size= "+it?.size)//数据是全部替换，并非累加。。。。。难怪会闪
             if (it?.size == 0) {
                 //极端情况需要处理空数据的情况，按具体业务而定
                 return@Observer
