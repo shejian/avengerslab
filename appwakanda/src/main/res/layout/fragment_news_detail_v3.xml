@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm2"
+            type="com.avengers.appwakanda.ui.detail.vm.NewsDetailViewModelV3" />
+
+        <variable
+            name="handlerClick"
+            type="com.avengers.appwakanda.ui.detail.NewsDetailActivityV2Fragment.HandlerClick" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.detail.NewsDetailActivityFragment"
+        tools:showIn="@layout/activity_news_detail">
+
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_16"
+            android:background="@color/red"
+            android:text="@{vm2.detailVm.liveData.data.list.get(0).brief}"
+            android:textSize="@dimen/_16"
+            tools:text="" />
+
+        <TextView
+            android:id="@+id/qdaily_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_text"
+            android:layout_margin="@dimen/_16"
+            android:background="@android:color/holo_blue_dark"
+            android:maxLength="300"
+            android:text="@{vm2.qdVm.liveData.response.article.body}"
+            android:textSize="@dimen/_16"
+            tools:text="" />
+
+        <TextView
+            android:id="@+id/title_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="133dp"
+            app:status="@{vm2.detailVm.netWorkState}"
+            tools:text="" />
+
+        <Button
+            android:id="@+id/refresh_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="71dp"
+            android:layout_marginStart="59dp"
+            android:elevation="0dp"
+            android:onClick="@{() -> handlerClick.refreshClick()}"
+            android:text="Button"
+            android:translationZ="0dp" />
+
+    </RelativeLayout>
+</layout>
